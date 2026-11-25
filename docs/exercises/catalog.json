@@ -1,0 +1,3223 @@
+[
+  {
+    "id": "wall-push-up",
+    "name_en": "Wall push-up",
+    "name_fr": "Pompe au mur",
+    "category": "push",
+    "movement_pattern": "horizontal push",
+    "primary_muscles": [
+      "chest",
+      "triceps"
+    ],
+    "secondary_muscles": [
+      "front delts",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "reps",
+    "progression": {
+      "easier": null,
+      "harder": "incline-push-up",
+      "chain": "push-up"
+    },
+    "setup": "Stand about one arm's length from a wall, palms on it at shoulder height, feet hip-width.",
+    "steps": [
+      "Brace your core so the body is one straight line.",
+      "Bend the elbows and bring your chest toward the wall.",
+      "Keep elbows about 45° from the torso.",
+      "Press the wall away until the arms are straight."
+    ],
+    "common_mistakes": [
+      "Hips sagging or poking back",
+      "Elbows flaring out wide",
+      "Only moving the head forward"
+    ],
+    "tips": "Step your feet further back to make it harder before moving to the incline version.",
+    "drawing": "drawings/wall-push-up.svg"
+  },
+  {
+    "id": "incline-push-up",
+    "name_en": "Incline push-up",
+    "name_fr": "Pompe inclinée",
+    "category": "push",
+    "movement_pattern": "horizontal push",
+    "primary_muscles": [
+      "chest",
+      "triceps"
+    ],
+    "secondary_muscles": [
+      "front delts",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "reps",
+    "progression": {
+      "easier": "wall-push-up",
+      "harder": "knee-push-up",
+      "chain": "push-up"
+    },
+    "setup": "Hands on a sturdy raised surface (step, low bar or stairs), body in a straight diagonal line.",
+    "steps": [
+      "Squeeze glutes and abs; keep the body straight from head to heels.",
+      "Lower the chest to the edge, elbows ~45° from body.",
+      "Press up until arms are straight."
+    ],
+    "common_mistakes": [
+      "Hips dropping",
+      "Surface that slides or is unstable",
+      "Shrugging the shoulders to the ears"
+    ],
+    "tips": "Lower the surface over weeks; the lower it is, the harder the push-up.",
+    "drawing": "drawings/incline-push-up.svg"
+  },
+  {
+    "id": "knee-push-up",
+    "name_en": "Knee push-up",
+    "name_fr": "Pompe sur les genoux",
+    "category": "push",
+    "movement_pattern": "horizontal push",
+    "primary_muscles": [
+      "chest",
+      "triceps"
+    ],
+    "secondary_muscles": [
+      "front delts",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 2,
+    "type": "reps",
+    "progression": {
+      "easier": "incline-push-up",
+      "harder": "push-up",
+      "chain": "push-up"
+    },
+    "setup": "Kneel, hands under shoulders, body straight from knees to head, feet lifted.",
+    "steps": [
+      "Tighten abs and glutes so there is no bend at the hips.",
+      "Lower the chest to just above the floor.",
+      "Press back up with straight line knees-hips-shoulders."
+    ],
+    "common_mistakes": [
+      "Sitting the hips back toward the heels",
+      "Sagging lower back",
+      "Head dropping first"
+    ],
+    "tips": "Pad the knees if the floor is hard. Move to full push-ups once you hit 3 x 12.",
+    "drawing": "drawings/knee-push-up.svg"
+  },
+  {
+    "id": "push-up",
+    "name_en": "Push-up",
+    "name_fr": "Pompe",
+    "category": "push",
+    "movement_pattern": "horizontal push",
+    "primary_muscles": [
+      "chest",
+      "triceps"
+    ],
+    "secondary_muscles": [
+      "front delts",
+      "core",
+      "serratus"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 2,
+    "type": "reps",
+    "progression": {
+      "easier": "knee-push-up",
+      "harder": "wide-push-up",
+      "chain": "push-up"
+    },
+    "setup": "Hands slightly wider than shoulders, arms straight, body in a plank from head to heels.",
+    "steps": [
+      "Squeeze glutes and abs; ribs down.",
+      "Lower the chest to a fist above the floor, elbows ~45° from the body.",
+      "Press the floor away until the elbows lock out."
+    ],
+    "common_mistakes": [
+      "Sagging hips or piking up",
+      "Flaring the elbows to 90°",
+      "Half reps; neck craned forward"
+    ],
+    "tips": "Think of screwing your hands into the floor to keep the shoulders stable.",
+    "drawing": "drawings/push-up.svg"
+  },
+  {
+    "id": "wide-push-up",
+    "name_en": "Wide push-up",
+    "name_fr": "Pompe large",
+    "category": "push",
+    "movement_pattern": "horizontal push",
+    "primary_muscles": [
+      "chest"
+    ],
+    "secondary_muscles": [
+      "front delts",
+      "triceps",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 3,
+    "type": "reps",
+    "progression": {
+      "easier": "push-up",
+      "harder": "diamond-push-up",
+      "chain": "push-up"
+    },
+    "setup": "Plank with hands clearly wider than shoulders (about 1.5x), fingers forward or slightly out.",
+    "steps": [
+      "Brace the body into a straight line.",
+      "Lower the chest between the hands with elbows out ~60-70°.",
+      "Push up to full lockout."
+    ],
+    "common_mistakes": [
+      "Elbows flared to 90°",
+      "Reduced depth",
+      "Hips sagging"
+    ],
+    "tips": "Wider hands shift work to the chest and cut the range slightly; keep shoulder comfort first.",
+    "drawing": "drawings/wide-push-up.svg"
+  },
+  {
+    "id": "diamond-push-up",
+    "name_en": "Diamond push-up",
+    "name_fr": "Pompe diamant",
+    "category": "push",
+    "movement_pattern": "horizontal push",
+    "primary_muscles": [
+      "triceps"
+    ],
+    "secondary_muscles": [
+      "chest",
+      "front delts",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 3,
+    "type": "reps",
+    "progression": {
+      "easier": "wide-push-up",
+      "harder": "decline-push-up",
+      "chain": "push-up"
+    },
+    "setup": "Plank with hands together under the chest, thumbs and index fingers forming a diamond.",
+    "steps": [
+      "Keep elbows tight to the sides.",
+      "Lower the chest toward the hands.",
+      "Extend fully, keeping the hips level."
+    ],
+    "common_mistakes": [
+      "Elbows flaring",
+      "Wrists collapsing inward",
+      "Hips sagging"
+    ],
+    "tips": "If the wrists complain, use narrow hands (not touching) or push-up bars.",
+    "drawing": "drawings/diamond-push-up.svg"
+  },
+  {
+    "id": "decline-push-up",
+    "name_en": "Decline push-up",
+    "name_fr": "Pompe déclinée",
+    "category": "push",
+    "movement_pattern": "horizontal push",
+    "primary_muscles": [
+      "chest",
+      "front delts"
+    ],
+    "secondary_muscles": [
+      "triceps",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 3,
+    "type": "reps",
+    "progression": {
+      "easier": "diamond-push-up",
+      "harder": "banded-push-up",
+      "chain": "push-up"
+    },
+    "setup": "Feet on a stable raised surface (step or chair), hands on the floor under the shoulders.",
+    "steps": [
+      "Stay rigid from head to heels.",
+      "Lower the chest toward the floor, elbows ~45°.",
+      "Press up without letting the hips pike."
+    ],
+    "common_mistakes": [
+      "Hips piking",
+      "Feet surface wobbling",
+      "Head dropping first"
+    ],
+    "tips": "The higher the feet, the more it loads shoulders; keep it modest to start.",
+    "drawing": "drawings/decline-push-up.svg"
+  },
+  {
+    "id": "banded-push-up",
+    "name_en": "Banded push-up",
+    "name_fr": "Pompe avec élastique",
+    "category": "push",
+    "movement_pattern": "horizontal push",
+    "primary_muscles": [
+      "chest",
+      "triceps"
+    ],
+    "secondary_muscles": [
+      "front delts",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight",
+      "bands"
+    ],
+    "difficulty": 3,
+    "type": "reps",
+    "progression": {
+      "easier": "decline-push-up",
+      "harder": "archer-push-up",
+      "chain": "push-up"
+    },
+    "setup": "Loop a band across your upper back and hold each end under your palms, then take a plank.",
+    "steps": [
+      "Keep the body straight as the band tightens.",
+      "Lower the chest with elbows ~45°.",
+      "Press hard to lockout where the band is tightest."
+    ],
+    "common_mistakes": [
+      "Letting the band slip off a hand",
+      "Sagging hips",
+      "Cutting the range short"
+    ],
+    "tips": "Use a heavier band to progress without changing leverage.",
+    "drawing": "drawings/banded-push-up.svg"
+  },
+  {
+    "id": "archer-push-up",
+    "name_en": "Archer push-up",
+    "name_fr": "Pompe archer",
+    "category": "push",
+    "movement_pattern": "horizontal push",
+    "primary_muscles": [
+      "chest",
+      "triceps"
+    ],
+    "secondary_muscles": [
+      "front delts",
+      "core",
+      "obliques"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 4,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": "banded-push-up",
+      "harder": "pseudo-planche-push-up",
+      "chain": "push-up"
+    },
+    "setup": "Wide plank, hands about twice shoulder width, fingers pointing slightly out.",
+    "steps": [
+      "Shift your weight toward one hand and bend that elbow.",
+      "Keep the opposite arm straight and press it into the floor.",
+      "Lower the chest toward the bent-arm hand.",
+      "Press back to center; repeat to the other side."
+    ],
+    "common_mistakes": [
+      "Rotating the hips",
+      "Straight arm bending",
+      "Dropping the chest unevenly"
+    ],
+    "tips": "Use the straight arm as a kickstand and keep the movement slow.",
+    "drawing": "drawings/archer-push-up.svg"
+  },
+  {
+    "id": "pseudo-planche-push-up",
+    "name_en": "Pseudo planche push-up",
+    "name_fr": "Pompe pseudo planche",
+    "category": "push",
+    "movement_pattern": "horizontal push",
+    "primary_muscles": [
+      "front delts",
+      "chest"
+    ],
+    "secondary_muscles": [
+      "triceps",
+      "core",
+      "biceps (stabilise)"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 4,
+    "type": "reps",
+    "progression": {
+      "easier": "archer-push-up",
+      "harder": "one-arm-push-up",
+      "chain": "push-up"
+    },
+    "setup": "Plank with hands by the lower ribs, fingers pointing back or out, shoulders well ahead of the hands.",
+    "steps": [
+      "Lean forward until the shoulders pass the hands.",
+      "Keep a hollow body: ribs down, glutes tight.",
+      "Lower under control, elbows close to the body.",
+      "Press up while holding the lean."
+    ],
+    "common_mistakes": [
+      "Losing the lean as you lower",
+      "Hips piking",
+      "Piking the shoulders to the ears"
+    ],
+    "tips": "Build the wrist and bicep tolerance gradually; warm up the wrists first.",
+    "drawing": "drawings/pseudo-planche-push-up.svg"
+  },
+  {
+    "id": "one-arm-push-up",
+    "name_en": "One-arm push-up",
+    "name_fr": "Pompe à un bras",
+    "category": "push",
+    "movement_pattern": "horizontal push",
+    "primary_muscles": [
+      "chest",
+      "triceps"
+    ],
+    "secondary_muscles": [
+      "front delts",
+      "core",
+      "obliques"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 5,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": "pseudo-planche-push-up",
+      "harder": null,
+      "chain": "push-up"
+    },
+    "setup": "Wide feet, one hand under the chest, other hand resting behind your back.",
+    "steps": [
+      "Squeeze glutes, abs and legs to resist rotation.",
+      "Lower the chest toward the floor beside the working hand.",
+      "Press up while keeping shoulders and hips level."
+    ],
+    "common_mistakes": [
+      "Twisting open toward the free arm",
+      "Narrow foot stance",
+      "Skipping progressions"
+    ],
+    "tips": "Work toward it with archers or by raising the working hand on a step.",
+    "drawing": "drawings/one-arm-push-up.svg"
+  },
+  {
+    "id": "scapular-push-up",
+    "name_en": "Scapular push-up",
+    "name_fr": "Pompe scapulaire",
+    "category": "push",
+    "movement_pattern": "scapular control",
+    "primary_muscles": [
+      "serratus anterior"
+    ],
+    "secondary_muscles": [
+      "chest",
+      "traps",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "reps",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "push-scapular"
+    },
+    "setup": "Plank with straight arms, hands under shoulders.",
+    "steps": [
+      "Keep elbows locked straight.",
+      "Let the chest sink slightly by squeezing the shoulder blades together.",
+      "Push the floor away to spread the blades apart and round the upper back."
+    ],
+    "common_mistakes": [
+      "Bending the elbows",
+      "Moving the hips",
+      "Rushing the reps"
+    ],
+    "tips": "A small, slow movement; it teaches shoulder control for push-ups and handstands.",
+    "drawing": "drawings/scapular-push-up.svg"
+  },
+  {
+    "id": "dip-support-hold",
+    "name_en": "Dip support hold",
+    "name_fr": "Maintien en appui sur barres",
+    "category": "push",
+    "movement_pattern": "vertical push",
+    "primary_muscles": [
+      "triceps",
+      "chest"
+    ],
+    "secondary_muscles": [
+      "front delts",
+      "core",
+      "traps"
+    ],
+    "equipment": [
+      "parallel-bars"
+    ],
+    "difficulty": 2,
+    "type": "time",
+    "progression": {
+      "easier": null,
+      "harder": "band-assisted-dip",
+      "chain": "dip"
+    },
+    "setup": "Grip the parallel bars, jump or step to straight-arm support, legs slightly forward.",
+    "steps": [
+      "Lock the elbows and push the shoulders down away from the ears.",
+      "Keep the chest slightly forward and the core braced.",
+      "Hold without swinging."
+    ],
+    "common_mistakes": [
+      "Shrugging up into the ears",
+      "Bent elbows",
+      "Swinging legs"
+    ],
+    "tips": "Build to 30 seconds before attempting dips.",
+    "drawing": "drawings/dip-support-hold.svg"
+  },
+  {
+    "id": "band-assisted-dip",
+    "name_en": "Band-assisted dip",
+    "name_fr": "Dips assistés (élastique)",
+    "category": "push",
+    "movement_pattern": "vertical push",
+    "primary_muscles": [
+      "triceps",
+      "chest"
+    ],
+    "secondary_muscles": [
+      "front delts",
+      "core"
+    ],
+    "equipment": [
+      "parallel-bars",
+      "bands"
+    ],
+    "difficulty": 2,
+    "type": "reps",
+    "progression": {
+      "easier": "dip-support-hold",
+      "harder": "negative-dip",
+      "chain": "dip"
+    },
+    "setup": "Stretch a band between the bars, knees resting on it, in straight-arm support.",
+    "steps": [
+      "Lower under control until the upper arms are about parallel to the floor.",
+      "Keep elbows close and chest slightly forward.",
+      "Press up to full lockout."
+    ],
+    "common_mistakes": [
+      "Bouncing off the band",
+      "Elbows flaring",
+      "Dropping too fast"
+    ],
+    "tips": "Use thinner bands over time; slow lowering matters more than reps.",
+    "drawing": "drawings/band-assisted-dip.svg"
+  },
+  {
+    "id": "negative-dip",
+    "name_en": "Negative dip",
+    "name_fr": "Dip négatif",
+    "category": "push",
+    "movement_pattern": "vertical push",
+    "primary_muscles": [
+      "triceps",
+      "chest"
+    ],
+    "secondary_muscles": [
+      "front delts",
+      "core"
+    ],
+    "equipment": [
+      "parallel-bars"
+    ],
+    "difficulty": 3,
+    "type": "reps",
+    "progression": {
+      "easier": "band-assisted-dip",
+      "harder": "parallel-bar-dip",
+      "chain": "dip"
+    },
+    "setup": "Start in straight-arm support at the top of the bars.",
+    "steps": [
+      "Lower slowly for 3-5 seconds, chest slightly forward.",
+      "Stop when the upper arms are parallel to the floor.",
+      "Step down or jump back to the top; repeat."
+    ],
+    "common_mistakes": [
+      "Dropping in one fast motion",
+      "Shoulders rolling forward at the bottom",
+      "Elbows flaring"
+    ],
+    "tips": "Stay in control; the slow lowering is the whole exercise.",
+    "drawing": "drawings/negative-dip.svg"
+  },
+  {
+    "id": "parallel-bar-dip",
+    "name_en": "Parallel bar dip",
+    "name_fr": "Dips aux barres parallèles",
+    "category": "push",
+    "movement_pattern": "vertical push",
+    "primary_muscles": [
+      "triceps",
+      "chest"
+    ],
+    "secondary_muscles": [
+      "front delts",
+      "core"
+    ],
+    "equipment": [
+      "parallel-bars"
+    ],
+    "difficulty": 3,
+    "type": "reps",
+    "progression": {
+      "easier": "negative-dip",
+      "harder": null,
+      "chain": "dip"
+    },
+    "setup": "Support yourself on the bars with straight arms, shoulders pulled down.",
+    "steps": [
+      "Lean the chest slightly forward and bend the elbows.",
+      "Lower until the upper arms are parallel with the floor.",
+      "Press back to full lockout."
+    ],
+    "common_mistakes": [
+      "Going too deep with shoulders rolled forward",
+      "Flared elbows",
+      "Swinging or kipping"
+    ],
+    "tips": "Keep the shoulders away from the ears; stop short if the front of the shoulder hurts.",
+    "drawing": "drawings/parallel-bar-dip.svg"
+  },
+  {
+    "id": "pike-push-up",
+    "name_en": "Pike push-up",
+    "name_fr": "Pompe en pique",
+    "category": "push",
+    "movement_pattern": "vertical push",
+    "primary_muscles": [
+      "front delts",
+      "triceps"
+    ],
+    "secondary_muscles": [
+      "upper chest",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 3,
+    "type": "reps",
+    "progression": {
+      "easier": null,
+      "harder": "wall-handstand-hold",
+      "chain": "pike-handstand"
+    },
+    "setup": "From downward dog: hands shoulder-width, hips high, legs straight, head between the arms.",
+    "steps": [
+      "Bend the elbows and lower the top of the head toward the floor in front of the hands.",
+      "Keep the hips high throughout.",
+      "Press back to the starting pike."
+    ],
+    "common_mistakes": [
+      "Hips dropping into a push-up",
+      "Elbows flaring wide",
+      "Not reaching full depth"
+    ],
+    "tips": "Walk the feet closer to the hands to make it harder.",
+    "drawing": "drawings/pike-push-up.svg"
+  },
+  {
+    "id": "wall-handstand-hold",
+    "name_en": "Wall handstand hold",
+    "name_fr": "Poirier au mur (maintien)",
+    "category": "push",
+    "movement_pattern": "vertical push",
+    "primary_muscles": [
+      "front delts",
+      "triceps"
+    ],
+    "secondary_muscles": [
+      "traps",
+      "core",
+      "wrists"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 4,
+    "type": "time",
+    "progression": {
+      "easier": "pike-push-up",
+      "harder": "wall-handstand-push-up",
+      "chain": "pike-handstand"
+    },
+    "setup": "Kick up with your belly toward the wall, hands about 20 cm from the wall, arms locked.",
+    "steps": [
+      "Push tall through the shoulders, ears between the arms.",
+      "Squeeze glutes and abs to stay straight.",
+      "Breathe and hold the position."
+    ],
+    "common_mistakes": [
+      "Banana back (arched lower back)",
+      "Bent elbows",
+      "Hands too far from the wall"
+    ],
+    "tips": "Practice the exit (cartwheel out or step down) before long holds.",
+    "drawing": "drawings/wall-handstand-hold.svg"
+  },
+  {
+    "id": "wall-handstand-push-up",
+    "name_en": "Wall handstand push-up",
+    "name_fr": "Pompe en poirier au mur",
+    "category": "push",
+    "movement_pattern": "vertical push",
+    "primary_muscles": [
+      "front delts",
+      "triceps"
+    ],
+    "secondary_muscles": [
+      "traps",
+      "core",
+      "upper chest"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 5,
+    "type": "reps",
+    "progression": {
+      "easier": "wall-handstand-hold",
+      "harder": null,
+      "chain": "pike-handstand"
+    },
+    "setup": "Belly-to-wall handstand, hands shoulder-width, body straight.",
+    "steps": [
+      "Lower the head toward the floor in a controlled path.",
+      "Lightly touch the head or a pad.",
+      "Press back up to full lockout."
+    ],
+    "common_mistakes": [
+      "Kipping the legs",
+      "Arching the back",
+      "Dropping too fast"
+    ],
+    "tips": "Use pike push-ups and short-range negatives first; place a folded mat under the head.",
+    "drawing": "drawings/wall-handstand-push-up.svg"
+  },
+  {
+    "id": "kettlebell-overhead-press",
+    "name_en": "Kettlebell overhead press",
+    "name_fr": "Développé militaire (kettlebell)",
+    "category": "push",
+    "movement_pattern": "vertical push",
+    "primary_muscles": [
+      "front delts",
+      "triceps"
+    ],
+    "secondary_muscles": [
+      "upper chest",
+      "core",
+      "traps"
+    ],
+    "equipment": [
+      "kettlebell"
+    ],
+    "difficulty": 2,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "overhead-press"
+    },
+    "setup": "Stand tall, kettlebell racked at the shoulder, wrist straight, feet hip-width.",
+    "steps": [
+      "Squeeze glutes and abs; do not lean back.",
+      "Press straight up until the arm is fully locked, biceps by the ear.",
+      "Lower back to the rack with control."
+    ],
+    "common_mistakes": [
+      "Leaning back to finish the press",
+      "Bent wrist",
+      "Elbow drifting forward"
+    ],
+    "tips": "Pick a light bell first; the small kettlebell makes this a great shoulder finisher.",
+    "drawing": "drawings/kettlebell-overhead-press.svg"
+  },
+  {
+    "id": "dead-hang",
+    "name_en": "Dead hang",
+    "name_fr": "Suspension à la barre",
+    "category": "pull",
+    "movement_pattern": "vertical pull",
+    "primary_muscles": [
+      "forearms",
+      "lats"
+    ],
+    "secondary_muscles": [
+      "shoulders",
+      "core"
+    ],
+    "equipment": [
+      "pullup-bar"
+    ],
+    "difficulty": 1,
+    "type": "time",
+    "progression": {
+      "easier": null,
+      "harder": "scapular-pull-up",
+      "chain": "vertical-pull"
+    },
+    "setup": "Grip the bar slightly wider than shoulders, hang with arms straight and feet off the floor.",
+    "steps": [
+      "Let the shoulders relax up, then gently pull them down (active hang).",
+      "Keep ribs down and legs together.",
+      "Breathe and hold."
+    ],
+    "common_mistakes": [
+      "Swinging",
+      "Overarched lower back",
+      "Shrugging the shoulders to the ears"
+    ],
+    "tips": "Great for grip and shoulder health; build to 30-60 seconds.",
+    "drawing": "drawings/dead-hang.svg"
+  },
+  {
+    "id": "scapular-pull-up",
+    "name_en": "Scapular pull-up",
+    "name_fr": "Tractions scapulaires",
+    "category": "pull",
+    "movement_pattern": "vertical pull",
+    "primary_muscles": [
+      "lower traps",
+      "lats"
+    ],
+    "secondary_muscles": [
+      "forearms",
+      "core"
+    ],
+    "equipment": [
+      "pullup-bar"
+    ],
+    "difficulty": 1,
+    "type": "reps",
+    "progression": {
+      "easier": "dead-hang",
+      "harder": "band-assisted-pull-up",
+      "chain": "vertical-pull"
+    },
+    "setup": "Hang from the bar with straight arms.",
+    "steps": [
+      "Keep the elbows straight.",
+      "Pull the shoulder blades down and back, lifting the body a few centimetres.",
+      "Lower slowly back to the full hang."
+    ],
+    "common_mistakes": [
+      "Bending the elbows",
+      "Swinging",
+      "Tiny range with no shoulder movement"
+    ],
+    "tips": "This teaches the first part of every pull-up.",
+    "drawing": "drawings/scapular-pull-up.svg"
+  },
+  {
+    "id": "band-assisted-pull-up",
+    "name_en": "Band-assisted pull-up",
+    "name_fr": "Traction assistée (élastique)",
+    "category": "pull",
+    "movement_pattern": "vertical pull",
+    "primary_muscles": [
+      "lats",
+      "biceps"
+    ],
+    "secondary_muscles": [
+      "forearms",
+      "rear delts",
+      "core"
+    ],
+    "equipment": [
+      "pullup-bar",
+      "bands"
+    ],
+    "difficulty": 2,
+    "type": "reps",
+    "progression": {
+      "easier": "scapular-pull-up",
+      "harder": "negative-pull-up",
+      "chain": "vertical-pull"
+    },
+    "setup": "Loop a band over the bar and set one knee or foot in it; hang with straight arms.",
+    "steps": [
+      "Pull the elbows down toward the ribs until the chin clears the bar.",
+      "Lower under control to straight arms.",
+      "Do not bounce out of the bottom."
+    ],
+    "common_mistakes": [
+      "Bouncing off the band",
+      "Kipping",
+      "Stopping short of the bar"
+    ],
+    "tips": "Use progressively lighter bands; the goal is to need less assistance.",
+    "drawing": "drawings/band-assisted-pull-up.svg"
+  },
+  {
+    "id": "negative-pull-up",
+    "name_en": "Negative pull-up",
+    "name_fr": "Traction négative",
+    "category": "pull",
+    "movement_pattern": "vertical pull",
+    "primary_muscles": [
+      "lats",
+      "biceps"
+    ],
+    "secondary_muscles": [
+      "forearms",
+      "core"
+    ],
+    "equipment": [
+      "pullup-bar"
+    ],
+    "difficulty": 2,
+    "type": "reps",
+    "progression": {
+      "easier": "band-assisted-pull-up",
+      "harder": "chin-up",
+      "chain": "vertical-pull"
+    },
+    "setup": "Jump or step up so your chin is over the bar, hands shoulder-width or a bit wider.",
+    "steps": [
+      "Lower yourself as slowly as possible (3-5 seconds).",
+      "Keep shoulders down and body still.",
+      "Reach a full hang, then step up again."
+    ],
+    "common_mistakes": [
+      "Dropping fast",
+      "Letting shoulders shrug at the bottom",
+      "Swinging"
+    ],
+    "tips": "Five slow reps beat ten fast drops.",
+    "drawing": "drawings/negative-pull-up.svg"
+  },
+  {
+    "id": "chin-up",
+    "name_en": "Chin-up",
+    "name_fr": "Traction supination",
+    "category": "pull",
+    "movement_pattern": "vertical pull",
+    "primary_muscles": [
+      "lats",
+      "biceps"
+    ],
+    "secondary_muscles": [
+      "forearms",
+      "rear delts",
+      "core"
+    ],
+    "equipment": [
+      "pullup-bar"
+    ],
+    "difficulty": 3,
+    "type": "reps",
+    "progression": {
+      "easier": "negative-pull-up",
+      "harder": "pull-up",
+      "chain": "vertical-pull"
+    },
+    "setup": "Underhand (palms toward you) grip, shoulder-width, hang with straight arms.",
+    "steps": [
+      "Squeeze the bar and pull elbows down to the ribs.",
+      "Chin clears the bar with chest up.",
+      "Lower to straight arms under control."
+    ],
+    "common_mistakes": [
+      "Half reps",
+      "Kipping or swinging",
+      "Craning the neck over the bar"
+    ],
+    "tips": "Usually easier than a pull-up because the biceps help more.",
+    "drawing": "drawings/chin-up.svg"
+  },
+  {
+    "id": "pull-up",
+    "name_en": "Pull-up",
+    "name_fr": "Traction",
+    "category": "pull",
+    "movement_pattern": "vertical pull",
+    "primary_muscles": [
+      "lats",
+      "upper back"
+    ],
+    "secondary_muscles": [
+      "biceps",
+      "forearms",
+      "core"
+    ],
+    "equipment": [
+      "pullup-bar"
+    ],
+    "difficulty": 3,
+    "type": "reps",
+    "progression": {
+      "easier": "chin-up",
+      "harder": "neutral-grip-pull-up",
+      "chain": "vertical-pull"
+    },
+    "setup": "Overhand grip slightly wider than shoulders, hang with straight arms, legs slightly forward.",
+    "steps": [
+      "Start with the shoulder blades down.",
+      "Pull the elbows toward the ribs until the chin clears the bar.",
+      "Lower to full hang under control."
+    ],
+    "common_mistakes": [
+      "Kipping",
+      "Chin poking forward",
+      "Not going to full extension at the bottom"
+    ],
+    "tips": "If you can do 8 clean reps, make it harder with the archer or L-sit versions.",
+    "drawing": "drawings/pull-up.svg"
+  },
+  {
+    "id": "neutral-grip-pull-up",
+    "name_en": "Neutral-grip pull-up",
+    "name_fr": "Traction prise neutre",
+    "category": "pull",
+    "movement_pattern": "vertical pull",
+    "primary_muscles": [
+      "lats",
+      "biceps"
+    ],
+    "secondary_muscles": [
+      "forearms",
+      "rear delts",
+      "core"
+    ],
+    "equipment": [
+      "parallel-bars"
+    ],
+    "difficulty": 3,
+    "type": "reps",
+    "progression": {
+      "easier": "pull-up",
+      "harder": "l-sit-pull-up",
+      "chain": "vertical-pull"
+    },
+    "setup": "Hang from parallel handles with palms facing each other (shoulder-width).",
+    "steps": [
+      "Pull the elbows toward the ribs.",
+      "Bring the chin above the handles.",
+      "Lower slowly to straight arms."
+    ],
+    "common_mistakes": [
+      "Kipping",
+      "Half range",
+      "Shrugging at the top"
+    ],
+    "tips": "Often the friendliest grip on elbows and shoulders.",
+    "drawing": "drawings/neutral-grip-pull-up.svg"
+  },
+  {
+    "id": "l-sit-pull-up",
+    "name_en": "L-sit pull-up",
+    "name_fr": "Traction en L",
+    "category": "pull",
+    "movement_pattern": "vertical pull",
+    "primary_muscles": [
+      "lats",
+      "abs"
+    ],
+    "secondary_muscles": [
+      "biceps",
+      "hip flexors",
+      "forearms"
+    ],
+    "equipment": [
+      "pullup-bar"
+    ],
+    "difficulty": 4,
+    "type": "reps",
+    "progression": {
+      "easier": "neutral-grip-pull-up",
+      "harder": "archer-pull-up",
+      "chain": "vertical-pull"
+    },
+    "setup": "Hang with legs straight out in front at hip height, toes pointed.",
+    "steps": [
+      "Hold the legs up and pull the elbows down.",
+      "Chin clears the bar without the legs dropping.",
+      "Lower with the legs still raised."
+    ],
+    "common_mistakes": [
+      "Bending the knees",
+      "Legs sinking as you tire",
+      "Swinging"
+    ],
+    "tips": "Practice a hanging L-hold first, then add the pull.",
+    "drawing": "drawings/l-sit-pull-up.svg"
+  },
+  {
+    "id": "archer-pull-up",
+    "name_en": "Archer pull-up",
+    "name_fr": "Traction archer",
+    "category": "pull",
+    "movement_pattern": "vertical pull",
+    "primary_muscles": [
+      "lats",
+      "biceps"
+    ],
+    "secondary_muscles": [
+      "forearms",
+      "obliques",
+      "core"
+    ],
+    "equipment": [
+      "pullup-bar"
+    ],
+    "difficulty": 5,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": "l-sit-pull-up",
+      "harder": null,
+      "chain": "vertical-pull"
+    },
+    "setup": "Wide overhand grip, hang with straight arms.",
+    "steps": [
+      "Pull toward one hand, bending that elbow.",
+      "Keep the opposite arm straight along the bar.",
+      "Lower under control; alternate sides."
+    ],
+    "common_mistakes": [
+      "Straight arm bending",
+      "Swinging",
+      "Chin not clearing the bar"
+    ],
+    "tips": "Build with wide-grip pull-ups and band-assisted versions first.",
+    "drawing": "drawings/archer-pull-up.svg"
+  },
+  {
+    "id": "band-row",
+    "name_en": "Band row",
+    "name_fr": "Rame avec élastique",
+    "category": "pull",
+    "movement_pattern": "horizontal pull",
+    "primary_muscles": [
+      "lats",
+      "mid back"
+    ],
+    "secondary_muscles": [
+      "biceps",
+      "rear delts"
+    ],
+    "equipment": [
+      "bands"
+    ],
+    "difficulty": 1,
+    "type": "reps",
+    "progression": {
+      "easier": null,
+      "harder": "kettlebell-row",
+      "chain": "horizontal-pull"
+    },
+    "setup": "Anchor a band at chest height (door anchor), step back until it is tight, arms straight.",
+    "steps": [
+      "Brace the core and stand tall.",
+      "Pull the hands to the ribs, squeezing shoulder blades together.",
+      "Return with control."
+    ],
+    "common_mistakes": [
+      "Leaning back to pull",
+      "Shrugging",
+      "Letting the band snap back"
+    ],
+    "tips": "Step further back or use a thicker band to progress.",
+    "drawing": "drawings/band-row.svg"
+  },
+  {
+    "id": "kettlebell-row",
+    "name_en": "Kettlebell row",
+    "name_fr": "Rameur avec kettlebell",
+    "category": "pull",
+    "movement_pattern": "horizontal pull",
+    "primary_muscles": [
+      "lats",
+      "mid back"
+    ],
+    "secondary_muscles": [
+      "biceps",
+      "rear delts",
+      "core"
+    ],
+    "equipment": [
+      "kettlebell"
+    ],
+    "difficulty": 2,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": "band-row",
+      "harder": null,
+      "chain": "horizontal-pull"
+    },
+    "setup": "Hinge forward with a flat back, knees soft, kettlebell hanging from one hand.",
+    "steps": [
+      "Keep the back flat and hips back.",
+      "Row the bell toward the hip, elbow close to the body.",
+      "Lower to a straight arm without twisting."
+    ],
+    "common_mistakes": [
+      "Rounding the back",
+      "Using momentum",
+      "Twisting the torso"
+    ],
+    "tips": "Rest the free hand on the thigh for support.",
+    "drawing": "drawings/kettlebell-row.svg"
+  },
+  {
+    "id": "band-pull-apart",
+    "name_en": "Band pull-apart",
+    "name_fr": "Écartement d'élastique",
+    "category": "pull",
+    "movement_pattern": "horizontal pull",
+    "primary_muscles": [
+      "rear delts",
+      "mid back"
+    ],
+    "secondary_muscles": [
+      "traps",
+      "rotator cuff"
+    ],
+    "equipment": [
+      "bands"
+    ],
+    "difficulty": 1,
+    "type": "reps",
+    "progression": {
+      "easier": null,
+      "harder": "band-face-pull",
+      "chain": "shoulder-health"
+    },
+    "setup": "Hold a band at chest height with straight arms, hands shoulder-width.",
+    "steps": [
+      "Pull the band apart sideways until it touches the chest.",
+      "Squeeze the shoulder blades together.",
+      "Return slowly."
+    ],
+    "common_mistakes": [
+      "Shrugging",
+      "Arching the lower back",
+      "Bending the elbows"
+    ],
+    "tips": "Great as a warm-up or between push sets.",
+    "drawing": "drawings/band-pull-apart.svg"
+  },
+  {
+    "id": "band-face-pull",
+    "name_en": "Band face pull",
+    "name_fr": "Tirage visage (élastique)",
+    "category": "pull",
+    "movement_pattern": "horizontal pull",
+    "primary_muscles": [
+      "rear delts",
+      "rotator cuff"
+    ],
+    "secondary_muscles": [
+      "mid back",
+      "traps"
+    ],
+    "equipment": [
+      "bands"
+    ],
+    "difficulty": 2,
+    "type": "reps",
+    "progression": {
+      "easier": "band-pull-apart",
+      "harder": null,
+      "chain": "shoulder-health"
+    },
+    "setup": "Anchor a band at face height, hold both ends with palms facing in, step back.",
+    "steps": [
+      "Pull the band toward the face, hands splitting to either side of the head.",
+      "Elbows high, finishing in a double-biceps position.",
+      "Return under control."
+    ],
+    "common_mistakes": [
+      "Elbows dropping low",
+      "Leaning back",
+      "Shrugging"
+    ],
+    "tips": "Light band, high reps (12-20).",
+    "drawing": "drawings/band-face-pull.svg"
+  },
+  {
+    "id": "band-lat-pulldown",
+    "name_en": "Band lat pulldown",
+    "name_fr": "Tirage vertical (élastique)",
+    "category": "pull",
+    "movement_pattern": "vertical pull",
+    "primary_muscles": [
+      "lats"
+    ],
+    "secondary_muscles": [
+      "biceps",
+      "rear delts"
+    ],
+    "equipment": [
+      "bands",
+      "pullup-bar"
+    ],
+    "difficulty": 2,
+    "type": "reps",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "band-vertical-pull"
+    },
+    "setup": "Loop a band over the pull-up bar, hold the ends overhead with straight arms (stand or kneel).",
+    "steps": [
+      "Pull the elbows down and back toward the ribs.",
+      "Squeeze the lats at the bottom.",
+      "Let the arms rise slowly."
+    ],
+    "common_mistakes": [
+      "Leaning back too far",
+      "Shrugging",
+      "Using only the biceps"
+    ],
+    "tips": "Step back so the band pulls down-forward for better line.",
+    "drawing": "drawings/band-lat-pulldown.svg"
+  },
+  {
+    "id": "bodyweight-squat",
+    "name_en": "Bodyweight squat",
+    "name_fr": "Squat au poids du corps",
+    "category": "legs",
+    "movement_pattern": "squat",
+    "primary_muscles": [
+      "quads",
+      "glutes"
+    ],
+    "secondary_muscles": [
+      "hamstrings",
+      "core",
+      "calves"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "reps",
+    "progression": {
+      "easier": null,
+      "harder": "goblet-squat",
+      "chain": "squat"
+    },
+    "setup": "Feet shoulder-width, toes slightly out, arms forward for balance.",
+    "steps": [
+      "Brace the core and sit the hips back and down.",
+      "Keep the heels down and knees tracking over the toes.",
+      "Reach at least thigh-parallel, then drive up through the whole foot."
+    ],
+    "common_mistakes": [
+      "Heels lifting",
+      "Knees caving in",
+      "Chest collapsing forward"
+    ],
+    "tips": "Pause 1 second at the bottom for control.",
+    "drawing": "drawings/bodyweight-squat.svg"
+  },
+  {
+    "id": "goblet-squat",
+    "name_en": "Goblet squat",
+    "name_fr": "Squat gobelet",
+    "category": "legs",
+    "movement_pattern": "squat",
+    "primary_muscles": [
+      "quads",
+      "glutes"
+    ],
+    "secondary_muscles": [
+      "core",
+      "upper back",
+      "hamstrings"
+    ],
+    "equipment": [
+      "kettlebell"
+    ],
+    "difficulty": 2,
+    "type": "reps",
+    "progression": {
+      "easier": "bodyweight-squat",
+      "harder": "split-squat",
+      "chain": "squat"
+    },
+    "setup": "Hold the kettlebell by the horns at the chest, elbows pointing down, feet shoulder-width.",
+    "steps": [
+      "Keep the bell close to the chest.",
+      "Sit between the hips, elbows inside the knees.",
+      "Drive up, chest tall."
+    ],
+    "common_mistakes": [
+      "Bell drifting away from the chest",
+      "Heels lifting",
+      "Rounding the upper back"
+    ],
+    "tips": "The counterweight makes it easier to stay upright and go deep.",
+    "drawing": "drawings/goblet-squat.svg"
+  },
+  {
+    "id": "jump-squat",
+    "name_en": "Jump squat",
+    "name_fr": "Squat sauté",
+    "category": "legs",
+    "movement_pattern": "squat",
+    "primary_muscles": [
+      "quads",
+      "glutes"
+    ],
+    "secondary_muscles": [
+      "calves",
+      "hamstrings",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 2,
+    "type": "reps",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "plyometric"
+    },
+    "setup": "Squat stance, arms ready to swing.",
+    "steps": [
+      "Drop into a quarter to half squat.",
+      "Explode up, extending hips, knees and ankles.",
+      "Land softly on the midfoot and sink straight into the next rep."
+    ],
+    "common_mistakes": [
+      "Stiff, loud landings",
+      "Knees caving on landing",
+      "Shallow, rushed reps"
+    ],
+    "tips": "Land quietly; stop when you can no longer.",
+    "drawing": "drawings/jump-squat.svg"
+  },
+  {
+    "id": "split-squat",
+    "name_en": "Split squat",
+    "name_fr": "Squat fendu (statique)",
+    "category": "legs",
+    "movement_pattern": "squat",
+    "primary_muscles": [
+      "quads",
+      "glutes"
+    ],
+    "secondary_muscles": [
+      "hamstrings",
+      "core",
+      "adductors"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 2,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": "goblet-squat",
+      "harder": "cossack-squat",
+      "chain": "squat"
+    },
+    "setup": "Long staggered stance, front foot flat, back heel raised, torso upright.",
+    "steps": [
+      "Lower the back knee straight down toward the floor.",
+      "Keep the front shin close to vertical.",
+      "Press through the front foot to rise."
+    ],
+    "common_mistakes": [
+      "Stance too short",
+      "Front heel lifting",
+      "Leaning forward and bouncing"
+    ],
+    "tips": "Hold a doorframe lightly for balance if needed.",
+    "drawing": "drawings/split-squat.svg"
+  },
+  {
+    "id": "reverse-lunge",
+    "name_en": "Reverse lunge",
+    "name_fr": "Fente arrière",
+    "category": "legs",
+    "movement_pattern": "lunge",
+    "primary_muscles": [
+      "quads",
+      "glutes"
+    ],
+    "secondary_muscles": [
+      "hamstrings",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 2,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "lunge"
+    },
+    "setup": "Stand tall, feet hip-width, hands on hips.",
+    "steps": [
+      "Step one foot back and lower until both knees are about 90°.",
+      "Keep the front shin vertical and torso upright.",
+      "Push through the front heel to return."
+    ],
+    "common_mistakes": [
+      "Front knee collapsing in",
+      "Short step, forcing the knee forward",
+      "Torso collapsing"
+    ],
+    "tips": "Easier on the knees than a forward lunge.",
+    "drawing": "drawings/reverse-lunge.svg"
+  },
+  {
+    "id": "lateral-lunge",
+    "name_en": "Lateral lunge",
+    "name_fr": "Fente latérale",
+    "category": "legs",
+    "movement_pattern": "lunge",
+    "primary_muscles": [
+      "quads",
+      "glutes",
+      "adductors"
+    ],
+    "secondary_muscles": [
+      "hamstrings",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 2,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "lunge"
+    },
+    "setup": "Stand tall, feet together, toes forward.",
+    "steps": [
+      "Step wide to the side and sit back over that leg.",
+      "Keep the other leg straight, both feet flat.",
+      "Push off the bent leg to return to standing."
+    ],
+    "common_mistakes": [
+      "Heel lifting on the working leg",
+      "Chest dropping",
+      "Knee caving inward"
+    ],
+    "tips": "Hold a goblet kettlebell once the bodyweight version is easy.",
+    "drawing": "drawings/lateral-lunge.svg"
+  },
+  {
+    "id": "cossack-squat",
+    "name_en": "Cossack squat",
+    "name_fr": "Squat cosaque",
+    "category": "legs",
+    "movement_pattern": "squat",
+    "primary_muscles": [
+      "quads",
+      "glutes",
+      "adductors"
+    ],
+    "secondary_muscles": [
+      "hamstrings",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 3,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": "split-squat",
+      "harder": "assisted-pistol-squat",
+      "chain": "squat"
+    },
+    "setup": "Very wide stance, toes slightly out, arms in front for balance.",
+    "steps": [
+      "Shift your weight to one side and sit deep on that leg.",
+      "Keep the other leg straight with the heel down (toes can lift).",
+      "Drive back through the bent leg to center, then switch sides."
+    ],
+    "common_mistakes": [
+      "Heel of the working leg lifting",
+      "Not sitting deep",
+      "Collapsing the chest"
+    ],
+    "tips": "Hold a doorframe at first. Great hip mobility builder.",
+    "drawing": "drawings/cossack-squat.svg"
+  },
+  {
+    "id": "assisted-pistol-squat",
+    "name_en": "Assisted pistol squat",
+    "name_fr": "Squat pistolet assisté",
+    "category": "legs",
+    "movement_pattern": "squat",
+    "primary_muscles": [
+      "quads",
+      "glutes"
+    ],
+    "secondary_muscles": [
+      "core",
+      "adductors",
+      "calves"
+    ],
+    "equipment": [
+      "bands",
+      "pullup-bar"
+    ],
+    "difficulty": 4,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": "cossack-squat",
+      "harder": "pistol-squat",
+      "chain": "squat"
+    },
+    "setup": "Hang a band from the pull-up bar and hold it with both hands; stand on one leg, other leg forward.",
+    "steps": [
+      "Lower slowly on one leg, using the band only as needed.",
+      "Keep the free leg off the floor and the heel down.",
+      "Drive up with the working leg; reduce the pull over time."
+    ],
+    "common_mistakes": [
+      "Pulling up with the arms",
+      "Heel lifting",
+      "Dropping to the bottom"
+    ],
+    "tips": "Move your hand lower on the band as you get stronger.",
+    "drawing": "drawings/assisted-pistol-squat.svg"
+  },
+  {
+    "id": "pistol-squat",
+    "name_en": "Pistol squat",
+    "name_fr": "Squat pistolet",
+    "category": "legs",
+    "movement_pattern": "squat",
+    "primary_muscles": [
+      "quads",
+      "glutes"
+    ],
+    "secondary_muscles": [
+      "core",
+      "adductors",
+      "calves"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 5,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": "assisted-pistol-squat",
+      "harder": null,
+      "chain": "squat"
+    },
+    "setup": "Stand on one leg, free leg extended forward, arms forward for balance.",
+    "steps": [
+      "Sit back and down on the standing leg, keeping the heel flat.",
+      "Hold the free leg straight and off the floor.",
+      "Drive up through the whole foot."
+    ],
+    "common_mistakes": [
+      "Heel lifting",
+      "Free foot touching down",
+      "Dropping into the bottom"
+    ],
+    "tips": "Use boxes or the assisted version to build range first.",
+    "drawing": "drawings/pistol-squat.svg"
+  },
+  {
+    "id": "wall-sit",
+    "name_en": "Wall sit",
+    "name_fr": "Chaise murale",
+    "category": "legs",
+    "movement_pattern": "squat",
+    "primary_muscles": [
+      "quads"
+    ],
+    "secondary_muscles": [
+      "glutes",
+      "calves",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "time",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "isometric-squat"
+    },
+    "setup": "Back flat on a wall, feet about 60 cm out, thighs parallel to the floor.",
+    "steps": [
+      "Slide down until knees are at about 90°.",
+      "Keep the back flat on the wall and weight through the heels.",
+      "Hold and breathe."
+    ],
+    "common_mistakes": [
+      "Knees past the toes",
+      "Hands pushing on the thighs",
+      "Sitting too high"
+    ],
+    "tips": "Add 10 seconds each session.",
+    "drawing": "drawings/wall-sit.svg"
+  },
+  {
+    "id": "glute-bridge",
+    "name_en": "Glute bridge",
+    "name_fr": "Pont fessier",
+    "category": "legs",
+    "movement_pattern": "hip extension",
+    "primary_muscles": [
+      "glutes"
+    ],
+    "secondary_muscles": [
+      "hamstrings",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "reps",
+    "progression": {
+      "easier": null,
+      "harder": "single-leg-glute-bridge",
+      "chain": "glute-bridge"
+    },
+    "setup": "Lie on your back, knees bent, feet flat hip-width, arms by sides.",
+    "steps": [
+      "Press through the heels and lift the hips.",
+      "Squeeze the glutes at the top; body in a line from shoulders to knees.",
+      "Lower with control."
+    ],
+    "common_mistakes": [
+      "Arching the lower back",
+      "Pushing through the toes",
+      "Knees falling in"
+    ],
+    "tips": "Pause 2 seconds at the top.",
+    "drawing": "drawings/glute-bridge.svg"
+  },
+  {
+    "id": "single-leg-glute-bridge",
+    "name_en": "Single-leg glute bridge",
+    "name_fr": "Pont fessier à une jambe",
+    "category": "legs",
+    "movement_pattern": "hip extension",
+    "primary_muscles": [
+      "glutes"
+    ],
+    "secondary_muscles": [
+      "hamstrings",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 2,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": "glute-bridge",
+      "harder": null,
+      "chain": "glute-bridge"
+    },
+    "setup": "Lie on your back, one foot planted, the other leg extended.",
+    "steps": [
+      "Drive through the planted heel to lift the hips.",
+      "Keep the pelvis level and the free leg in line with the thigh.",
+      "Lower slowly."
+    ],
+    "common_mistakes": [
+      "Hips rotating",
+      "Over-arching the back",
+      "Pushing with the toes"
+    ],
+    "tips": "Slow tempo makes it far harder.",
+    "drawing": "drawings/single-leg-glute-bridge.svg"
+  },
+  {
+    "id": "calf-raise",
+    "name_en": "Calf raise",
+    "name_fr": "Élévation des mollets",
+    "category": "legs",
+    "movement_pattern": "plantar flexion",
+    "primary_muscles": [
+      "calves"
+    ],
+    "secondary_muscles": [
+      "ankle stabilisers"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "reps",
+    "progression": {
+      "easier": null,
+      "harder": "single-leg-calf-raise",
+      "chain": "calf"
+    },
+    "setup": "Stand tall, feet hip-width, a hand on a wall for balance if needed.",
+    "steps": [
+      "Rise onto the balls of the feet as high as you can.",
+      "Pause at the top.",
+      "Lower slowly until the heels reach the floor."
+    ],
+    "common_mistakes": [
+      "Bouncing",
+      "Rolling onto the outside of the feet",
+      "Partial range"
+    ],
+    "tips": "Go slowly; a 3-second lowering works well.",
+    "drawing": "drawings/calf-raise.svg"
+  },
+  {
+    "id": "single-leg-calf-raise",
+    "name_en": "Single-leg calf raise",
+    "name_fr": "Mollet à une jambe",
+    "category": "legs",
+    "movement_pattern": "plantar flexion",
+    "primary_muscles": [
+      "calves"
+    ],
+    "secondary_muscles": [
+      "ankle stabilisers"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 2,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": "calf-raise",
+      "harder": null,
+      "chain": "calf"
+    },
+    "setup": "Stand on one foot, other foot lifted behind, fingertips on a wall.",
+    "steps": [
+      "Rise as high as possible on the working foot.",
+      "Hold a second at the top.",
+      "Lower slowly below the floor line if standing on a step."
+    ],
+    "common_mistakes": [
+      "Bouncing",
+      "Leaning on the wall",
+      "Rolling outward"
+    ],
+    "tips": "Add reps before adding a step to extend the range.",
+    "drawing": "drawings/single-leg-calf-raise.svg"
+  },
+  {
+    "id": "single-leg-rdl",
+    "name_en": "Single-leg Romanian deadlift",
+    "name_fr": "Soulevé de terre roumain à une jambe",
+    "category": "legs",
+    "movement_pattern": "hip hinge",
+    "primary_muscles": [
+      "hamstrings",
+      "glutes"
+    ],
+    "secondary_muscles": [
+      "core",
+      "calves",
+      "back extensors"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 2,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": "kettlebell-deadlift",
+      "harder": "kettlebell-swing",
+      "chain": "hinge"
+    },
+    "setup": "Stand on one foot with a soft knee, other foot just off the floor.",
+    "steps": [
+      "Hinge at the hip and send the free leg straight back.",
+      "Keep a flat back and level hips until the torso is near parallel.",
+      "Squeeze the glute to stand back up."
+    ],
+    "common_mistakes": [
+      "Rounding the back",
+      "Hips rotating open",
+      "Bending the standing knee too much"
+    ],
+    "tips": "Touch a fingertip to a wall for balance at first.",
+    "drawing": "drawings/single-leg-rdl.svg"
+  },
+  {
+    "id": "kettlebell-deadlift",
+    "name_en": "Kettlebell deadlift",
+    "name_fr": "Soulevé de terre (kettlebell)",
+    "category": "legs",
+    "movement_pattern": "hip hinge",
+    "primary_muscles": [
+      "glutes",
+      "hamstrings"
+    ],
+    "secondary_muscles": [
+      "back extensors",
+      "core",
+      "forearms"
+    ],
+    "equipment": [
+      "kettlebell"
+    ],
+    "difficulty": 1,
+    "type": "reps",
+    "progression": {
+      "easier": null,
+      "harder": "single-leg-rdl",
+      "chain": "hinge"
+    },
+    "setup": "Kettlebell on the floor between the feet, feet hip-width, hips back, flat back.",
+    "steps": [
+      "Grip the handle, brace, and push the floor away.",
+      "Stand tall, squeezing the glutes at the top.",
+      "Hinge back down, bell tracking close to the legs."
+    ],
+    "common_mistakes": [
+      "Rounding the back",
+      "Squatting instead of hinging",
+      "Hyperextending at the top"
+    ],
+    "tips": "Sets the pattern for swings.",
+    "drawing": "drawings/kettlebell-deadlift.svg"
+  },
+  {
+    "id": "band-lateral-walk",
+    "name_en": "Band lateral walk",
+    "name_fr": "Marche latérale (élastique)",
+    "category": "legs",
+    "movement_pattern": "hip abduction",
+    "primary_muscles": [
+      "glute medius"
+    ],
+    "secondary_muscles": [
+      "glutes",
+      "quads",
+      "core"
+    ],
+    "equipment": [
+      "bands"
+    ],
+    "difficulty": 1,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "hip-abduction"
+    },
+    "setup": "Band just above the knees, quarter-squat, feet hip-width, hands in front.",
+    "steps": [
+      "Take a controlled step sideways, keeping tension on the band.",
+      "Stay low; knees pushed out over the toes.",
+      "Follow with the other foot without letting the feet touch."
+    ],
+    "common_mistakes": [
+      "Standing up between steps",
+      "Knees caving in",
+      "Torso leaning"
+    ],
+    "tips": "Take 10-15 steps each way.",
+    "drawing": "drawings/band-lateral-walk.svg"
+  },
+  {
+    "id": "plank",
+    "name_en": "Plank",
+    "name_fr": "Planche abdominale (gainage)",
+    "category": "core",
+    "movement_pattern": "anti-extension",
+    "primary_muscles": [
+      "abs",
+      "transverse abdominis"
+    ],
+    "secondary_muscles": [
+      "glutes",
+      "shoulders",
+      "lower back"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "time",
+    "progression": {
+      "easier": null,
+      "harder": "plank-shoulder-tap",
+      "chain": "plank"
+    },
+    "setup": "Forearms on the floor, elbows under shoulders, legs straight, toes down.",
+    "steps": [
+      "Squeeze glutes and abs; ribs down.",
+      "Keep a straight line from head to heels.",
+      "Breathe steadily while you hold."
+    ],
+    "common_mistakes": [
+      "Sagging hips",
+      "Hips too high",
+      "Holding the breath"
+    ],
+    "tips": "Quality over time: stop when the hips start to sag.",
+    "drawing": "drawings/plank.svg"
+  },
+  {
+    "id": "plank-shoulder-tap",
+    "name_en": "Plank shoulder tap",
+    "name_fr": "Planche avec touche d'épaule",
+    "category": "core",
+    "movement_pattern": "anti-rotation",
+    "primary_muscles": [
+      "abs",
+      "obliques"
+    ],
+    "secondary_muscles": [
+      "shoulders",
+      "glutes"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 2,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": "plank",
+      "harder": null,
+      "chain": "plank"
+    },
+    "setup": "High plank (arms straight), feet slightly wider than hip-width.",
+    "steps": [
+      "Brace the core and keep the hips level.",
+      "Lift one hand and tap the opposite shoulder.",
+      "Return it and alternate without rocking."
+    ],
+    "common_mistakes": [
+      "Hips swaying side to side",
+      "Rushing",
+      "Sagging lower back"
+    ],
+    "tips": "Widen the feet to make it easier; bring them closer to make it harder.",
+    "drawing": "drawings/plank-shoulder-tap.svg"
+  },
+  {
+    "id": "side-plank",
+    "name_en": "Side plank",
+    "name_fr": "Planche latérale",
+    "category": "core",
+    "movement_pattern": "lateral stability",
+    "primary_muscles": [
+      "obliques",
+      "glute medius"
+    ],
+    "secondary_muscles": [
+      "shoulders",
+      "abs"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 2,
+    "type": "time-per-side",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "lateral-core"
+    },
+    "setup": "Lie on one side, forearm under the shoulder, feet stacked.",
+    "steps": [
+      "Lift the hips so the body forms a straight line.",
+      "Keep the hips stacked and shoulders away from the ears.",
+      "Hold, then switch sides."
+    ],
+    "common_mistakes": [
+      "Hips dropping",
+      "Rolling forward or backward",
+      "Shoulder collapsing"
+    ],
+    "tips": "Drop the lower knee to the floor to make it easier.",
+    "drawing": "drawings/side-plank.svg"
+  },
+  {
+    "id": "dead-bug",
+    "name_en": "Dead bug",
+    "name_fr": "Insecte mort",
+    "category": "core",
+    "movement_pattern": "anti-extension",
+    "primary_muscles": [
+      "abs",
+      "transverse abdominis"
+    ],
+    "secondary_muscles": [
+      "hip flexors",
+      "obliques"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": null,
+      "harder": "hollow-body-hold",
+      "chain": "hollow"
+    },
+    "setup": "Lie on your back, arms up toward the ceiling, hips and knees bent at 90°.",
+    "steps": [
+      "Press the lower back gently into the floor.",
+      "Lower the opposite arm and leg slowly toward the floor.",
+      "Return and switch sides."
+    ],
+    "common_mistakes": [
+      "Lower back arching",
+      "Moving too fast",
+      "Holding the breath"
+    ],
+    "tips": "Only go as low as the back stays flat.",
+    "drawing": "drawings/dead-bug.svg"
+  },
+  {
+    "id": "bird-dog",
+    "name_en": "Bird dog",
+    "name_fr": "Chien-oiseau",
+    "category": "core",
+    "movement_pattern": "anti-rotation",
+    "primary_muscles": [
+      "lower back",
+      "glutes"
+    ],
+    "secondary_muscles": [
+      "abs",
+      "shoulders"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": null,
+      "harder": "superman",
+      "chain": "back-extension"
+    },
+    "setup": "On all fours, hands under shoulders, knees under hips, back neutral.",
+    "steps": [
+      "Brace the abs, then reach one arm forward and the opposite leg back.",
+      "Keep hips and shoulders level.",
+      "Pause, return, and switch sides."
+    ],
+    "common_mistakes": [
+      "Arching the lower back",
+      "Hips rotating open",
+      "Lifting the leg too high"
+    ],
+    "tips": "Imagine balancing a cup on your lower back.",
+    "drawing": "drawings/bird-dog.svg"
+  },
+  {
+    "id": "hollow-body-hold",
+    "name_en": "Hollow body hold",
+    "name_fr": "Position creuse (hollow)",
+    "category": "core",
+    "movement_pattern": "anti-extension",
+    "primary_muscles": [
+      "abs"
+    ],
+    "secondary_muscles": [
+      "hip flexors",
+      "quads"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 3,
+    "type": "time",
+    "progression": {
+      "easier": "dead-bug",
+      "harder": null,
+      "chain": "hollow"
+    },
+    "setup": "Lie on your back, arms overhead, legs straight.",
+    "steps": [
+      "Press the lower back into the floor.",
+      "Lift the shoulders and legs off the floor, body shaped like a shallow banana.",
+      "Breathe and hold."
+    ],
+    "common_mistakes": [
+      "Lower back lifting off the floor",
+      "Neck straining",
+      "Legs too high to be challenging"
+    ],
+    "tips": "Raise the legs for easier, lower them for harder; tuck knees to scale.",
+    "drawing": "drawings/hollow-body-hold.svg"
+  },
+  {
+    "id": "hanging-knee-raise",
+    "name_en": "Hanging knee raise",
+    "name_fr": "Montée de genoux suspendue",
+    "category": "core",
+    "movement_pattern": "hip flexion",
+    "primary_muscles": [
+      "abs",
+      "hip flexors"
+    ],
+    "secondary_muscles": [
+      "forearms",
+      "lats"
+    ],
+    "equipment": [
+      "pullup-bar"
+    ],
+    "difficulty": 2,
+    "type": "reps",
+    "progression": {
+      "easier": null,
+      "harder": "hanging-leg-raise",
+      "chain": "hanging-core"
+    },
+    "setup": "Hang from the bar, shoulders slightly pulled down.",
+    "steps": [
+      "Curl the pelvis up as the knees rise toward the chest.",
+      "Pause without swinging.",
+      "Lower slowly to a full hang."
+    ],
+    "common_mistakes": [
+      "Swinging",
+      "Only lifting the thighs with the hip flexors",
+      "Dropping fast"
+    ],
+    "tips": "Think of curling the pelvis, not just lifting the legs.",
+    "drawing": "drawings/hanging-knee-raise.svg"
+  },
+  {
+    "id": "hanging-leg-raise",
+    "name_en": "Hanging leg raise",
+    "name_fr": "Relevé de jambes suspendu",
+    "category": "core",
+    "movement_pattern": "hip flexion",
+    "primary_muscles": [
+      "abs",
+      "hip flexors"
+    ],
+    "secondary_muscles": [
+      "forearms",
+      "lats"
+    ],
+    "equipment": [
+      "pullup-bar"
+    ],
+    "difficulty": 3,
+    "type": "reps",
+    "progression": {
+      "easier": "hanging-knee-raise",
+      "harder": "toes-to-bar",
+      "chain": "hanging-core"
+    },
+    "setup": "Hang from the bar, legs straight and together.",
+    "steps": [
+      "Brace, and raise straight legs to hip height or above.",
+      "Keep the body still and shoulders down.",
+      "Lower with control."
+    ],
+    "common_mistakes": [
+      "Swinging",
+      "Bending the knees",
+      "Letting the back arch"
+    ],
+    "tips": "Start with bent knees until straight legs are controlled.",
+    "drawing": "drawings/hanging-leg-raise.svg"
+  },
+  {
+    "id": "toes-to-bar",
+    "name_en": "Toes to bar",
+    "name_fr": "Orteils à la barre",
+    "category": "core",
+    "movement_pattern": "hip flexion",
+    "primary_muscles": [
+      "abs",
+      "hip flexors"
+    ],
+    "secondary_muscles": [
+      "lats",
+      "forearms",
+      "grip"
+    ],
+    "equipment": [
+      "pullup-bar"
+    ],
+    "difficulty": 4,
+    "type": "reps",
+    "progression": {
+      "easier": "hanging-leg-raise",
+      "harder": null,
+      "chain": "hanging-core"
+    },
+    "setup": "Hang with a solid grip, shoulders active.",
+    "steps": [
+      "Pull the bar down slightly and lift straight legs.",
+      "Touch the toes to the bar.",
+      "Lower under control without a big swing."
+    ],
+    "common_mistakes": [
+      "Kipping out of control",
+      "Bending the knees",
+      "Not reaching the bar"
+    ],
+    "tips": "Practice strict leg raises first.",
+    "drawing": "drawings/toes-to-bar.svg"
+  },
+  {
+    "id": "tuck-l-sit",
+    "name_en": "Tuck L-sit",
+    "name_fr": "L-sit groupé",
+    "category": "core",
+    "movement_pattern": "compression",
+    "primary_muscles": [
+      "abs",
+      "hip flexors"
+    ],
+    "secondary_muscles": [
+      "triceps",
+      "shoulders"
+    ],
+    "equipment": [
+      "parallel-bars"
+    ],
+    "difficulty": 3,
+    "type": "time",
+    "progression": {
+      "easier": null,
+      "harder": "l-sit",
+      "chain": "l-sit"
+    },
+    "setup": "Support yourself on parallel bars, arms straight, shoulders pushed down.",
+    "steps": [
+      "Lift both knees to hip height and hold them tucked.",
+      "Keep the arms locked and the chest tall.",
+      "Breathe and hold."
+    ],
+    "common_mistakes": [
+      "Shrugging",
+      "Legs dropping",
+      "Leaning back too far"
+    ],
+    "tips": "Build time here before extending the legs.",
+    "drawing": "drawings/tuck-l-sit.svg"
+  },
+  {
+    "id": "l-sit",
+    "name_en": "L-sit",
+    "name_fr": "L-sit",
+    "category": "core",
+    "movement_pattern": "compression",
+    "primary_muscles": [
+      "abs",
+      "hip flexors"
+    ],
+    "secondary_muscles": [
+      "triceps",
+      "quads",
+      "shoulders"
+    ],
+    "equipment": [
+      "parallel-bars"
+    ],
+    "difficulty": 4,
+    "type": "time",
+    "progression": {
+      "easier": "tuck-l-sit",
+      "harder": null,
+      "chain": "l-sit"
+    },
+    "setup": "Support on the bars with arms straight, legs together.",
+    "steps": [
+      "Press down hard, shoulders away from the ears.",
+      "Raise the straight legs until they are parallel to the floor.",
+      "Point the toes and hold."
+    ],
+    "common_mistakes": [
+      "Bent knees",
+      "Rounded shoulders",
+      "Legs below parallel"
+    ],
+    "tips": "Even 5-10 seconds of clean holds counts; repeat short sets.",
+    "drawing": "drawings/l-sit.svg"
+  },
+  {
+    "id": "crunch",
+    "name_en": "Crunch",
+    "name_fr": "Redressement assis court",
+    "category": "core",
+    "movement_pattern": "spinal flexion",
+    "primary_muscles": [
+      "abs"
+    ],
+    "secondary_muscles": [
+      "obliques"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "reps",
+    "progression": {
+      "easier": null,
+      "harder": "bicycle-crunch",
+      "chain": "crunch"
+    },
+    "setup": "Lie on your back, knees bent, feet flat, hands across the chest or by the temples.",
+    "steps": [
+      "Curl the ribs toward the pelvis, lifting the shoulder blades.",
+      "Pause, then lower slowly.",
+      "Keep the neck relaxed."
+    ],
+    "common_mistakes": [
+      "Pulling on the neck",
+      "Using momentum",
+      "Lifting too high"
+    ],
+    "tips": "Exhale on the way up.",
+    "drawing": "drawings/crunch.svg"
+  },
+  {
+    "id": "bicycle-crunch",
+    "name_en": "Bicycle crunch",
+    "name_fr": "Crunch vélo",
+    "category": "core",
+    "movement_pattern": "rotation",
+    "primary_muscles": [
+      "obliques",
+      "abs"
+    ],
+    "secondary_muscles": [
+      "hip flexors"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 2,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": "crunch",
+      "harder": null,
+      "chain": "crunch"
+    },
+    "setup": "Lie on your back, hands by the temples, legs lifted.",
+    "steps": [
+      "Bring one knee toward the chest while the other leg extends.",
+      "Rotate the opposite elbow toward that knee.",
+      "Switch sides with a smooth pedaling motion."
+    ],
+    "common_mistakes": [
+      "Pulling on the neck",
+      "Rushing",
+      "Back arching as the leg extends"
+    ],
+    "tips": "Slow reps work the obliques better than fast ones.",
+    "drawing": "drawings/bicycle-crunch.svg"
+  },
+  {
+    "id": "lying-leg-raise",
+    "name_en": "Lying leg raise",
+    "name_fr": "Relevé de jambes allongé",
+    "category": "core",
+    "movement_pattern": "hip flexion",
+    "primary_muscles": [
+      "lower abs",
+      "hip flexors"
+    ],
+    "secondary_muscles": [
+      "quads"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 2,
+    "type": "reps",
+    "progression": {
+      "easier": null,
+      "harder": "v-up",
+      "chain": "leg-raise"
+    },
+    "setup": "Lie on your back, hands under the hips, legs straight.",
+    "steps": [
+      "Press the lower back into the floor.",
+      "Raise the straight legs to vertical.",
+      "Lower slowly, stopping before the back arches."
+    ],
+    "common_mistakes": [
+      "Lower back arching",
+      "Dropping legs fast",
+      "Bending knees"
+    ],
+    "tips": "Bend the knees to regress.",
+    "drawing": "drawings/lying-leg-raise.svg"
+  },
+  {
+    "id": "v-up",
+    "name_en": "V-up",
+    "name_fr": "V-up",
+    "category": "core",
+    "movement_pattern": "compression",
+    "primary_muscles": [
+      "abs",
+      "hip flexors"
+    ],
+    "secondary_muscles": [
+      "obliques"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 3,
+    "type": "reps",
+    "progression": {
+      "easier": "lying-leg-raise",
+      "harder": null,
+      "chain": "leg-raise"
+    },
+    "setup": "Lie flat, arms overhead, legs straight.",
+    "steps": [
+      "Lift arms and legs at the same time.",
+      "Reach hands toward the toes, forming a V.",
+      "Lower with control, keeping the lower back flat."
+    ],
+    "common_mistakes": [
+      "Throwing the arms",
+      "Bending the knees",
+      "Falling back"
+    ],
+    "tips": "Bend the knees (tuck-up) if it is too hard.",
+    "drawing": "drawings/v-up.svg"
+  },
+  {
+    "id": "russian-twist",
+    "name_en": "Russian twist",
+    "name_fr": "Rotation russe",
+    "category": "core",
+    "movement_pattern": "rotation",
+    "primary_muscles": [
+      "obliques"
+    ],
+    "secondary_muscles": [
+      "abs",
+      "hip flexors"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 2,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "rotation"
+    },
+    "setup": "Sit with knees bent, lean back to about 45°, feet lifted if possible.",
+    "steps": [
+      "Keep the back long and chest up.",
+      "Rotate the shoulders side to side, hands following.",
+      "Touch the floor beside each hip."
+    ],
+    "common_mistakes": [
+      "Moving only the arms",
+      "Rounded back",
+      "Rushing"
+    ],
+    "tips": "Hold the kettlebell at the chest to add load.",
+    "drawing": "drawings/russian-twist.svg"
+  },
+  {
+    "id": "superman",
+    "name_en": "Superman",
+    "name_fr": "Superman",
+    "category": "core",
+    "movement_pattern": "back extension",
+    "primary_muscles": [
+      "lower back",
+      "glutes"
+    ],
+    "secondary_muscles": [
+      "hamstrings",
+      "rear delts"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "time",
+    "progression": {
+      "easier": "bird-dog",
+      "harder": null,
+      "chain": "back-extension"
+    },
+    "setup": "Lie face down, arms extended overhead, legs straight.",
+    "steps": [
+      "Lift arms, chest and legs off the floor together.",
+      "Keep the neck neutral, looking at the floor.",
+      "Hold, then lower slowly."
+    ],
+    "common_mistakes": [
+      "Cranking the neck up",
+      "Jerking up",
+      "Lifting too high"
+    ],
+    "tips": "Pause and breathe; use short holds with repeats.",
+    "drawing": "drawings/superman.svg"
+  },
+  {
+    "id": "pallof-press",
+    "name_en": "Pallof press",
+    "name_fr": "Presse Pallof",
+    "category": "core",
+    "movement_pattern": "anti-rotation",
+    "primary_muscles": [
+      "obliques",
+      "transverse abdominis"
+    ],
+    "secondary_muscles": [
+      "shoulders",
+      "glutes"
+    ],
+    "equipment": [
+      "bands"
+    ],
+    "difficulty": 2,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "anti-rotation"
+    },
+    "setup": "Anchor a band at chest height to your side, stand sideways to it, band held at the chest.",
+    "steps": [
+      "Brace and press the hands straight out in front.",
+      "Resist the band pulling you toward the anchor.",
+      "Hold a second, then bring the hands back."
+    ],
+    "common_mistakes": [
+      "Letting the torso twist",
+      "Leaning away",
+      "Rushing"
+    ],
+    "tips": "Step further from the anchor for more tension.",
+    "drawing": "drawings/pallof-press.svg"
+  },
+  {
+    "id": "cat-cow",
+    "name_en": "Cat-cow",
+    "name_fr": "Chat-vache",
+    "category": "mobility",
+    "movement_pattern": "spinal flexion/extension",
+    "primary_muscles": [
+      "spinal erectors",
+      "abs"
+    ],
+    "secondary_muscles": [
+      "shoulders",
+      "hips"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "reps",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "spine-mobility"
+    },
+    "setup": "On all fours, hands under shoulders, knees under hips.",
+    "steps": [
+      "Inhale: drop the belly, lift the chest and tailbone (cow).",
+      "Exhale: round the back, tuck chin and tailbone (cat).",
+      "Move slowly through the whole spine."
+    ],
+    "common_mistakes": [
+      "Moving only the neck",
+      "Rushing",
+      "Bending the elbows"
+    ],
+    "tips": "Link the movement to your breathing.",
+    "drawing": "drawings/cat-cow.svg"
+  },
+  {
+    "id": "child-pose",
+    "name_en": "Child's pose",
+    "name_fr": "Posture de l'enfant",
+    "category": "mobility",
+    "movement_pattern": "hip/shoulder stretch",
+    "primary_muscles": [
+      "lats",
+      "glutes"
+    ],
+    "secondary_muscles": [
+      "lower back",
+      "shoulders"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "time",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "floor-mobility"
+    },
+    "setup": "Kneel, big toes together, knees apart or together, sit back on the heels.",
+    "steps": [
+      "Fold forward and reach the arms in front.",
+      "Rest the forehead on the floor.",
+      "Breathe slowly into the back."
+    ],
+    "common_mistakes": [
+      "Forcing the hips up",
+      "Tensing the shoulders"
+    ],
+    "tips": "Use it as a rest between hard sets.",
+    "drawing": "drawings/child-pose.svg"
+  },
+  {
+    "id": "downward-dog",
+    "name_en": "Downward dog",
+    "name_fr": "Chien tête en bas",
+    "category": "mobility",
+    "movement_pattern": "posterior chain stretch",
+    "primary_muscles": [
+      "hamstrings",
+      "calves",
+      "shoulders"
+    ],
+    "secondary_muscles": [
+      "lats",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "time",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "floor-mobility"
+    },
+    "setup": "From hands and knees, tuck the toes and lift the hips up and back.",
+    "steps": [
+      "Press the floor away; arms long.",
+      "Send the hips high; heels reach toward the floor.",
+      "Keep the spine long, head between the arms."
+    ],
+    "common_mistakes": [
+      "Rounding the lower back",
+      "Hands too close to the feet",
+      "Locking the shoulders"
+    ],
+    "tips": "Bend the knees slightly if the hamstrings are tight.",
+    "drawing": "drawings/downward-dog.svg"
+  },
+  {
+    "id": "deep-squat-hold",
+    "name_en": "Deep squat hold",
+    "name_fr": "Squat profond (maintien)",
+    "category": "mobility",
+    "movement_pattern": "squat",
+    "primary_muscles": [
+      "hips",
+      "ankles"
+    ],
+    "secondary_muscles": [
+      "quads",
+      "adductors",
+      "lower back"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "time",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "floor-mobility"
+    },
+    "setup": "Feet shoulder-width or a little wider, toes slightly out, sink all the way down.",
+    "steps": [
+      "Press the elbows against the knees, hands together.",
+      "Keep the chest tall and heels down.",
+      "Breathe and shift gently side to side."
+    ],
+    "common_mistakes": [
+      "Heels lifting",
+      "Collapsing the back",
+      "Knees caving in"
+    ],
+    "tips": "Hold a doorframe if your heels lift.",
+    "drawing": "drawings/deep-squat-hold.svg"
+  },
+  {
+    "id": "hip-flexor-stretch",
+    "name_en": "Half-kneeling hip flexor stretch",
+    "name_fr": "Étirement des fléchisseurs de hanche",
+    "category": "mobility",
+    "movement_pattern": "hip extension stretch",
+    "primary_muscles": [
+      "hip flexors",
+      "quads"
+    ],
+    "secondary_muscles": [
+      "glutes"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "time-per-side",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "floor-mobility"
+    },
+    "setup": "Half-kneeling lunge, back knee on a pad, front foot flat ahead.",
+    "steps": [
+      "Tuck the pelvis under (squeeze the back-side glute).",
+      "Shift the hips forward until you feel the front of the back hip.",
+      "Raise the same-side arm for more stretch."
+    ],
+    "common_mistakes": [
+      "Arching the lower back",
+      "Leaning forward from the waist",
+      "Knee too far past the toes"
+    ],
+    "tips": "Hold 30-60 seconds per side.",
+    "drawing": "drawings/hip-flexor-stretch.svg"
+  },
+  {
+    "id": "thoracic-rotation",
+    "name_en": "Quadruped thoracic rotation",
+    "name_fr": "Rotation thoracique à quatre pattes",
+    "category": "mobility",
+    "movement_pattern": "thoracic rotation",
+    "primary_muscles": [
+      "thoracic spine"
+    ],
+    "secondary_muscles": [
+      "obliques",
+      "shoulders"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "reps-per-side",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "spine-mobility"
+    },
+    "setup": "On all fours, one hand behind the head, other hand under the shoulder.",
+    "steps": [
+      "Rotate the chest toward the floor, elbow in.",
+      "Then open the chest and point the elbow to the ceiling.",
+      "Follow the elbow with your eyes."
+    ],
+    "common_mistakes": [
+      "Moving from the lower back",
+      "Hips shifting back",
+      "Rushing"
+    ],
+    "tips": "Pause at the top and exhale.",
+    "drawing": "drawings/thoracic-rotation.svg"
+  },
+  {
+    "id": "shoulder-pass-through",
+    "name_en": "Band shoulder pass-through",
+    "name_fr": "Passage d'épaules (élastique)",
+    "category": "mobility",
+    "movement_pattern": "shoulder mobility",
+    "primary_muscles": [
+      "rotator cuff",
+      "delts"
+    ],
+    "secondary_muscles": [
+      "chest",
+      "lats"
+    ],
+    "equipment": [
+      "bands"
+    ],
+    "difficulty": 1,
+    "type": "reps",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "shoulder-mobility"
+    },
+    "setup": "Hold a band with a wide overhand grip in front of the thighs, arms straight.",
+    "steps": [
+      "Lift the band overhead, arms straight.",
+      "Continue behind the head toward the lower back.",
+      "Reverse with control; widen the grip if it is too hard."
+    ],
+    "common_mistakes": [
+      "Bending the elbows",
+      "Arching the lower back",
+      "Grip too narrow"
+    ],
+    "tips": "Use the widest comfortable grip and go slowly.",
+    "drawing": "drawings/shoulder-pass-through.svg"
+  },
+  {
+    "id": "arm-circles",
+    "name_en": "Arm circles",
+    "name_fr": "Cercles de bras",
+    "category": "mobility",
+    "movement_pattern": "shoulder mobility",
+    "primary_muscles": [
+      "delts",
+      "rotator cuff"
+    ],
+    "secondary_muscles": [
+      "traps"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "time",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "shoulder-mobility"
+    },
+    "setup": "Stand tall, arms straight out to the sides at shoulder height.",
+    "steps": [
+      "Draw small circles, gradually making them bigger.",
+      "Keep shoulders down and the core braced.",
+      "Switch direction halfway."
+    ],
+    "common_mistakes": [
+      "Shrugging",
+      "Arching the back",
+      "Going too fast"
+    ],
+    "tips": "Great warm-up before push or pull work.",
+    "drawing": "drawings/arm-circles.svg"
+  },
+  {
+    "id": "kettlebell-halo",
+    "name_en": "Kettlebell halo",
+    "name_fr": "Halo avec kettlebell",
+    "category": "mobility",
+    "movement_pattern": "shoulder mobility",
+    "primary_muscles": [
+      "delts",
+      "rotator cuff"
+    ],
+    "secondary_muscles": [
+      "triceps",
+      "core",
+      "upper back"
+    ],
+    "equipment": [
+      "kettlebell"
+    ],
+    "difficulty": 2,
+    "type": "reps",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "shoulder-mobility"
+    },
+    "setup": "Stand tall, kettlebell held upside down by the horns at chest height.",
+    "steps": [
+      "Circle the bell around the head, keeping it close.",
+      "Keep ribs down and glutes squeezed.",
+      "Alternate directions each set."
+    ],
+    "common_mistakes": [
+      "Leaning back",
+      "Bell drifting far from the head",
+      "Shrugging"
+    ],
+    "tips": "Use a light bell: it is a mobility drill, not a strength drill.",
+    "drawing": "drawings/kettlebell-halo.svg"
+  },
+  {
+    "id": "burpee",
+    "name_en": "Burpee",
+    "name_fr": "Burpee",
+    "category": "full-body",
+    "movement_pattern": "conditioning",
+    "primary_muscles": [
+      "quads",
+      "chest",
+      "core"
+    ],
+    "secondary_muscles": [
+      "shoulders",
+      "glutes",
+      "triceps"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 3,
+    "type": "reps",
+    "progression": {
+      "easier": "inchworm",
+      "harder": null,
+      "chain": "burpee"
+    },
+    "setup": "Stand tall, feet shoulder-width.",
+    "steps": [
+      "Drop hands to the floor and jump or step the feet back to a plank.",
+      "Lower the chest to the floor (optional), push up.",
+      "Jump the feet in and explode up with arms overhead."
+    ],
+    "common_mistakes": [
+      "Sagging in the plank",
+      "Landing heavily",
+      "Rushing with poor form"
+    ],
+    "tips": "Step back instead of jumping to scale; keep the pace sustainable.",
+    "drawing": "drawings/burpee.svg"
+  },
+  {
+    "id": "inchworm",
+    "name_en": "Inchworm",
+    "name_fr": "Marche de la chenille",
+    "category": "full-body",
+    "movement_pattern": "plank walkout",
+    "primary_muscles": [
+      "core",
+      "shoulders"
+    ],
+    "secondary_muscles": [
+      "hamstrings",
+      "chest",
+      "calves"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "reps",
+    "progression": {
+      "easier": null,
+      "harder": "burpee",
+      "chain": "burpee"
+    },
+    "setup": "Stand tall, then fold forward and place the hands on the floor (knees soft if needed).",
+    "steps": [
+      "Walk the hands forward to a high plank.",
+      "Pause, brace the core, keep hips level.",
+      "Walk the hands back to the feet, then stand up."
+    ],
+    "common_mistakes": [
+      "Sagging hips at the end",
+      "Bending the knees too much",
+      "Rushing"
+    ],
+    "tips": "Add a push-up at the plank for an extra challenge.",
+    "drawing": "drawings/inchworm.svg"
+  },
+  {
+    "id": "bear-crawl",
+    "name_en": "Bear crawl",
+    "name_fr": "Marche de l'ours",
+    "category": "full-body",
+    "movement_pattern": "locomotion",
+    "primary_muscles": [
+      "core",
+      "shoulders",
+      "quads"
+    ],
+    "secondary_muscles": [
+      "hips",
+      "chest",
+      "triceps"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 2,
+    "type": "time",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "locomotion"
+    },
+    "setup": "On all fours, knees hovering a hand's width above the floor.",
+    "steps": [
+      "Keep the back flat and hips low.",
+      "Move opposite hand and foot together.",
+      "Take small steps forward, then back."
+    ],
+    "common_mistakes": [
+      "Hips rising",
+      "Rushing steps",
+      "Knees touching the floor"
+    ],
+    "tips": "Crawl 5-10 meters at a time.",
+    "drawing": "drawings/bear-crawl.svg"
+  },
+  {
+    "id": "kettlebell-swing",
+    "name_en": "Kettlebell swing",
+    "name_fr": "Balancement kettlebell",
+    "category": "full-body",
+    "movement_pattern": "hip hinge (ballistic)",
+    "primary_muscles": [
+      "glutes",
+      "hamstrings"
+    ],
+    "secondary_muscles": [
+      "core",
+      "shoulders",
+      "back extensors"
+    ],
+    "equipment": [
+      "kettlebell"
+    ],
+    "difficulty": 3,
+    "type": "reps",
+    "progression": {
+      "easier": "single-leg-rdl",
+      "harder": null,
+      "chain": "hinge"
+    },
+    "setup": "Feet slightly wider than the shoulders, kettlebell on the floor in front; hinge and hike it between the legs.",
+    "steps": [
+      "Hinge back, flat back, bell between the thighs.",
+      "Snap the hips forward to float the bell to chest height.",
+      "Let it fall and hinge back to absorb it."
+    ],
+    "common_mistakes": [
+      "Squatting instead of hinging",
+      "Lifting the bell with the arms",
+      "Leaning back at the top"
+    ],
+    "tips": "Power comes from the hips; arms are just hooks.",
+    "drawing": "drawings/kettlebell-swing.svg"
+  },
+  {
+    "id": "jumping-jack",
+    "name_en": "Jumping jack",
+    "name_fr": "Sauts d'étoile",
+    "category": "full-body",
+    "movement_pattern": "conditioning",
+    "primary_muscles": [
+      "calves",
+      "delts"
+    ],
+    "secondary_muscles": [
+      "quads",
+      "glutes",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 1,
+    "type": "time",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "locomotion"
+    },
+    "setup": "Stand with feet together, arms by the sides.",
+    "steps": [
+      "Jump the feet apart while swinging the arms overhead.",
+      "Jump back to the start.",
+      "Land softly and stay light on the feet."
+    ],
+    "common_mistakes": [
+      "Heavy landings",
+      "Locking the knees",
+      "Slouching"
+    ],
+    "tips": "Good warm-up; step-jacks are a low-impact version.",
+    "drawing": "drawings/jumping-jack.svg"
+  },
+  {
+    "id": "mountain-climber",
+    "name_en": "Mountain climber",
+    "name_fr": "Grimpeur",
+    "category": "full-body",
+    "movement_pattern": "conditioning",
+    "primary_muscles": [
+      "abs",
+      "hip flexors"
+    ],
+    "secondary_muscles": [
+      "shoulders",
+      "quads",
+      "chest"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "difficulty": 2,
+    "type": "time",
+    "progression": {
+      "easier": null,
+      "harder": null,
+      "chain": "locomotion"
+    },
+    "setup": "High plank, hands under shoulders, body straight.",
+    "steps": [
+      "Drive one knee toward the chest.",
+      "Switch legs quickly, hips level.",
+      "Keep the shoulders over the hands and the core braced."
+    ],
+    "common_mistakes": [
+      "Hips bouncing up",
+      "Hips sagging",
+      "Hands drifting forward"
+    ],
+    "tips": "Slow it down for control; speed it up for conditioning.",
+    "drawing": "drawings/mountain-climber.svg"
+  }
+]
