@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useMemo, useState } from 'react'
 import { listSessions, type SessionRow } from '../data/sessions'
+import { listActivities, type ActivityRow } from '../data/activities'
 import { canGoNext, monthGrid, monthLabel, monthOf, recentItems, shiftMonth, toEntries } from '../history/calendar'
 import { currentStreak, dayKey, monthMarkers, monthStats } from '../history/streak'
 import { BackIcon } from '../ui/Icons'
@@ -8,23 +9,25 @@ import { Empty } from '../ui/Empty'
 import { ScreenHeader } from '../ui/ScreenHeader'
 import './history.css'
 
-/** Everything History shows comes from here; activities become a second source in this one place. */
-function useHistoryData(): SessionRow[] | undefined {
-  const [sessions, setSessions] = useState<SessionRow[]>()
+/** Everything History shows comes from here. */
+function useHistoryData(): { sessions: SessionRow[]; activities: ActivityRow[] } | undefined {
+  const [data, setData] = useState<{ sessions: SessionRow[]; activities: ActivityRow[] }>()
   useEffect(() => {
     let live = true
-    listSessions().then((s) => live && setSessions(s))
+    void Promise.all([listSessions(), listActivities()]).then(([sessions, activities]) => live && setData({ sessions, activities }))
     return () => {
       live = false
     }
   }, [])
-  return sessions
+  return data
 }
 
 const WEEK = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
 
 export function History() {
-  const sessions = useHistoryData()
+  const data = useHistoryData()
+  const sessions = data?.sessions
+  const activities = data?.activities ?? []
   const now = Date.now()
   const todayKey = dayKey(now)
   const current = monthOf(todayKey)
@@ -32,7 +35,7 @@ export function History() {
   const entries = useMemo(() => toEntries(sessions ?? []), [sessions])
 
   if (!sessions) return <ScreenHeader title="History" />
-  if (sessions.length === 0) {
+  if (sessions.length === 0 && activities.length === 0) {
     return (
       <>
         <ScreenHeader title="History" />
@@ -44,7 +47,7 @@ export function History() {
   const stats = monthStats(entries, current.year, current.month)
   const streak = currentStreak(entries, now)
   const markers = new Map(monthMarkers(entries, shown.year, shown.month).map((m) => [m.day, m]))
-  const recent = recentItems(sessions, now)
+  const recent = recentItems(sessions, now, 20, undefined, activities)
   const pad = (n: number) => String(n).padStart(2, '0')
 
   return (
@@ -85,13 +88,13 @@ export function History() {
       <ul className="recent">
         {recent.map((r) => (
           <li key={r.id} className="recent__row">
-            <Link to={`/history/${r.id}`} className="recent__link">
+            <Link to={r.to} className="recent__link">
               <i className="recent__dot" style={{ background: `var(--color-category-${r.category}, var(--color-textFaint))` }} />
               <div className="recent__text">
                 <span className="recent__name">{r.name}</span>
-                <span className="recent__when">{r.when}</span>
+                <span className="recent__when">{r.when}{r.detail && ` · ${r.detail}`}</span>
               </div>
-              <span className={`recent__status${r.partial ? ' recent__status--partial' : ''}`}>
+              <span className={`recent__status${r.partial ? ' recent__status--partial' : ''}${r.kind === 'activity' ? ' recent__status--logged' : ''}`}>
                 {r.status}
                 {r.partial && <small>Partial</small>}
               </span>

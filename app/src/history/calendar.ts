@@ -1,5 +1,6 @@
 import { dayKey, daysInMonth, type DayEntry } from './streak'
-import type { SessionRow } from '../data/db'
+import type { ActivityRow, SessionRow } from '../data/db'
+import { activityLabel, activityPace, formatPace } from '../data/activities'
 
 export interface YearMonth {
   year: number
@@ -55,25 +56,69 @@ export function formatWhen(startedAt: number, now: number, timeZone?: string): s
 }
 
 export interface RecentItem {
+  kind: 'session' | 'activity'
   id: string
+  /** Where the row opens. */
+  to: string
   name: string
   category: string
   when: string
-  /** "Done" or "72%". */
+  /** Activity rows: "28:40 · 5:31 /km" after the time. */
+  detail?: string
+  /** "Done", "72%" or "Logged". */
   status: string
   partial: boolean
+  startedAt: number
 }
 
-export function recentItems(sessions: readonly SessionRow[], now: number, limit = 20, timeZone?: string): RecentItem[] {
-  return [...sessions]
-    .sort((a, b) => b.startedAt - a.startedAt)
-    .slice(0, limit)
-    .map((s) => ({
+/** "28:40" or "1:05:10". */
+export function formatDuration(totalSeconds: number): string {
+  const t = Math.max(0, Math.round(totalSeconds))
+  const h = Math.floor(t / 3600)
+  const m = Math.floor((t % 3600) / 60)
+  const s = t % 60
+  const ss = String(s).padStart(2, '0')
+  return h > 0 ? `${h}:${String(m).padStart(2, '0')}:${ss}` : `${m}:${ss}`
+}
+
+/** "5.2" (at most two decimals, no trailing zeros). */
+export const formatDistance = (km: number): string => String(Math.round(km * 100) / 100)
+
+/** Activity row text: "Run · 5.2 km", and "28:40 · 5:31 /km" (distance and pace only when known). */
+export function activityRowText(a: Pick<ActivityRow, 'type' | 'durationSeconds' | 'distanceKm'>): { name: string; detail: string } {
+  const hasDistance = a.distanceKm !== undefined && a.distanceKm > 0
+  const pace = activityPace(a)
+  return {
+    name: hasDistance ? `${activityLabel(a.type)} · ${formatDistance(a.distanceKm!)} km` : activityLabel(a.type),
+    detail: [formatDuration(a.durationSeconds), pace !== undefined ? `${formatPace(pace)} /km` : ''].filter(Boolean).join(' · '),
+  }
+}
+
+/** Sessions and logged activities in one list, newest first. */
+export function recentItems(sessions: readonly SessionRow[], now: number, limit = 20, timeZone?: string, activities: readonly ActivityRow[] = []): RecentItem[] {
+  const items: RecentItem[] = [
+    ...sessions.map((s): RecentItem => ({
+      kind: 'session',
       id: s.id,
+      to: `/history/${s.id}`,
       name: s.routineName,
       category: s.category,
       when: formatWhen(s.startedAt, now, timeZone),
       status: s.completed ? 'Done' : `${Math.round(s.percent)}%`,
       partial: !s.completed,
-    }))
+      startedAt: s.startedAt,
+    })),
+    ...activities.map((a): RecentItem => ({
+      kind: 'activity',
+      id: a.id,
+      to: `/log/${a.id}`,
+      ...activityRowText(a),
+      category: 'run',
+      when: formatWhen(a.startedAt, now, timeZone),
+      status: 'Logged',
+      partial: false,
+      startedAt: a.startedAt,
+    })),
+  ]
+  return items.sort((a, b) => b.startedAt - a.startedAt).slice(0, limit)
 }

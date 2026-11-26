@@ -26,6 +26,7 @@
 .recent__when { font-size: 15px; color: var(--color-textMuted); }
 .recent__status { display: flex; flex-direction: column; align-items: flex-end; font-weight: 600; font-size: 17px; color: var(--color-accentText); }
 .recent__status--partial { color: var(--color-warningText); }
+.recent__status--logged { color: var(--color-textMuted); }
 .recent__status small { font-size: 12px; font-weight: 500; }
 
 .recent__link { display: flex; align-items: center; gap: var(--space-3); flex: 1; min-width: 0; min-height: 48px; color: inherit; text-decoration: none; }

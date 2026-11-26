@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import type { SessionRow } from '../data/db'
-import { canGoNext, formatWhen, monthGrid, monthLabel, recentItems, shiftMonth, toEntries } from './calendar'
+import type { ActivityRow } from '../data/db'
+import { activityRowText, canGoNext, formatDuration, formatWhen, monthGrid, monthLabel, recentItems, shiftMonth, toEntries } from './calendar'
 
 const row = (o: Partial<SessionRow>): SessionRow => ({
   id: 'a', startedAt: 0, finishedAt: 0, routineName: 'Hip flow', category: 'mobility', mode: 'play-all', durationSeconds: 60,
@@ -47,5 +48,31 @@ describe('recent list', () => {
   })
   it('maps sessions to engine entries', () => {
     expect(toEntries([row({ startedAt: 5, stepsDone: 0 })])).toEqual([{ startedAt: 5, kind: 'session', category: 'mobility', stepsDone: 0 }])
+  })
+})
+
+describe('activity rows', () => {
+  const now = new Date(2026, 10, 24, 15, 0).getTime()
+  const act = (o: Partial<ActivityRow>): ActivityRow => ({ id: 'x', type: 'run', startedAt: 0, durationSeconds: 1720, distanceKm: 5.2, source: 'manual', ...o })
+  it('formats durations', () => {
+    expect(formatDuration(1720)).toBe('28:40')
+    expect(formatDuration(3910)).toBe('1:05:10')
+  })
+  it('shows type, distance, duration and pace', () => {
+    expect(activityRowText(act({}))).toEqual({ name: 'Run · 5.2 km', detail: '28:40 · 5:31 /km' })
+  })
+  it('omits distance and pace when there is no distance', () => {
+    expect(activityRowText(act({ type: 'swim', distanceKm: undefined, durationSeconds: 1800 }))).toEqual({ name: 'Swim', detail: '30:00' })
+    expect(activityRowText(act({ distanceKm: 0 }))).toEqual({ name: 'Run', detail: '28:40' })
+  })
+  it('merges with sessions newest first and marks Logged', () => {
+    const items = recentItems(
+      [row({ id: 's1', startedAt: new Date(2026, 10, 24, 14, 12).getTime() }), row({ id: 's2', startedAt: new Date(2026, 10, 21, 6, 10).getTime() })],
+      now, 20, undefined,
+      [act({ id: 'a1', startedAt: new Date(2026, 10, 24, 7, 15).getTime() }), act({ id: 'a2', startedAt: new Date(2026, 10, 23, 18, 0).getTime() })],
+    )
+    expect(items.map((i) => i.id)).toEqual(['s1', 'a1', 'a2', 's2'])
+    expect(items[1]).toMatchObject({ kind: 'activity', status: 'Logged', to: '/log/a1', when: 'Today · 7:15' })
+    expect(items[0]).toMatchObject({ kind: 'session', to: '/history/s1' })
   })
 })

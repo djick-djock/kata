@@ -12,3 +12,5 @@ Status: ready-for-agent
 - [ ] Editing or deleting keeps the list order correct
 - [ ] Layout checked at 400 px wide in light and dark
 - [ ] Build and tests pass
+
+Note: `recentItems` (app/src/history/calendar.ts) now merges sessions and activities, newest first, with a `kind` and a `to` link; activity rows show "Type · km", duration and pace, gold run dot, "Logged" status. Rows open the existing /log/:id form (edit and confirmed delete); saving or deleting returns to History, which reloads. Checked at 400 px light and dark with seeded data. Streak, calendar dots, stats and the activities tile are untouched (ticket 03).
