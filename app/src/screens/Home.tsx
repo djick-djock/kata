@@ -23,7 +23,7 @@ function greeting(d: Date) {
 const catColor = (c: Category) => `var(--color-category-${c === 'meditation' ? 'mobility' : c})`
 const art = (r: KataRoutine) => {
   const ref = firstExerciseRef(r)
-  return <Drawing svg={ref ? drawingFor(ref.exerciseId, ref.variantId) : undefined} category={r.category} label={r.name} />
+  return <Drawing svg={ref ? drawingFor(ref.exerciseId, ref.variantId) : undefined} exerciseId={ref?.exerciseId} variantId={ref?.variantId} category={r.category} label={r.name} />
 }
 
 export function Home() {

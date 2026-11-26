@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { drawingFor, findExercise, localized } from '../catalog'
 import { getExerciseLink, normaliseLink, removeExerciseLink, setExerciseLink } from '../data/exercise-links'
 import { AddToRoutine } from './AddToRoutine'
+import { ImportDrawing } from '../owner/ImportDrawing'
 import { RequestDrawing } from '../owner/RequestDrawing'
 import { Drawing } from '../ui/Drawing'
 import { BackIcon, LinkIcon, PlusIcon } from '../ui/Icons'
@@ -36,7 +37,7 @@ export function ExerciseDetail() {
           <Link to="/exercises" className="icon-btn" aria-label="Back"><BackIcon /></Link>
         </div>
         <div className="detail__art">
-          <Drawing svg={drawingFor(exercise.id, variant?.id)} category={exercise.category} label={name} />
+          <Drawing svg={drawingFor(exercise.id, variant?.id)} exerciseId={exercise.id} variantId={variant?.id} category={exercise.category} label={name} />
         </div>
         <h1 className="detail__title">{name}</h1>
         <div className="pills">
@@ -66,6 +67,7 @@ export function ExerciseDetail() {
         <p className="tips">{localized(exercise.tips)}</p>
         <VideoLink exerciseId={exercise.id} />
         <RequestDrawing exercise={exercise} />
+        <ImportDrawing exerciseId={exercise.id} variantId={variant?.id} category={exercise.category} name={variant ? `${name} (${localized(variant.label)})` : name} />
       </div>
       {added && (
         <p className="toast" role="status">Added to {added.name}. <Link to={`/routines/${added.id}`}>Open</Link></p>

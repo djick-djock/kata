@@ -51,7 +51,7 @@ export function ExercisePicker({ warmUp, onPick, onCustom, onClose }: { warmUp: 
   const row = (e: Exercise) => (
     <li key={e.id}>
       <button type="button" className="pick" onClick={() => pick(e)}>
-        <span className="thumb"><Drawing svg={drawingFor(e.id)} category={e.category} label={localized(e.name)} /></span>
+        <span className="thumb"><Drawing svg={drawingFor(e.id)} exerciseId={e.id} category={e.category} label={localized(e.name)} /></span>
         <span className="pick__text">
           <span className="pick__name">{localized(e.name)}</span>
           <span className="pick__meta">{CATEGORY_LABEL[e.category]} · {formatMeasure(e.measure, e.perSide)}{e.variants?.length ? ' · variants' : ''}</span>

@@ -227,7 +227,7 @@ function BlockCard({ block, collapsed, canDelete, onToggle, onChange, onDelete, 
 function StepDrawing({ step }: { step: RoutineStep }) {
   if (step.ref.type === 'exercise') {
     const ex = findExercise(step.ref.exerciseId)
-    if (ex) return <Drawing svg={drawingFor(ex.id, step.ref.variantId)} category={ex.category} label={step.name} />
+    if (ex) return <Drawing svg={drawingFor(ex.id, step.ref.variantId)} exerciseId={ex.id} variantId={step.ref.variantId} category={ex.category} label={step.name} />
   }
   return <Drawing category="mobility" label={step.name} />
 }

@@ -63,6 +63,13 @@ export interface ActivityRow {
   heartRate?: unknown
 }
 
+/** Owner's local drawing for an exercise (key `exerciseId`) or one variant (`exerciseId--variantId`). Sanitised SVG text. */
+export interface UserDrawingRow {
+  key: string
+  svg: string
+  updatedAt: number
+}
+
 /** Routine as stored. `pinned` is a number because booleans are not indexable. */
 export type RoutineRow = Omit<KataRoutine, 'pinned'> & { pinned: 0 | 1 }
 
@@ -72,6 +79,7 @@ export class KataDB extends Dexie {
   routines!: EntityTable<RoutineRow, 'id'>
   sessions!: EntityTable<SessionRow, 'id'>
   activities!: EntityTable<ActivityRow, 'id'>
+  userDrawings!: EntityTable<UserDrawingRow, 'key'>
 
   constructor(name = 'kata') {
     super(name)
@@ -80,6 +88,7 @@ export class KataDB extends Dexie {
     this.version(3).stores({ routines: 'id, pinned, updatedAt' })
     this.version(4).stores({ sessions: 'id, startedAt, routineId, [routineId+startedAt]' })
     this.version(5).stores({ activities: 'id, startedAt, externalId' })
+    this.version(6).stores({ userDrawings: 'key' })
   }
 }
 

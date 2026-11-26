@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { db } from '../data/db'
+import { refreshUserDrawings } from '../drawings/user-drawings'
 import { BackupError, exportAll, importBackupText, parseBackup, validateBackup } from '../backup/backup'
 import { saveBackupFile } from '../backup/file'
 import { lastBackupLabel, setLastBackup } from '../backup/nudge'
@@ -71,6 +72,7 @@ function BackupSection() {
     setBusy(true)
     try {
       const doc = await importBackupText(db, pending.text)
+      await refreshUserDrawings()
       setLastBackup(Math.max(Date.parse(doc.exportedAt), 1))
       setMsg({ text: 'Backup restored.', error: false })
     } catch (e) {

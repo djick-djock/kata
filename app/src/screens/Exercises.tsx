@@ -57,7 +57,7 @@ export function Exercises() {
             <li key={e.id}>
               <Link to={`/exercises/${e.id}`} className="tile">
                 <div className="tile__art">
-                  <Drawing svg={drawingFor(e.id)} category={e.category} label={localized(e.name)} />
+                  <Drawing svg={drawingFor(e.id)} exerciseId={e.id} category={e.category} label={localized(e.name)} />
                 </div>
                 <span className="tile__name">{localized(e.name)}</span>
                 <span className="tile__meta">

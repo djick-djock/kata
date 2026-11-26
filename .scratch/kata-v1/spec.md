@@ -1,4 +1,4 @@
-Status: ready-for-agent
+Status: done
 
 # Kata v1 — overview, decision log and build order
 

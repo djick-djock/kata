@@ -4,13 +4,17 @@
 
 **Blocked by:** 01, 02
 
-Status: ready-for-agent
+Status: done
 
-- [ ] Paste or file-import of SVG from the exercise detail screen in Owner mode only
-- [ ] Sanitiser removes scripts, event handlers, external references and unknown elements and leaves valid drawings unchanged (tested with hostile and valid samples); invalid input shows a clear message and nothing is stored
-- [ ] Preview in light and dark before saving; save and cancel work
-- [ ] A saved local drawing is used everywhere that exercise's drawing appears (library, detail, builder, player) and survives reloads
-- [ ] Replace and remove work; removing falls back to the shipped drawing
-- [ ] Local drawings are included in export and restored by import (extend the round-trip test)
-- [ ] Layout checked headless at 400 px wide in light and dark
-- [ ] Build and tests pass
+- [x] Paste or file-import of SVG from the exercise detail screen in Owner mode only
+- [x] Sanitiser removes scripts, event handlers, external references and unknown elements and leaves valid drawings unchanged (tested with hostile and valid samples); invalid input shows a clear message and nothing is stored
+- [x] Preview in light and dark before saving; save and cancel work
+- [x] A saved local drawing is used everywhere that exercise's drawing appears (library, detail, builder, player) and survives reloads
+- [x] Replace and remove work; removing falls back to the shipped drawing
+- [x] Local drawings are included in export and restored by import (extend the round-trip test)
+- [x] Layout checked headless at 400 px wide in light and dark
+- [x] Build and tests pass
+
+## Done
+
+Sanitiser (`app/src/drawings/sanitise.ts`, DOMParser allow-list; `<style>` elements are removed outright because inline SVG styles would leak into the page), local store (`userDrawings` Dexie v6, in-memory mirror, re-sanitised on load so restored backups cannot inject), `Drawing` takes `exerciseId`/`variantId` and prefers the local drawing (all 9 call sites pass them), `ImportDrawing` sheet beside Request drawing (Owner only, targets the selected variant). Verified headless at 400 px in light and dark (invalid, hostile, save, reload, library, remove with confirm, fallback). Tests and build pass.
