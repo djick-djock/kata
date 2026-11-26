@@ -4,17 +4,21 @@
 
 **Blocked by:** 01
 
-Status: ready-for-agent
+Status: done
 
-- [ ] Stats tiles show routines this month, activities this month and the streak, matching the design
-- [ ] Month calendar with a dot on days with a routine; today is marked; previous and next month work, and future months are not offered beyond the current one
-- [ ] Recent list shows routine name, date and time, and Done or percent; partial sessions are labelled
-- [ ] Empty state when there are no sessions
-- [ ] Days follow local time; a late-evening session appears on the right day (checked with a seeded session)
-- [ ] Distance and run tiles are not shown yet
-- [ ] Layout checked headless at 400 px wide in light and dark; matches the design screen
-- [ ] Build and tests pass
+- [x] Stats tiles show routines this month, activities this month and the streak, matching the design
+- [x] Month calendar with a dot on days with a routine; today is marked; previous and next month work, and future months are not offered beyond the current one
+- [x] Recent list shows routine name, date and time, and Done or percent; partial sessions are labelled
+- [x] Empty state when there are no sessions
+- [x] Days follow local time; a late-evening session appears on the right day (checked with a seeded session)
+- [x] Distance and run tiles are not shown yet
+- [x] Layout checked headless at 400 px wide in light and dark; matches the design screen
+- [x] Build and tests pass
 
 ## Notes
 
 Built `screens/History.tsx` + `history.css`, helpers in `history/calendar.ts` (grid, month nav, recent formatting, session to DayEntry mapping, tested). Activities tile counts 0 for now; adding activities is one change in `toEntries`/`useHistoryData`. Partial sessions show the percent plus a small "Partial" label. The "+ Log" header button from the design was not added (Settings stays in the header; Home already links Log). Checked headless at 400 px, light and dark, with seeded sessions (23:50 session lands on its own day, partial, previous month); tests and build pass.
+
+## Notes
+
+- Built and checked headless at 400 px in light and dark (see commit). The "+ Log" header button arrived with log-activity ticket 03; the distance and runs tiles likewise. Device test pending.
