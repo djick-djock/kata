@@ -129,6 +129,14 @@ export function moveItem<T>(list: readonly T[], from: number, to: number): T[] {
   return next
 }
 
+/** Copy of a block with fresh ids, so editing the copy never touches the original. */
+export function duplicateBlock(block: RoutineBlock, blocks: readonly RoutineBlock[]): RoutineBlock {
+  const taken = new Set(blocks.map((b) => b.name))
+  let name = `${block.name} copy`
+  for (let i = 2; taken.has(name); i++) name = `${block.name} copy ${i}`
+  return { ...block, id: uid(), name, steps: block.steps.map((s) => ({ ...s, id: uid() })) }
+}
+
 export function routineTotal(routine: Pick<KataRoutine, 'name' | 'blocks'>) {
   return routineDuration(routine)
 }
