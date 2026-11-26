@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import { KataDB } from './db'
 import { blankRoutine } from '../routines/model'
+import { currentStreak, monthStats } from '../history/streak'
+import { toEntries } from '../history/calendar'
 import { loadRoutine, saveRoutine } from './routines'
-import { getSession, listSessions, saveSession, sessionsBetween, sessionsForRoutine, setSessionFeel, toSessionRow, type FinishedInput } from './sessions'
+import { deleteSession, getSession, listSessions, saveSession, sessionsBetween, sessionsForRoutine, setSessionFeel, toSessionRow, type FinishedInput } from './sessions'
 
 const base = (over: Partial<FinishedInput> = {}): FinishedInput => ({
   id: 's1',
@@ -75,5 +77,28 @@ describe('sessions store', () => {
 
   it('toSessionRow clamps percent and gives completed sessions 100', () => {
     expect(toSessionRow(base({ result: { ...base().result, completed: true, percent: 97 } })).percent).toBe(100)
+  })
+
+  it('deleting a session updates month stats, streak and the routine last-done', async () => {
+    const store = new KataDB('sessions-delete')
+    const r = blankRoutine()
+    await saveRoutine(r, store)
+    const at = (d: number, h = 9) => new Date(2026, 5, d, h).getTime()
+    await saveSession(base({ id: 'd1', routineId: r.id, startedAt: at(9), finishedAt: at(9) + 600_000 }), store)
+    await saveSession(base({ id: 'd2', routineId: r.id, startedAt: at(10), finishedAt: at(10) + 600_000 }), store)
+    const now = at(10, 20)
+    const view = async () => {
+      const e = toEntries(await listSessions(store))
+      return { routines: monthStats(e, 2026, 6).routines, streak: currentStreak(e, now) }
+    }
+    expect(await view()).toEqual({ routines: 2, streak: 2 })
+    expect((await loadRoutine(r.id, store))?.lastDone).toBe(at(10) + 600_000)
+    await deleteSession('d2', store)
+    expect(await view()).toEqual({ routines: 1, streak: 1 })
+    expect((await loadRoutine(r.id, store))?.lastDone).toBe(at(9) + 600_000)
+    await deleteSession('d1', store)
+    expect(await view()).toEqual({ routines: 0, streak: 0 })
+    expect((await loadRoutine(r.id, store))?.lastDone).toBeUndefined()
+    await deleteSession('nope', store)
   })
 })

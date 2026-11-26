@@ -1,5 +1,5 @@
 import { db, type Feel, type KataDB, type SessionRow } from './db'
-import { markRoutineDone } from './routines'
+import { markRoutineDone, recomputeLastDone } from './routines'
 import { uid } from '../routines/model'
 import type { SessionMode, SessionResult } from '../engine'
 
@@ -84,6 +84,9 @@ export async function sessionsForRoutine(routineId: string, store: KataDB = db):
   return rows.reverse()
 }
 
+/** Deletes a session and re-derives its routine's "Last done" from the sessions that remain. */
 export async function deleteSession(id: string, store: KataDB = db): Promise<void> {
+  const existing = await store.sessions.get(id)
   await store.sessions.delete(id)
+  if (existing?.routineId) await recomputeLastDone(existing.routineId, store)
 }

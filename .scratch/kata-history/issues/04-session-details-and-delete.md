@@ -4,11 +4,17 @@
 
 **Blocked by:** 02, 03
 
-Status: ready-for-agent
+Status: done
 
-- [ ] Tapping a session in the recent list opens its details with every recorded field
-- [ ] The feeling can be set or changed from the details
-- [ ] Delete asks for confirmation, removes the session and returns to History
-- [ ] After deleting: stats, calendar dot, streak, week strip and the routine's "Last:" reflect the change (tested at the data level; checked headless)
-- [ ] Layout checked at 400 px wide in light and dark
-- [ ] Build and tests pass
+- [x] Tapping a session in the recent list opens its details with every recorded field
+- [x] The feeling can be set or changed from the details
+- [x] Delete asks for confirmation, removes the session and returns to History
+- [x] After deleting: stats, calendar dot, streak, week strip and the routine's "Last:" reflect the change (tested at the data level; checked headless)
+- [x] Layout checked at 400 px wide in light and dark
+- [x] Build and tests pass
+
+## Notes
+
+- New `screens/SessionDetails.tsx` at `/history/:sessionId` (History rows are links); `ui/FeelChooser.tsx` is shared with SessionComplete. Delete uses the Sheet confirm pattern, then returns to History.
+- `deleteSession` now calls new `recomputeLastDone(routineId)` (data/routines.ts): last finish of remaining sessions with a step done, else cleared. Screens load from the store on mount, so no cache to invalidate. Data test in sessions.test.ts covers month stats, streak and last-done.
+- Checked headless at 400 px, light and dark: open, set feeling, delete, History/Home/routine "Last:" updated.

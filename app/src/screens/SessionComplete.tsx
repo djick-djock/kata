@@ -6,6 +6,7 @@ import { loadRoutine } from '../data/routines'
 import { getSession, setSessionFeel, type Feel, type SessionRow } from '../data/sessions'
 import { formatClock } from '../routines/format'
 import { firstExerciseRef } from '../routines/model'
+import { FeelChooser } from '../ui/FeelChooser'
 import { Drawing } from '../ui/Drawing'
 import './complete.css'
 import './exercises.css'
@@ -14,12 +15,6 @@ import './exercises.css'
 export interface CompleteState {
   sessionId: string
 }
-
-const FEELS: { value: Feel; label: string }[] = [
-  { value: 'easy', label: 'Easy' },
-  { value: 'good', label: 'Good' },
-  { value: 'hard', label: 'Hard' },
-]
 
 /** Shown after a session ends. Reads the stored session, so it never saves anything itself. */
 export function SessionComplete() {
@@ -73,14 +68,7 @@ export function SessionComplete() {
           <div><dd>{session.stepsDone} / {session.stepsTotal}</dd><dt>Steps done</dt></div>
           <div><dd>{partial ? `${session.roundsDone} / ${session.roundsTotal}` : session.roundsTotal}</dd><dt>Rounds</dt></div>
         </dl>
-        <div className="complete__feel" role="group" aria-label="How did it feel? (optional)">
-          <p className="complete__q">How did it feel? (optional)</p>
-          <div className="complete__opts">
-            {FEELS.map((f) => (
-              <button key={f.value} type="button" className="complete__opt" aria-pressed={session.feel === f.value} onClick={() => void pick(f.value)}>{f.label}</button>
-            ))}
-          </div>
-        </div>
+        <FeelChooser feel={session.feel} onPick={(f) => void pick(f)} />
       </div>
       <div className="complete__cta">
         <Link to="/history" className="btn btn--primary btn--block btn--tall" replace>See history</Link>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useEffect, useMemo, useState } from 'react'
 import { listSessions, type SessionRow } from '../data/sessions'
 import { canGoNext, monthGrid, monthLabel, monthOf, recentItems, shiftMonth, toEntries } from '../history/calendar'
@@ -84,15 +85,17 @@ export function History() {
       <ul className="recent">
         {recent.map((r) => (
           <li key={r.id} className="recent__row">
-            <i className="recent__dot" style={{ background: `var(--color-category-${r.category}, var(--color-textFaint))` }} />
-            <div className="recent__text">
-              <span className="recent__name">{r.name}</span>
-              <span className="recent__when">{r.when}</span>
-            </div>
-            <span className={`recent__status${r.partial ? ' recent__status--partial' : ''}`}>
-              {r.status}
-              {r.partial && <small>Partial</small>}
-            </span>
+            <Link to={`/history/${r.id}`} className="recent__link">
+              <i className="recent__dot" style={{ background: `var(--color-category-${r.category}, var(--color-textFaint))` }} />
+              <div className="recent__text">
+                <span className="recent__name">{r.name}</span>
+                <span className="recent__when">{r.when}</span>
+              </div>
+              <span className={`recent__status${r.partial ? ' recent__status--partial' : ''}`}>
+                {r.status}
+                {r.partial && <small>Partial</small>}
+              </span>
+            </Link>
           </li>
         ))}
       </ul>

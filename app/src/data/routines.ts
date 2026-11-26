@@ -75,3 +75,13 @@ export async function getPinnedRoutine(store: KataDB = db): Promise<KataRoutine 
 export async function markRoutineDone(id: string, at: number = Date.now(), store: KataDB = db): Promise<void> {
   await store.routines.update(id, { lastDone: at })
 }
+
+/**
+ * Sets the routine's `lastDone` from the sessions that remain (the latest one with at least one
+ * step done), or clears it. Used after a session is deleted. No-op if the routine is gone.
+ */
+export async function recomputeLastDone(id: string, store: KataDB = db): Promise<void> {
+  const rows = await store.sessions.where('[routineId+startedAt]').between([id, -Infinity], [id, Infinity]).toArray()
+  const last = rows.filter((r) => r.stepsDone > 0).reduce((m, r) => Math.max(m, r.finishedAt), 0)
+  await store.routines.update(id, { lastDone: last || undefined })
+}
