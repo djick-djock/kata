@@ -1,0 +1,29 @@
+/* History: stats, month calendar, recent list. Tokens only. */
+.hstats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+.hstat { display: flex; flex-direction: column; gap: 2px; padding: var(--space-3) var(--space-3); background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-card); min-width: 0; }
+.hstat strong { font-family: var(--font-display); font-weight: 600; font-size: 22px; letter-spacing: -0.01em; white-space: nowrap; }
+.hstat span { font-size: 14px; color: var(--color-textMuted); white-space: nowrap; }
+
+.cal { margin-top: var(--space-4); padding: var(--space-4); background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-sheet); }
+.cal__head { display: flex; align-items: center; gap: var(--space-1); margin-bottom: var(--space-3); }
+.cal__title { flex: 1; font-family: var(--font-display); font-weight: 600; font-size: 19px; }
+.cal__nav { width: 44px; height: 44px; display: grid; place-items: center; border: 0; background: none; color: var(--color-textMuted); border-radius: 50%; cursor: pointer; }
+.cal__nav--next svg { transform: scaleX(-1); }
+.cal__nav:disabled { color: var(--color-textFaint); opacity: 0.4; cursor: default; }
+.cal__nav:focus-visible { outline: 2px solid var(--color-accentText); outline-offset: -2px; }
+.cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 2px; text-align: center; }
+.cal__dow { font-size: 14px; color: var(--color-textMuted); padding-bottom: var(--space-2); }
+.cal__day { display: flex; flex-direction: column; align-items: center; gap: 3px; margin: 0 auto; width: 40px; padding: 6px 0 5px; border-radius: 12px; font-size: 15px; font-weight: 500; }
+.cal__day--today { background: var(--color-surfaceRaised); }
+.cal__dot { width: 6px; height: 6px; border-radius: 50%; background: transparent; }
+.cal__dot--on { background: var(--color-accentText); }
+
+.recent { list-style: none; margin: var(--space-5) 0 0; padding: 0; }
+.recent__row { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) 0; border-bottom: 1px solid var(--color-line); }
+.recent__dot { width: 10px; height: 10px; flex: none; border-radius: 50%; }
+.recent__text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.recent__name { font-family: var(--font-display); font-weight: 600; font-size: 18px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.recent__when { font-size: 15px; color: var(--color-textMuted); }
+.recent__status { display: flex; flex-direction: column; align-items: flex-end; font-weight: 600; font-size: 17px; color: var(--color-accentText); }
+.recent__status--partial { color: var(--color-warningText); }
+.recent__status small { font-size: 12px; font-weight: 500; }

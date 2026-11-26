@@ -4,11 +4,15 @@
 
 **Blocked by:** 01
 
-Status: ready-for-agent
+Status: done
 
-- [ ] Seven day circles for the week, with category colours and today outlined, matching the design screen
-- [ ] Streak shown on Home and equal to the History tab's streak for the same data
-- [ ] A day with several activities uses the category colour of the most recent one
-- [ ] No sessions yet: week empty, streak zero, no errors
-- [ ] Layout checked headless at 400 px wide in light and dark
-- [ ] Build and tests pass
+- [x] Seven day circles for the week, with category colours and today outlined, matching the design screen
+- [x] Streak shown on Home and equal to the History tab's streak for the same data
+- [x] A day with several activities uses the category colour of the most recent one
+- [x] No sessions yet: week empty, streak zero, no errors
+- [x] Layout checked headless at 400 px wide in light and dark
+- [x] Build and tests pass
+
+## Notes
+
+Week runs Mon to Sun (per the design), today outlined, later days empty. Pure helper `app/src/history/home-week.ts` (+ tests) wraps `weekStrip`/`currentStreak`; `useHomeWeek.ts` loads sessions (extend `load()` to merge activities later). Streak text: "N-day streak" or "No streak yet". Checked headless at 400 px, light and dark, with seeded streak, empty and multi-session-day data. The design's "runs count too" caption is left out.

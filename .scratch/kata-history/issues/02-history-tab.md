@@ -14,3 +14,7 @@ Status: ready-for-agent
 - [ ] Distance and run tiles are not shown yet
 - [ ] Layout checked headless at 400 px wide in light and dark; matches the design screen
 - [ ] Build and tests pass
+
+## Notes
+
+Built `screens/History.tsx` + `history.css`, helpers in `history/calendar.ts` (grid, month nav, recent formatting, session to DayEntry mapping, tested). Activities tile counts 0 for now; adding activities is one change in `toEntries`/`useHistoryData`. Partial sessions show the percent plus a small "Partial" label. The "+ Log" header button from the design was not added (Settings stays in the header; Home already links Log). Checked headless at 400 px, light and dark, with seeded sessions (23:50 session lands on its own day, partial, previous month); tests and build pass.

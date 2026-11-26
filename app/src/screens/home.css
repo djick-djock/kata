@@ -22,3 +22,15 @@
 .qcard__art .drawing svg { max-height: 100%; }
 .qcard__name { font-family: var(--font-display); font-weight: 600; font-size: 19px; letter-spacing: -0.01em; line-height: 1.2; margin-top: var(--space-1); }
 .qcard__meta { display: flex; align-items: center; gap: var(--space-2); color: var(--color-textMuted); font-size: 14px; }
+
+/* Week strip */
+.week { margin-top: var(--space-5); padding: var(--space-4) var(--space-4) var(--space-4); background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-sheet); }
+.week__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); }
+.week__h { font-family: var(--font-display); font-weight: 600; font-size: 19px; letter-spacing: -0.01em; }
+.week__streak { color: var(--color-textMuted); font-size: 15px; }
+.week__days { list-style: none; margin: var(--space-3) 0 0; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); gap: var(--space-1); }
+.week__day { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); }
+.week__label { font-size: 14px; color: var(--color-textMuted); }
+.week__dot { width: 100%; max-width: 32px; aspect-ratio: 1; box-sizing: border-box; border-radius: 50%; border: 1.5px solid var(--color-line); background: transparent; }
+.week__day[data-today] .week__dot { border: 2.5px solid var(--color-text); }
+.week__day[data-today] .week__label { color: var(--color-text); font-weight: 600; }

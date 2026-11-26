@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { drawingFor, type Category } from '../catalog'
 import type { KataRoutine } from '../data/routine-types'
 import { listRoutines } from '../data/routines'
+import { useHomeWeek } from '../history/useHomeWeek'
+import { weekColor } from '../history/home-week'
 import { formatLength } from '../routines/format'
 import { firstExerciseRef, routineTotal, stepCount } from '../routines/model'
 import { Drawing } from '../ui/Drawing'
@@ -34,6 +36,7 @@ export function Home() {
     return () => { live = false }
   }, [])
 
+  const week = useHomeWeek(now)
   const pinned = routines?.find((r) => r.pinned)
   const others = (routines ?? []).filter((r) => !r.pinned && stepCount(r) > 0)
   const pinnedTotal = pinned && routineTotal(pinned)
@@ -52,6 +55,31 @@ export function Home() {
       </div>
       <p className="screen-sub">{date}</p>
       <h1 className="screen-title">{greeting(now)}</h1>
+
+      {week && (
+        <section className="week" aria-label="This week" data-testid="week">
+          <div className="week__head">
+            <h2 className="week__h">This week</h2>
+            <span className="week__streak" data-testid="streak">{week.streak === 0 ? 'No streak yet' : `${week.streak}-day streak`}</span>
+          </div>
+          <ol className="week__days">
+            {week.days.map((d, i) => {
+              const color = weekColor(d.category)
+              return (
+                <li key={d.date} className="week__day" data-today={d.isToday || undefined}>
+                  <span className="week__label" aria-hidden="true">{'MTWTFSS'[i]}</span>
+                  <span
+                    className="week__dot"
+                    style={color ? { background: color } : undefined}
+                    role="img"
+                    aria-label={`${new Date(`${d.date}T12:00:00`).toLocaleDateString('en-US', { weekday: 'long' })}${d.isToday ? ' (today)' : ''}${d.active ? ', active' : ''}`}
+                  />
+                </li>
+              )
+            })}
+          </ol>
+        </section>
+      )}
 
       {routines === null ? null : pinned && pinnedTotal ? (
         <Link to={`/play/${pinned.id}`} className="pinned" aria-label={`Start ${pinned.name}`} data-testid="pinned">
