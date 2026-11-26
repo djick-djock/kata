@@ -5,8 +5,5 @@ dist/
 .vite/
 coverage/
 
-# How I work (agent skills and their config), not part of the project
-.claude/
-CLAUDE.md
-skills-lock.json
-docs/agents/
+# Per-machine Claude Code settings
+.claude/settings.local.json

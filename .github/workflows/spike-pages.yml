@@ -1,11 +1,9 @@
 name: Deploy spike to GitHub Pages
 
-# Written but not enabled: needs Pages (source: GitHub Actions) turned on in repo settings.
+# Manual only. Running it publishes the spike at /<repo>/ and REPLACES the live app.
+# app-pages.yml already publishes the spike at /<repo>/spike/.
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths: ['spike/**', '.github/workflows/spike-pages.yml']
 
 permissions:
   contents: read

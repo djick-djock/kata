@@ -1,12 +1,12 @@
 name: Deploy app to GitHub Pages
 
-# Written but not enabled: needs Pages (source: GitHub Actions) turned on in repo settings.
 # Publishes one Pages artifact: the app at /<repo>/ and the spike at /<repo>/spike/.
-# NOTE: spike-pages.yml also deploys to Pages (spike only, at /<repo>/). Once this workflow is in use,
-# disable or delete spike-pages.yml, otherwise a spike deploy would replace the app.
+# Runs on every push to main that touches the app or the spike. Failing tests or a failing build stop the deploy.
 on:
   workflow_dispatch:
-  # Push trigger left off on purpose until the app is ready to replace the spike at the Pages root.
+  push:
+    branches: [main]
+    paths: ['app/**', 'spike/**', '.github/workflows/app-pages.yml']
 
 permissions:
   contents: read
