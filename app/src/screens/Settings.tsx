@@ -11,6 +11,7 @@ import { Sheet } from '../ui/Sheet'
 import { saveSetting, useSettings } from '../data/settings'
 import { BackIcon } from '../ui/Icons'
 import { Stepper } from '../ui/Stepper'
+import { VersionToggle } from '../owner/VersionToggle'
 import './settings.css'
 import './routines.css'
 
@@ -160,7 +161,7 @@ export function Settings() {
         )}
         <BackupSection />
 
-        <p className="setversion">Kata {__APP_VERSION__}</p>
+        <VersionToggle>Kata {__APP_VERSION__}</VersionToggle>
       </main>
     </div>
   )

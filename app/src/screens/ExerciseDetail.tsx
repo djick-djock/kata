@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { drawingFor, findExercise, localized } from '../catalog'
 import { getExerciseLink, normaliseLink, removeExerciseLink, setExerciseLink } from '../data/exercise-links'
 import { AddToRoutine } from './AddToRoutine'
+import { RequestDrawing } from '../owner/RequestDrawing'
 import { Drawing } from '../ui/Drawing'
 import { BackIcon, LinkIcon, PlusIcon } from '../ui/Icons'
 import { CATEGORY_LABEL, formatMeasure } from './exercise-format'
@@ -64,6 +65,7 @@ export function ExerciseDetail() {
         <h2 className="section">Tips</h2>
         <p className="tips">{localized(exercise.tips)}</p>
         <VideoLink exerciseId={exercise.id} />
+        <RequestDrawing exercise={exercise} />
       </div>
       {added && (
         <p className="toast" role="status">Added to {added.name}. <Link to={`/routines/${added.id}`}>Open</Link></p>
