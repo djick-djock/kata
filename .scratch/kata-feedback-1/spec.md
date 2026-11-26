@@ -1,4 +1,4 @@
-Status: in-progress
+Status: done
 
 # Kata — feedback round 1 (after first device use)
 

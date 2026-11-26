@@ -57,7 +57,7 @@ export function SessionComplete() {
     <div className="detail complete">
       <div className="detail__scroll complete__scroll">
         <div className="complete__art">
-          <Drawing svg={ref ? drawingFor(ref.exerciseId, ref.variantId) : undefined} exerciseId={ref?.exerciseId} variantId={ref?.variantId} category={category} label={session.routineName} />
+          <Drawing svg={ref ? drawingFor(ref.exerciseId, ref.variantId) : undefined} category={category} label={session.routineName} />
         </div>
         <p className={`complete__status${partial ? ' complete__status--partial' : ''}`} data-testid="complete-title">
           {partial ? `Stopped early · ${session.percent}% done · saved to history` : 'Session complete · saved to history'}

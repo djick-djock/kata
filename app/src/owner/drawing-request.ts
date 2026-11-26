@@ -1,4 +1,4 @@
-import { localized, type Exercise } from '../catalog'
+import { localized, type Exercise, type Measure } from '../catalog'
 import { formatMeasure } from '../screens/exercise-format'
 
 /** Drawing style rules, taken from the real files in catalog/drawings and the convention in app/README.md. */
@@ -24,26 +24,54 @@ export interface DrawingRequestPayload extends Record<string, unknown> {
   deliverable: string
 }
 
-export function buildDrawingPayload(exercise: Exercise): DrawingRequestPayload {
-  const name = localized(exercise.name)
-  const meditation = exercise.category === 'meditation'
-  const figure = meditation
+/** A custom exercise as typed into a routine (no catalog entry): used to ask for a drawing before it joins the catalog. */
+export interface CustomExercise {
+  name: string
+  /** Written details, one instruction per line. */
+  details?: string
+  measure: Measure
+  perSide: boolean
+}
+
+export const slugify = (name: string) => name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'exercise'
+
+interface Facts { name: string; id: string; category: string; measure: Measure; perSide: boolean; steps: string[]; tips: string; meditation: boolean }
+
+function build(f: Facts): DrawingRequestPayload {
+  const figure = f.meditation
     ? 'Meditation: use a calm glyph (a seated figure, a circle or soft concentric arcs) rather than an athletic pose.'
-    : exercise.perSide
+    : f.perSide
       ? 'This exercise is done per side: show ONE side clearly (the working side), with the other limbs in var(--ill-far).'
       : 'Show the key position of the movement.'
   return {
-    exercise: name,
-    exerciseId: exercise.id,
-    category: exercise.category,
-    measure: formatMeasure(exercise.measure, exercise.perSide),
-    perSide: exercise.perSide,
-    steps: localized(exercise.howTo),
-    tips: localized(exercise.tips),
+    exercise: f.name,
+    exerciseId: f.id,
+    category: f.category,
+    measure: formatMeasure(f.measure, f.perSide),
+    perSide: f.perSide,
+    steps: f.steps,
+    tips: f.tips,
     figure,
     styleRules: DRAWING_STYLE_RULES,
-    deliverable: `Reply with only the SVG code for "${name}". It will be saved as app/src/catalog/drawings/${exercise.id}.svg.`,
+    deliverable: `Reply with only the SVG code for "${f.name}". It will be saved as app/src/catalog/drawings/${f.id}.svg.`,
   }
+}
+
+export function buildDrawingPayload(exercise: Exercise | CustomExercise): DrawingRequestPayload {
+  if ('howTo' in exercise) {
+    return build({ name: localized(exercise.name), id: exercise.id, category: exercise.category, measure: exercise.measure, perSide: exercise.perSide, steps: localized(exercise.howTo), tips: localized(exercise.tips), meditation: exercise.category === 'meditation' })
+  }
+  const lines = (exercise.details ?? '').split('\n').map((l) => l.trim()).filter(Boolean)
+  return build({
+    name: exercise.name,
+    id: slugify(exercise.name),
+    category: 'custom exercise, not in the catalog yet (pick the closest category)',
+    measure: exercise.measure,
+    perSide: exercise.perSide,
+    steps: lines.length ? lines : ['(no written details: infer the movement from the name)'],
+    tips: '',
+    meditation: false,
+  })
 }
 
 export const DRAWING_REQUEST = { appId: 'kata', type: 'exercise-drawing' } as const

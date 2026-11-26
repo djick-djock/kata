@@ -9,6 +9,7 @@ import { RoutineBuilder } from './screens/RoutineBuilder'
 import { Routines } from './screens/Routines'
 import { SessionComplete } from './screens/SessionComplete'
 import { SessionDetails } from './screens/SessionDetails'
+import { CustomExercises } from './owner/CustomExercises'
 import { Settings } from './screens/Settings'
 import { Shell } from './ui/Shell'
 import { Toaster } from './ui/Toast'
@@ -31,6 +32,7 @@ export function App() {
       <Route path="log" element={<LogActivity />} />
       <Route path="log/:id" element={<LogActivity />} />
       <Route path="settings" element={<Settings />} />
+      <Route path="settings/custom-exercises" element={<CustomExercises />} />
       <Route path="*" element={<Shell />}>
         <Route path="*" element={<Home />} />
       </Route>

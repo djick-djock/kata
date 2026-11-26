@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { db } from '../data/db'
-import { refreshUserDrawings } from '../drawings/user-drawings'
 import { BackupError, exportAll, importBackupText, parseBackup, validateBackup } from '../backup/backup'
 import { saveBackupFile } from '../backup/file'
 import { lastBackupLabel, setLastBackup } from '../backup/nudge'
@@ -13,6 +12,7 @@ import { saveSetting, useSettings } from '../data/settings'
 import { BackIcon } from '../ui/Icons'
 import { Stepper } from '../ui/Stepper'
 import { VersionToggle } from '../owner/VersionToggle'
+import { useOwnerMode } from '../owner/owner'
 import './settings.css'
 import './routines.css'
 
@@ -72,7 +72,6 @@ function BackupSection() {
     setBusy(true)
     try {
       const doc = await importBackupText(db, pending.text)
-      await refreshUserDrawings()
       setLastBackup(Math.max(Date.parse(doc.exportedAt), 1))
       setMsg({ text: 'Backup restored.', error: false })
     } catch (e) {
@@ -112,6 +111,7 @@ function BackupSection() {
 export function Settings() {
   const navigate = useNavigate()
   const s = useSettings()
+  const owner = useOwnerMode()
   return (
     <div className="shell">
       <main className="shell__main">
@@ -162,6 +162,15 @@ export function Settings() {
           </>
         )}
         <BackupSection />
+
+        {owner && (
+          <section className="setgroup" aria-label="Owner">
+            <h2 className="setgroup__title">Owner</h2>
+            <Link to="/settings/custom-exercises" className="setrow setrow--tap" data-testid="custom-exercises-link">
+              <span className="setrow__text"><strong>Custom exercises</strong><span>Custom steps in use, to add to the catalog</span></span>
+            </Link>
+          </section>
+        )}
 
         <VersionToggle>Kata {__APP_VERSION__}</VersionToggle>
       </main>

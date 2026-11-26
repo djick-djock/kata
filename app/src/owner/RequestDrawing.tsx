@@ -3,14 +3,11 @@ import { submit } from '../request'
 import { Sheet } from '../ui/Sheet'
 import { notify } from '../ui/Toast'
 import type { Exercise } from '../catalog'
-import { buildDrawingPayload, DRAWING_REQUEST } from './drawing-request'
-import { useOwnerMode } from './owner'
+import { buildDrawingPayload, DRAWING_REQUEST, type CustomExercise } from './drawing-request'
 
-/** Owner-only action on exercise detail: copies a ready-made drawing prompt. Renders nothing otherwise. */
-export function RequestDrawing({ exercise }: { exercise: Exercise }) {
-  const owner = useOwnerMode()
+/** Copies a ready-made drawing prompt for an exercise or a custom exercise. Only used on the owner-only screen. */
+export function RequestDrawing({ exercise }: { exercise: Exercise | CustomExercise }) {
   const [manual, setManual] = useState<string | null>(null)
-  if (!owner) return null
 
   const run = async () => {
     const r = await submit({ ...DRAWING_REQUEST, payload: buildDrawingPayload(exercise) })
@@ -19,7 +16,7 @@ export function RequestDrawing({ exercise }: { exercise: Exercise }) {
   }
   return (
     <>
-      <button type="button" className="btn btn--block" style={{ marginTop: 'var(--space-4)' }} data-testid="request-drawing" onClick={() => void run()}>Request drawing</button>
+      <button type="button" className="btn" data-testid="request-drawing" onClick={() => void run()}>Request drawing</button>
       {manual !== null && (
         <Sheet title="Copy the prompt" onClose={() => setManual(null)}>
           <p>Copying was blocked. Select the text below and copy it.</p>

@@ -80,6 +80,11 @@ export async function importAll(db: KataDB, input: unknown): Promise<BackupDocum
   return doc
 }
 
+/** Parses and fully validates backup text without touching any database (read only). Throws BackupError. */
+export function readBackupText(db: KataDB, text: string): BackupDocument {
+  return validateBackup(db, parseBackup(text))
+}
+
 /** Convenience for the file picker: text in, replaced data out. */
 export async function importBackupText(db: KataDB, text: string): Promise<BackupDocument> {
   return importAll(db, parseBackup(text))

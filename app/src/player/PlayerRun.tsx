@@ -177,7 +177,7 @@ export function PlayerRun({ routine, mode, settings, cuePlayer, onFinished, now 
         ))}
       </div>
 
-      <div className="pl__art"><Drawing svg={svg} exerciseId={shown?.ref?.type === 'exercise' ? shown.ref.exerciseId : undefined} variantId={shown?.ref?.type === 'exercise' ? shown.ref.variantId : undefined} category={category} label={shown?.name ?? item.name} /></div>
+      <div className="pl__art"><Drawing svg={svg} category={category} label={shown?.name ?? item.name} /></div>
 
       <div className="pl__label" data-testid="phase-label">{phaseLabel(item, view.status)}</div>
       <h1 className="pl__name" data-testid="name">{name}</h1>

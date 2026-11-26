@@ -1,8 +1,0 @@
-.idraw__text { height: 120px; flex: none; padding: var(--space-3); font-family: ui-monospace, monospace; font-size: 13px; resize: vertical; }
-.idraw__preview { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
-.idraw__cell { margin: 0; padding: var(--space-3); border-radius: var(--radius-card); border: 1px solid var(--color-line); aspect-ratio: 1; display: flex; flex-direction: column; gap: var(--space-2); min-height: 0; }
-.idraw__cell .drawing { flex: 1; min-height: 0; }
-.idraw__cell figcaption { font-size: 13px; text-align: center; }
-/* Forced theme variable sets so both themes show side by side regardless of the device setting. */
-.idraw__cell--light { background: #F5F3EE; color: #1F2422; --color-line: #DDD9D0; --ill-bg: #F5F3EE; --ill-far: #A3A9A5; --color-illustration-strength: #B5704F; --color-illustration-hiit: #A85F80; --color-illustration-stretch: #7A6CB8; --color-illustration-mobility: #4F8A7F; --color-illustration-warmup: #8A6A2E; --color-text: #1F2422; }
-.idraw__cell--dark { background: #161A19; color: #EEF0EC; --color-line: #353C39; --ill-bg: #161A19; --ill-far: #5F6863; --color-illustration-strength: #E3A786; --color-illustration-hiit: #D9A0B8; --color-illustration-stretch: #B8AEDD; --color-illustration-mobility: #8FCBC0; --color-illustration-warmup: #E6C79C; --color-text: #EEF0EC; }

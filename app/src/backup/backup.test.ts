@@ -13,6 +13,7 @@ async function seed(db: KataDB) {
   await db.exerciseLinks.put({ exerciseId: 'plank', url: 'https://example.com/v' })
   await db.routines.put({ id: 'r1', name: 'Morning', pinned: 1, updatedAt: 5, steps: [{ custom: true, name: 'Breathe' }] } as never)
   await db.sessions.put({ id: 's1', startedAt: 1, finishedAt: 2, routineName: 'Morning', category: 'stretch', mode: 'play-all', durationSeconds: 60, stepsDone: 1, stepsTotal: 1, roundsDone: 1, roundsTotal: 1, percent: 100, completed: true, feel: 'good' })
+  // legacy table (removed owner drawing import): rows must still round-trip
   await db.userDrawings.put({ key: 'squat--wide', svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"><path d="M0 0 L1 1"/></svg>', updatedAt: 7 })
   await db.activities.put({ id: 'a1', type: 'run', startedAt: 3, durationSeconds: 1800, distanceKm: 5, source: 'manual' })
 }
@@ -43,6 +44,14 @@ describe('backup', () => {
     expect(before.sessions).toHaveLength(1)
     expect(before.userDrawings).toHaveLength(1)
     expect(await db.userDrawings.get('squat--wide')).toMatchObject({ updatedAt: 7 })
+  })
+
+  it('an old backup with legacy userDrawings rows still imports without error', async () => {
+    const db = fresh()
+    const old = { app: 'kata', formatVersion: 1, exportedAt: '2026-01-01T00:00:00.000Z', tables: { userDrawings: [{ key: 'squat', svg: '<svg/>', updatedAt: 1 }], settings: [{ key: 'sound', value: false }] } }
+    await importBackupText(db, JSON.stringify(old))
+    expect(await db.settings.count()).toBe(1)
+    expect(await db.userDrawings.count()).toBe(1)
   })
 
   it('custom step details survive export and import', async () => {

@@ -63,7 +63,7 @@ export interface ActivityRow {
   heartRate?: unknown
 }
 
-/** Owner's local drawing for an exercise (key `exerciseId`) or one variant (`exerciseId--variantId`). Sanitised SVG text. */
+/** LEGACY: the removed owner drawing import stored rows here. Nothing reads or writes the table any more; it stays declared so existing databases open and old backups containing it still import. */
 export interface UserDrawingRow {
   key: string
   svg: string
@@ -79,6 +79,7 @@ export class KataDB extends Dexie {
   routines!: EntityTable<RoutineRow, 'id'>
   sessions!: EntityTable<SessionRow, 'id'>
   activities!: EntityTable<ActivityRow, 'id'>
+  /** Legacy, unused (see UserDrawingRow). Do not drop: schema changes and old backups depend on it. */
   userDrawings!: EntityTable<UserDrawingRow, 'key'>
 
   constructor(name = 'kata') {

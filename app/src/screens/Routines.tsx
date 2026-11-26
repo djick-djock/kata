@@ -139,7 +139,7 @@ function RoutineCard({ routine }: { routine: KataRoutine }) {
   return (
     <li className="rcard">
       <Link to={`/routines/${routine.id}`} className="rcard__main" aria-label={`Edit ${routine.name}`}>
-        <div className="rcard__art"><Drawing svg={ref ? drawingFor(ref.exerciseId, ref.variantId) : undefined} exerciseId={ref?.exerciseId} variantId={ref?.variantId} category={routine.category} label={routine.name} /></div>
+        <div className="rcard__art"><Drawing svg={ref ? drawingFor(ref.exerciseId, ref.variantId) : undefined} category={routine.category} label={routine.name} /></div>
         <div className="rcard__text">
           <span className="rcard__name">{routine.name}{routine.pinned && <span className="rcard__pin" role="img" aria-label="Pinned"><PinIcon /></span>}</span>
           <span className="rcard__meta"><span className="dot" style={{ background: catColor(routine.category) }} />{CATEGORY_LABEL[routine.category]} · {shape} · {formatLength(d.seconds, d.approximate)}</span>

@@ -1,10 +1,7 @@
 import type { Category } from '../catalog'
-import { useUserDrawings, userDrawingFor } from '../drawings/user-drawings'
 
-/** Exercise drawing (a local owner drawing for exerciseId/variantId wins over the shipped `svg`) tinted with the category colour, or a calm placeholder when there is none. */
-export function Drawing({ svg: shipped, exerciseId, variantId, category, label }: { svg?: string; exerciseId?: string; variantId?: string; category: Category; label: string }) {
-  useUserDrawings() // re-render when the owner's local drawings change
-  const svg = (exerciseId ? userDrawingFor(exerciseId, variantId) : undefined) ?? shipped
+/** Shipped exercise drawing tinted with the category colour, or a calm placeholder when there is none. */
+export function Drawing({ svg, category, label }: { svg?: string; category: Category; label: string }) {
   const tint = { color: `var(--color-illustration-${category === 'meditation' ? 'mobility' : category})` }
   if (!svg) {
     return (
