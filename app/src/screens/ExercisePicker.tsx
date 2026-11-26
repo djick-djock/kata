@@ -4,16 +4,16 @@ import type { Measure } from '../engine'
 import { Drawing } from '../ui/Drawing'
 import { Sheet } from '../ui/Sheet'
 import { Stepper } from '../ui/Stepper'
-import { SearchIcon } from '../ui/Icons'
+import { InfoIcon, SearchIcon } from '../ui/Icons'
 import { CATEGORY_LABEL, formatMeasure } from './exercise-format'
 import './routines.css'
 
 const norm = (s: string) => s.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().trim()
 
-export interface CustomInput { name: string; measure: Measure; perSide: boolean }
+export interface CustomInput { name: string; measure: Measure; perSide: boolean; details?: string }
 
 /** Pick a catalog exercise (asking for a variant when it has some) or define a custom step. */
-export function ExercisePicker({ warmUp, onPick, onCustom, onClose }: { warmUp: boolean; onPick: (exerciseId: string, variantId?: string) => void; onCustom: (input: CustomInput) => void; onClose: () => void }) {
+export function ExercisePicker({ warmUp, onPick, onInfo, onCustom, onClose }: { warmUp: boolean; onPick: (exerciseId: string, variantId?: string) => void; onInfo: (exerciseId: string) => void; onCustom: (input: CustomInput) => void; onClose: () => void }) {
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState<Category | null>(null)
   const [variantFor, setVariantFor] = useState<Exercise | null>(null)
@@ -49,7 +49,7 @@ export function ExercisePicker({ warmUp, onPick, onCustom, onClose }: { warmUp: 
 
   const pick = (e: Exercise) => (e.variants?.length ? setVariantFor(e) : onPick(e.id))
   const row = (e: Exercise) => (
-    <li key={e.id}>
+    <li key={e.id} className="pick-row">
       <button type="button" className="pick" onClick={() => pick(e)}>
         <span className="thumb"><Drawing svg={drawingFor(e.id)} exerciseId={e.id} category={e.category} label={localized(e.name)} /></span>
         <span className="pick__text">
@@ -57,6 +57,7 @@ export function ExercisePicker({ warmUp, onPick, onCustom, onClose }: { warmUp: 
           <span className="pick__meta">{CATEGORY_LABEL[e.category]} · {formatMeasure(e.measure, e.perSide)}{e.variants?.length ? ' · variants' : ''}</span>
         </span>
       </button>
+      <button type="button" className="info-btn" aria-label={`Details: ${localized(e.name)}`} onClick={() => onInfo(e.id)}><InfoIcon /></button>
     </li>
   )
 
@@ -94,6 +95,7 @@ function CustomForm({ onSubmit, onBack, onClose }: { onSubmit: (i: CustomInput) 
   const [type, setType] = useState<'time' | 'reps'>('time')
   const [value, setValue] = useState(30)
   const [perSide, setPerSide] = useState(false)
+  const [details, setDetails] = useState('')
   const switchType = (t: 'time' | 'reps') => { setType(t); setValue(t === 'time' ? 30 : 10) }
   return (
     <Sheet title="Custom step" onClose={onClose} action={<button type="button" className="text-btn" onClick={onBack}>Back</button>}>
@@ -116,7 +118,11 @@ function CustomForm({ onSubmit, onBack, onClose }: { onSubmit: (i: CustomInput) 
         <input type="checkbox" checked={perSide} onChange={(e) => setPerSide(e.target.checked)} />
         <span>Per side</span>
       </label>
-      <button type="button" className="btn btn--primary btn--block" disabled={!name.trim()} onClick={() => onSubmit({ name: name.trim(), measure: type === 'time' ? { type, seconds: value } : { type, reps: value }, perSide })}>Add step</button>
+      <label className="field">
+        <span className="field__label">Details (optional)</span>
+        <textarea className="field__input field__textarea" rows={3} value={details} onChange={(e) => setDetails(e.target.value)} placeholder="How to do it, what to watch for" />
+      </label>
+      <button type="button" className="btn btn--primary btn--block" disabled={!name.trim()} onClick={() => onSubmit({ name: name.trim(), measure: type === 'time' ? { type, seconds: value } : { type, reps: value }, perSide, details })}>Add step</button>
     </Sheet>
   )
 }

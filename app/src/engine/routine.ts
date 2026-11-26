@@ -20,6 +20,8 @@ export interface Step {
   measure: Measure
   /** Split into a left and a right part with a switch pause between. Each side gets the full measure. */
   perSide?: boolean
+  /** Optional written notes of a custom step. Display only, the engine ignores it. */
+  details?: string
   /** Rest after this step in seconds, zero allowed. Ignored inside warm-up blocks. */
   restAfterSeconds: number
 }

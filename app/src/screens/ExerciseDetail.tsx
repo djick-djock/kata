@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import type { ReactNode } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { drawingFor, findExercise, localized } from '../catalog'
 import { getExerciseLink, normaliseLink, removeExerciseLink, setExerciseLink } from '../data/exercise-links'
@@ -12,15 +13,31 @@ import './exercises.css'
 
 export function ExerciseDetail() {
   const { id = '' } = useParams()
+  return <ExerciseInfo exerciseId={id} />
+}
+
+/**
+ * The exercise details. As a route it links back to the library and offers "Add to a routine".
+ * Opened from the routine builder (`onBack` given) it goes back through `onBack` and shows `footer`
+ * (a Back button) instead of the add button.
+ */
+export function ExerciseInfo({ exerciseId: id, initialVariantId, onBack, footer }: { exerciseId: string; initialVariantId?: string; onBack?: () => void; footer?: ReactNode }) {
   const exercise = findExercise(id)
-  const [variantId, setVariantId] = useState<string | undefined>(undefined)
+  const [variantId, setVariantId] = useState<string | undefined>(() => {
+    const first = findExercise(id)?.variants?.[0]?.id
+    return initialVariantId && initialVariantId !== first ? initialVariantId : undefined
+  })
   const [adding, setAdding] = useState(false)
   const [added, setAdded] = useState<{ id: string; name: string } | null>(null)
+
+  const back = onBack
+    ? <button type="button" className="icon-btn" aria-label="Back" onClick={onBack}><BackIcon /></button>
+    : <Link to="/exercises" className="icon-btn" aria-label="Back"><BackIcon /></Link>
 
   if (!exercise) {
     return (
       <div className="detail">
-        <Link to="/exercises" className="icon-btn" aria-label="Back"><BackIcon /></Link>
+        {back}
         <p className="no-match">This exercise is not in the library.</p>
       </div>
     )
@@ -34,7 +51,7 @@ export function ExerciseDetail() {
     <div className="detail">
       <div className="detail__scroll">
         <div className="detail__bar">
-          <Link to="/exercises" className="icon-btn" aria-label="Back"><BackIcon /></Link>
+          {back}
         </div>
         <div className="detail__art">
           <Drawing svg={drawingFor(exercise.id, variant?.id)} exerciseId={exercise.id} variantId={variant?.id} category={exercise.category} label={name} />
@@ -69,13 +86,13 @@ export function ExerciseDetail() {
         <RequestDrawing exercise={exercise} />
         <ImportDrawing exerciseId={exercise.id} variantId={variant?.id} category={exercise.category} name={variant ? `${name} (${localized(variant.label)})` : name} />
       </div>
-      {added && (
+      {!onBack && added && (
         <p className="toast" role="status">Added to {added.name}. <Link to={`/routines/${added.id}`}>Open</Link></p>
       )}
       <div className="detail__cta">
-        <button type="button" className="btn btn--primary btn--block btn--tall" onClick={() => { setAdded(null); setAdding(true) }}>Add to a routine</button>
+        {onBack ? footer : <button type="button" className="btn btn--primary btn--block btn--tall" onClick={() => { setAdded(null); setAdding(true) }}>Add to a routine</button>}
       </div>
-      {adding && (
+      {!onBack && adding && (
         <AddToRoutine
           exerciseId={exercise.id}
           variantId={variants.length ? (variantId ?? variants[0].id) : undefined}

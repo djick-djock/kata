@@ -81,8 +81,24 @@ export function catalogStep(exerciseId: string, block: Pick<RoutineBlock, 'warmU
   }
 }
 
-export function customStep(input: { name: string; measure: Measure; perSide?: boolean; restAfterSeconds?: number }): RoutineStep {
-  return { id: uid(), ref: { type: 'custom' }, name: input.name.trim() || 'Custom step', measure: input.measure, perSide: !!input.perSide, restAfterSeconds: input.restAfterSeconds ?? DEFAULT_REST_SECONDS }
+export function customStep(input: { name: string; measure: Measure; perSide?: boolean; restAfterSeconds?: number; details?: string }): RoutineStep {
+  const details = input.details?.trim()
+  return { id: uid(), ref: { type: 'custom' }, name: input.name.trim() || 'Custom step', measure: input.measure, perSide: !!input.perSide, restAfterSeconds: input.restAfterSeconds ?? DEFAULT_REST_SECONDS, ...(details ? { details } : {}) }
+}
+
+/** Info-view target stored in the builder's `info` search param, and its parser. */
+export type InfoTarget = { type: 'exercise'; exerciseId: string; variantId?: string } | { type: 'step'; stepId: string }
+
+export function infoParam(t: InfoTarget): string {
+  return t.type === 'step' ? `step:${t.stepId}` : `ex:${t.exerciseId}${t.variantId ? `:${t.variantId}` : ''}`
+}
+
+export function parseInfoParam(v: string | null): InfoTarget | null {
+  if (!v) return null
+  const [kind, a, b] = v.split(':')
+  if (kind === 'step' && a) return { type: 'step', stepId: a }
+  if (kind === 'ex' && a) return { type: 'exercise', exerciseId: a, ...(b ? { variantId: b } : {}) }
+  return null
 }
 
 /**

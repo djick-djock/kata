@@ -4,13 +4,17 @@
 
 **Blocked by:** None (can start immediately)
 
-Status: ready-for-agent
+Status: done
 
-- [ ] Picker rows have an info control that opens exercise details; quick add keeps working; back returns to the picker with search, filter and scroll kept
-- [ ] Each catalog step in the builder opens that exercise's details (including its variant if one was chosen)
-- [ ] Custom steps have an optional details text field in the create and edit forms; it is saved with the routine and included in backups (stored on the step)
-- [ ] A custom step's info view shows name, measure, per-side and the written details; empty details show a gentle hint to add some
-- [ ] Details screens opened from the builder have a clear back path to the builder; unsaved builder state is not lost
-- [ ] Data test: a custom step's details round-trip through save and load and through export and import
-- [ ] Layout checked headless at 400 px wide in light and dark
-- [ ] Build and tests pass
+- [x] Picker rows have an info control that opens exercise details; quick add keeps working; back returns to the picker with search, filter and scroll kept
+- [x] Each catalog step in the builder opens that exercise's details (including its variant if one was chosen)
+- [x] Custom steps have an optional details text field in the create and edit forms; it is saved with the routine and included in backups (stored on the step)
+- [x] A custom step's info view shows name, measure, per-side and the written details; empty details show a gentle hint to add some
+- [x] Details screens opened from the builder have a clear back path to the builder; unsaved builder state is not lost
+- [x] Data test: a custom step's details round-trip through save and load and through export and import
+- [x] Layout checked headless at 400 px wide in light and dark
+- [x] Build and tests pass
+
+## Notes (done)
+
+Info opens as a full-screen layer inside the builder, driven by an `?info=` search param (`ex:<id>[:<variant>]` or `step:<stepId>`), not a separate route. The builder stays mounted, so picker search/filter/scroll, expanded blocks and builder scroll are kept; the layer's Back and the browser Back both close it. Catalog details reuse `ExerciseInfo` (extracted from `ExerciseDetail`), with "Add to a routine" replaced by a "Back to the picker / routine" button. Custom steps store `details` on the step (no Dexie change, travels in backups). Tests added in `data/routines.test.ts` and `backup/backup.test.ts`; checked headless at 400 px, light and dark.

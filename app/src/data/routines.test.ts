@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest'
 import { findExercise, variantsOf, allExercises } from '../catalog'
 import { routineDuration } from '../engine'
-import { blankRoutine, catalogStep, customStep, resolveRoutine, routineFromTemplate, TEMPLATES } from '../routines/model'
+import { blankRoutine, catalogStep, customStep, infoParam, parseInfoParam, resolveRoutine, routineFromTemplate, TEMPLATES } from '../routines/model'
 import { KataDB } from './db'
 import { copyRoutine, deleteRoutine, getPinnedRoutine, listRoutines, loadRoutine, markRoutineDone, saveRoutine, setPinned } from './routines'
 import type { KataRoutine } from './routine-types'
@@ -23,6 +23,29 @@ function sample(): KataRoutine {
   block.steps.push(customStep({ name: 'Foam roll calves', measure: { type: 'time', seconds: 40 }, perSide: true, restAfterSeconds: 0 }))
   return r
 }
+
+describe('custom step details', () => {
+  it('round-trips through save and load; empty details are not stored', async () => {
+    open()
+    const r = blankRoutine()
+    r.blocks[0].steps.push(customStep({ name: 'A', measure: { type: 'reps', reps: 5 }, details: 'Keep the back flat' }), customStep({ name: 'B', measure: { type: 'reps', reps: 5 }, details: '   ' }))
+    await saveRoutine(r, store)
+    const loaded = (await loadRoutine(r.id, store))!
+    expect(loaded.blocks[0].steps[0].details).toBe('Keep the back flat')
+    expect('details' in loaded.blocks[0].steps[1]).toBe(false)
+    const copy = (await copyRoutine(r.id, store))!
+    expect(copy.blocks[0].steps[0].details).toBe('Keep the back flat')
+  })
+})
+
+describe('info param', () => {
+  it('formats and parses targets', () => {
+    for (const t of [{ type: 'step', stepId: 'abc' }, { type: 'exercise', exerciseId: 'squat' }, { type: 'exercise', exerciseId: 'squat', variantId: 'wide' }] as const)
+      expect(parseInfoParam(infoParam(t))).toEqual(t)
+    expect(parseInfoParam(null)).toBeNull()
+    expect(parseInfoParam('junk')).toBeNull()
+  })
+})
 
 describe('routine repository', () => {
   it('round-trips a routine through save and load', async () => {

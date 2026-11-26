@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { CATEGORIES, drawingFor, findExercise, type Category } from '../catalog'
 import { deleteRoutine, loadRoutine, saveRoutine } from '../data/routines'
 import type { KataRoutine, RoutineBlock, RoutineStep } from '../data/routine-types'
 import { formatTotal } from '../routines/format'
-import { blockTotal, catalogStep, customStep, moveItem, newBlock, nextBlockName, routineTotal, stepName } from '../routines/model'
+import { blockTotal, catalogStep, customStep, infoParam, moveItem, newBlock, nextBlockName, parseInfoParam, routineTotal, stepName, type InfoTarget } from '../routines/model'
 import { Drawing } from '../ui/Drawing'
-import { BackIcon, ChevronDownIcon, GripIcon, PinIcon, PlayIcon, PlusIcon, RepeatIcon, StepByStepIcon, TrashIcon } from '../ui/Icons'
+import { BackIcon, ChevronDownIcon, GripIcon, InfoIcon, PinIcon, PlayIcon, PlusIcon, RepeatIcon, StepByStepIcon, TrashIcon } from '../ui/Icons'
 import { Sheet } from '../ui/Sheet'
 import { Stepper } from '../ui/Stepper'
 import { useDragReorder } from '../ui/useDragReorder'
-import { CATEGORY_LABEL } from './exercise-format'
+import { ExerciseInfo } from './ExerciseDetail'
+import { CATEGORY_LABEL, formatMeasure } from './exercise-format'
 import { ExercisePicker } from './ExercisePicker'
 import './exercises.css'
 import './routines.css'
@@ -20,6 +21,9 @@ const catColor = (c: Category) => `var(--color-category-${c === 'meditation' ? '
 export function RoutineBuilder() {
   const { id = '' } = useParams()
   const navigate = useNavigate()
+  const location = useLocation()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const info = parseInfoParam(searchParams.get('info'))
   const [routine, setRoutine] = useState<KataRoutine | null | undefined>(undefined)
   const ref = useRef<KataRoutine | null>(null)
   const chain = useRef<Promise<unknown>>(Promise.resolve())
@@ -50,6 +54,17 @@ export function RoutineBuilder() {
     change((r) => ({ ...r, blocks: r.blocks.map((b) => (b.id === blockId ? fn(b) : b)) }))
   const changeStep = (blockId: string, stepId: string, fn: (s: RoutineStep) => RoutineStep) =>
     changeBlock(blockId, (b) => ({ ...b, steps: b.steps.map((s) => (s.id === stepId ? fn(s) : s)) }))
+
+  /**
+   * Details open as a full-screen layer over the builder, driven by the `info` search param. The builder
+   * stays mounted, so the picker (search, filter, scroll), expanded blocks and scroll are all kept, and
+   * the browser Back button closes the layer.
+   */
+  const openInfo = (t: InfoTarget) => setSearchParams({ info: infoParam(t) }, { state: { fromInfo: true } })
+  const closeInfo = () => {
+    if ((location.state as { fromInfo?: boolean } | null)?.fromInfo) navigate(-1)
+    else setSearchParams({}, { replace: true })
+  }
 
   async function leave() {
     await chain.current
@@ -103,6 +118,7 @@ export function RoutineBuilder() {
             onDelete={() => change((r) => ({ ...r, blocks: r.blocks.filter((b) => b.id !== block.id) }))}
             onAdd={() => setPicker(block.id)}
             onEdit={(stepId) => setEditing({ blockId: block.id, stepId })}
+            onInfo={(stepId) => openInfo({ type: 'step', stepId })}
           />
         ))}
         <button type="button" className="add-block" onClick={() => change((r) => ({ ...r, blocks: [...r.blocks, newBlock(nextBlockName(r.blocks))] }))}>
@@ -134,6 +150,7 @@ export function RoutineBuilder() {
         <ExercisePicker
           warmUp={!!pickerBlock.warmUp}
           onClose={() => setPicker(null)}
+          onInfo={(exerciseId) => openInfo({ type: 'exercise', exerciseId })}
           onPick={(exerciseId, variantId) => {
             addStep(pickerBlock.id, (b) => catalogStep(exerciseId, b, variantId))
             const ex = findExercise(exerciseId)
@@ -142,6 +159,7 @@ export function RoutineBuilder() {
           onCustom={(input) => addStep(pickerBlock.id, (b) => customStep({ ...input, restAfterSeconds: b.warmUp ? 0 : b.defaults?.restSeconds }))}
         />
       )}
+      {info && <InfoLayer info={info} routine={routine} fromPicker={!!pickerBlock && info.type === 'exercise'} onClose={closeInfo} onEditStep={(blockId, stepId) => { closeInfo(); setEditing({ blockId, stepId }) }} />}
       {editBlock && editStep && (
         <StepEditor
           step={editStep}
@@ -158,7 +176,7 @@ export function RoutineBuilder() {
   )
 }
 
-function BlockCard({ block, collapsed, canDelete, onToggle, onChange, onDelete, onAdd, onEdit }: {
+function BlockCard({ block, collapsed, canDelete, onToggle, onChange, onDelete, onAdd, onEdit, onInfo }: {
   block: RoutineBlock
   collapsed: boolean
   canDelete: boolean
@@ -167,6 +185,7 @@ function BlockCard({ block, collapsed, canDelete, onToggle, onChange, onDelete, 
   onDelete: () => void
   onAdd: () => void
   onEdit: (stepId: string) => void
+  onInfo: (stepId: string) => void
 }) {
   const { listRef, handleProps } = useDragReorder((from, to) => onChange((b) => ({ ...b, steps: moveItem(b.steps, from, to) })))
   const [confirm, setConfirm] = useState(false)
@@ -214,6 +233,7 @@ function BlockCard({ block, collapsed, canDelete, onToggle, onChange, onDelete, 
                   <span className="pill-work">{s.measure.type === 'time' ? `${s.measure.seconds}s` : `×${s.measure.reps}`}</span>
                   {!block.warmUp && s.restAfterSeconds > 0 && <span className="pill-rest">{s.restAfterSeconds}s</span>}
                 </button>
+                <button type="button" className="info-btn" aria-label={`Details: ${s.name}`} onClick={() => onInfo(s.id)}><InfoIcon /></button>
               </li>
             ))}
           </ul>
@@ -222,6 +242,49 @@ function BlockCard({ block, collapsed, canDelete, onToggle, onChange, onDelete, 
       )}
     </section>
   )
+}
+
+function InfoLayer({ info, routine, fromPicker, onClose, onEditStep }: { info: InfoTarget; routine: KataRoutine; fromPicker: boolean; onClose: () => void; onEditStep: (blockId: string, stepId: string) => void }) {
+  const backBtn = (label: string) => <button type="button" className="btn btn--primary btn--block btn--tall" onClick={onClose}>{label}</button>
+  let body: React.ReactNode
+  if (info.type === 'exercise') {
+    body = <ExerciseInfo exerciseId={info.exerciseId} initialVariantId={info.variantId} onBack={onClose} footer={backBtn(fromPicker ? 'Back to the picker' : 'Back to the routine')} />
+  } else {
+    let owner: RoutineBlock | undefined
+    let step: RoutineStep | undefined
+    for (const b of routine.blocks) { const s = b.steps.find((x) => x.id === info.stepId); if (s) { owner = b; step = s } }
+    if (!owner || !step) {
+      body = <div className="detail"><div className="detail__scroll"><button type="button" className="icon-btn" aria-label="Back" onClick={onClose}><BackIcon /></button><p className="no-match">This step is no longer in the routine.</p></div></div>
+    } else if (step.ref.type === 'exercise') {
+      body = <ExerciseInfo exerciseId={step.ref.exerciseId} initialVariantId={step.ref.variantId} onBack={onClose} footer={backBtn('Back to the routine')} />
+    } else {
+      const details = step.details?.trim()
+      const blockId = owner.id
+      const stepId = step.id
+      body = (
+        <div className="detail">
+          <div className="detail__scroll">
+            <div className="detail__bar"><button type="button" className="icon-btn" aria-label="Back" onClick={onClose}><BackIcon /></button></div>
+            <div className="detail__art"><Drawing category="mobility" label={step.name} /></div>
+            <h1 className="detail__title">{step.name}</h1>
+            <p className="step-info__meta">{formatMeasure(step.measure.type === 'time' ? { type: 'time', value: step.measure.seconds } : { type: 'reps', value: step.measure.reps }, !!step.perSide)}</p>
+            <h2 className="section">Details</h2>
+            {details ? <p className="step-info__text">{details}</p> : (
+              <>
+                <p className="step-info__hint">No details yet. Add a few notes on how to do this step.</p>
+                <button type="button" className="btn" onClick={() => onEditStep(blockId, stepId)}>Add details</button>
+              </>
+            )}
+          </div>
+          <div className="detail__cta">
+            {details ? <button type="button" className="btn btn--block" onClick={() => onEditStep(blockId, stepId)}>Edit step</button> : null}
+            {backBtn('Back to the routine')}
+          </div>
+        </div>
+      )
+    }
+  }
+  return <div className="info-layer" role="dialog" aria-modal="true" aria-label="Details">{body}</div>
 }
 
 function StepDrawing({ step }: { step: RoutineStep }) {
@@ -265,6 +328,12 @@ function StepEditor({ step, warmUp, index, count, onChange, onMove, onRemove, on
             ))}
           </div>
         </div>
+      )}
+      {!exercise && (
+        <label className="field">
+          <span className="field__label">Details (optional)</span>
+          <textarea className="field__input field__textarea" rows={3} value={step.details ?? ''} onChange={(e) => onChange((s) => ({ ...s, details: e.target.value }))} placeholder="How to do it, what to watch for" />
+        </label>
       )}
       <div className="field">
         <span className="field__label">Measure</span>

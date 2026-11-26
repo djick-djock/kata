@@ -62,3 +62,7 @@ export const CopyIcon = () => (
 export const TrashIcon = () => (
   <Icon size={20}><path d="M5 7h14M10 7V5h4v2M7 7l1 12h8l1-12" /></Icon>
 )
+
+export const InfoIcon = () => (
+  <Icon><circle cx="12" cy="12" r="8.5" /><path d="M12 11v5.5" /><circle cx="12" cy="7.8" r="0.6" fill="currentColor" /></Icon>
+)

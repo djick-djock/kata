@@ -1,5 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 import { KataDB } from '../data/db'
+import { loadRoutine, saveRoutine } from '../data/routines'
+import { blankRoutine, customStep } from '../routines/model'
 import { BackupError, FORMAT_VERSION, exportAll, importAll, importBackupText } from './backup'
 import { lastBackupLabel, shouldNudge } from './nudge'
 
@@ -41,6 +43,17 @@ describe('backup', () => {
     expect(before.sessions).toHaveLength(1)
     expect(before.userDrawings).toHaveLength(1)
     expect(await db.userDrawings.get('squat--wide')).toMatchObject({ updatedAt: 7 })
+  })
+
+  it('custom step details survive export and import', async () => {
+    const db = fresh()
+    const r = blankRoutine()
+    r.blocks[0].steps.push(customStep({ name: 'Foam roll', measure: { type: 'time', seconds: 30 }, details: '  Slow, pause on tight spots.\nBreathe.  ' }))
+    await saveRoutine(r, db)
+    const text = JSON.stringify(await exportAll(db))
+    for (const t of db.tables) await t.clear()
+    await importBackupText(db, text)
+    expect((await loadRoutine(r.id, db))!.blocks[0].steps[0].details).toBe('Slow, pause on tight spots.\nBreathe.')
   })
 
   it('import replaces existing data rather than merging', async () => {
