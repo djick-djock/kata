@@ -1,0 +1,25 @@
+/* Dark theme: follows the device. The phase colours (--color-phase-*) are final and never change.
+   Dark values below are derived (the design docs only define the light theme); see README. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #161A19;
+    --color-surface: #1F2422;
+    --color-surfaceRaised: #2A302E;
+    --color-line: #353C39;
+    --color-text: #EEF0EC;
+    --color-textMuted: #A3ABA6;
+    --color-textFaint: #5F6863;
+    --color-accentText: #A9C8A0;
+    --color-accentPale: #2A3A2B;
+    --color-danger: #E08A78;
+    --color-warningText: #E3B866;
+    --color-restText: #A3BFD9;
+    --color-illustration-strength: #E3A786;
+    --color-illustration-hiit: #D9A0B8;
+    --color-illustration-stretch: #B8AEDD;
+    --color-illustration-mobility: #8FCBC0;
+    --color-illustration-warmup: #E6C79C;
+    color-scheme: dark;
+  }
+}
+:root { color-scheme: light; }

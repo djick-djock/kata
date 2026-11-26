@@ -1,0 +1,66 @@
+name: Deploy app to GitHub Pages
+
+# Written but not enabled: needs Pages (source: GitHub Actions) turned on in repo settings.
+# Publishes one Pages artifact: the app at /<repo>/ and the spike at /<repo>/spike/.
+# NOTE: spike-pages.yml also deploys to Pages (spike only, at /<repo>/). Once this workflow is in use,
+# disable or delete spike-pages.yml, otherwise a spike deploy would replace the app.
+on:
+  workflow_dispatch:
+  # Push trigger left off on purpose until the app is ready to replace the spike at the Pages root.
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-app
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            app/package-lock.json
+            spike/package-lock.json
+      - name: Build app
+        working-directory: app
+        run: |
+          npm ci
+          npm test
+          npm run build
+        env:
+          VITE_BASE: /${{ github.event.repository.name }}/
+      - name: Build spike (kept reachable at /spike/)
+        working-directory: spike
+        run: |
+          npm ci
+          npm test
+          npm run build
+        env:
+          VITE_BASE: /${{ github.event.repository.name }}/spike/
+      - name: Assemble site
+        run: |
+          mkdir site
+          cp -R app/dist/. site/
+          mkdir site/spike
+          cp -R spike/dist/. site/spike/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
