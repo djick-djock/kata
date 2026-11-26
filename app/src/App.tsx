@@ -6,6 +6,7 @@ import { Home } from './screens/Home'
 import { Play } from './screens/Play'
 import { RoutineBuilder } from './screens/RoutineBuilder'
 import { Routines } from './screens/Routines'
+import { SessionComplete } from './screens/SessionComplete'
 import { Settings } from './screens/Settings'
 import { Shell } from './ui/Shell'
 
@@ -21,6 +22,7 @@ export function App() {
       <Route path="exercises/:id" element={<ExerciseDetail />} />
       <Route path="routines/:id" element={<RoutineBuilder />} />
       <Route path="play/:routineId" element={<Play />} />
+      <Route path="session-complete" element={<SessionComplete />} />
       <Route path="settings" element={<Settings />} />
       <Route path="*" element={<Shell />}>
         <Route path="*" element={<Home />} />

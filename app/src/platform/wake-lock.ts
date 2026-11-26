@@ -19,9 +19,10 @@ export function createWakeLock(onChange: (state: WakeLockState, detail?: string)
     }
   }
 
-  document.addEventListener('visibilitychange', () => {
+  const onVisible = () => {
     if (wanted && document.visibilityState === 'visible') void acquire()
-  })
+  }
+  document.addEventListener('visibilitychange', onVisible)
 
   onChange(supported ? 'idle' : 'unsupported')
   return {
@@ -36,6 +37,11 @@ export function createWakeLock(onChange: (state: WakeLockState, detail?: string)
       sentinel = null
       if (s) await s.release().catch(() => {})
       onChange(supported ? 'idle' : 'unsupported')
+    },
+    /** Releases the lock and removes the visibility listener. */
+    async dispose() {
+      document.removeEventListener('visibilitychange', onVisible)
+      await this.release()
     },
   }
 }

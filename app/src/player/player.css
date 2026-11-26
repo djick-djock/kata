@@ -1,0 +1,104 @@
+/* Player. Phase colours are final and the same in both themes. */
+.pl {
+  --pl-bg: var(--color-phase-work);
+  --pl-ink: var(--color-phase-onPhase);
+  --pl-ink2: rgba(22, 26, 26, 0.72);
+  --pl-panel: rgba(255, 255, 255, 0.28);
+  --pl-track: rgba(22, 26, 26, 0.16);
+  --pl-seg: rgba(22, 26, 26, 0.16);
+  --pl-seg-cur: rgba(22, 26, 26, 0.55);
+  --pl-accent: var(--color-phase-onPhase);
+  --color-line: rgba(22, 26, 26, 0.35);
+  --ill-far: rgba(22, 26, 26, 0.5);
+  position: fixed; inset: 0; z-index: 10; overflow-x: hidden; overflow-y: auto;
+  display: flex; flex-direction: column; max-width: 640px; margin: 0 auto;
+  padding: max(var(--space-4), env(safe-area-inset-top)) var(--space-5) max(var(--space-5), env(safe-area-inset-bottom));
+  background: var(--pl-bg); color: var(--pl-ink); transition: background-color 0.35s ease;
+}
+.pl--warmup { --pl-bg: var(--color-phase-warmup); }
+.pl--rest { --pl-bg: var(--color-phase-rest); }
+.pl--dark {
+  --pl-bg: var(--color-phase-ready); --pl-ink: var(--color-phase-onReady); --pl-ink2: rgba(238, 240, 236, 0.7);
+  --pl-panel: rgba(255, 255, 255, 0.05); --pl-track: rgba(238, 240, 236, 0.16); --pl-seg: rgba(238, 240, 236, 0.14);
+  --pl-seg-cur: #EEF0EC; --pl-accent: var(--color-accent);
+  --color-line: rgba(169, 200, 160, 0.4); --ill-far: rgba(169, 200, 160, 0.6);
+}
+/* Fills the whole screen (also under the OS bars), not just the max-width column. */
+body:has(.pl) { background: var(--color-phase-ready); }
+.pl__final { margin: auto; color: var(--pl-ink2); }
+
+.pl__top { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-3); flex: none; }
+.pl__close { width: 48px; height: 48px; margin: 0 0 0 -12px; display: grid; place-items: center; border: 0; border-radius: 50%; background: none; color: var(--pl-ink); cursor: pointer; }
+.pl__meta { display: flex; flex-direction: column; align-items: flex-end; font-size: 15px; color: var(--pl-ink2); padding-top: 2px; }
+.pl__meta strong { font-family: var(--font-display); font-weight: 600; font-size: 18px; color: var(--pl-ink); font-variant-numeric: tabular-nums; }
+
+.pl__segments { display: flex; gap: 4px; margin: var(--space-2) 0 var(--space-5); flex: none; }
+.pl__seg { flex: 1; min-width: 0; height: 4px; border-radius: 2px; background: var(--pl-seg); overflow: hidden; }
+.pl__seg i { display: block; height: 100%; background: var(--pl-ink); }
+.pl__seg--current i { background: var(--pl-seg-cur); }
+.pl--dark .pl__seg--done i { background: var(--color-accent); }
+
+.pl__art { flex: none; height: 150px; border-radius: var(--radius-card); background: var(--pl-panel); display: flex; align-items: center; justify-content: center; padding: var(--space-3); overflow: hidden; }
+.pl__art .drawing { color: var(--pl-ink) !important; display: block; width: 100%; height: 100%; }
+.pl--dark .pl__art .drawing { color: var(--color-accent) !important; }
+.pl__art .drawing svg { width: 100%; height: 100%; display: block; }
+
+.pl__label { margin-top: var(--space-5); text-align: center; font-family: var(--font-display); font-weight: 500; font-size: 22px; letter-spacing: 0.01em; color: var(--pl-ink2); }
+.pl__name { margin-top: 2px; text-align: center; font-family: var(--font-display); font-weight: 600; font-size: 34px; letter-spacing: -0.02em; line-height: 1.12; overflow-wrap: anywhere; }
+
+.pl__ring { position: relative; flex: none; width: min(250px, 100%); aspect-ratio: 1; margin: var(--space-4) auto 0; }
+.pl__ringsvg { width: 100%; height: 100%; display: block; }
+.pl__track { stroke: var(--pl-track); }
+.pl__arc { stroke: var(--pl-ink); }
+.pl--dark .pl__arc { stroke: var(--color-accent); }
+.pl__ringtext { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.pl__time { font-family: var(--font-display); font-weight: 500; font-size: 96px; line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.pl__of { margin-top: var(--space-2); font-size: 18px; color: var(--pl-ink2); font-variant-numeric: tabular-nums; }
+
+.pl__big { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: var(--space-4) 0; }
+.pl__count { font-family: var(--font-display); font-weight: 500; font-size: 150px; line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; text-align: left; }
+.pl__sub { margin-top: var(--space-3); font-size: 18px; color: var(--pl-ink2); }
+.pl__sub b { color: var(--pl-ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.pl--dark .pl__label { text-align: left; color: var(--color-accent); }
+.pl--dark .pl__name { text-align: left; }
+
+.pl__next { flex: none; display: flex; align-items: center; gap: var(--space-4); margin-top: auto; padding: var(--space-3) var(--space-4); min-height: 48px; border-radius: var(--radius-field); background: var(--pl-panel); font-size: 17px; }
+.pl__ring + .pl__next { margin-top: var(--space-5); }
+.pl__next span { color: var(--pl-ink2); font-size: 15px; }
+.pl__next b { font-family: var(--font-display); font-weight: 500; min-width: 0; }
+
+.pl__controls { flex: none; display: flex; align-items: center; justify-content: center; gap: var(--space-7); margin-top: var(--space-5); }
+.pl__round, .pl__main { display: grid; place-items: center; border-radius: 50%; cursor: pointer; }
+.pl__round { width: 64px; height: 64px; border: 1.5px solid var(--pl-ink); background: none; color: var(--pl-ink); }
+.pl__main { width: 84px; height: 84px; border: 0; background: var(--pl-ink); color: var(--pl-bg); }
+.pl--dark .pl__main { background: var(--color-accent); color: var(--color-phase-onPhase); }
+.pl__close:focus-visible, .pl__round:focus-visible, .pl__main:focus-visible, .pl__cta:focus-visible, .pl__link:focus-visible { outline: 3px solid var(--pl-ink); outline-offset: 3px; }
+
+.pl__bottom { flex: none; margin-top: auto; }
+.pl__cta { width: 100%; min-height: 72px; display: flex; align-items: center; justify-content: center; gap: var(--space-3); border: 0; border-radius: var(--radius-pill); background: var(--color-accent); color: var(--color-phase-onPhase); font-family: var(--font-display); font-weight: 600; font-size: 22px; cursor: pointer; }
+.pl__links { display: flex; justify-content: space-between; margin-top: var(--space-3); }
+.pl__link { min-height: 48px; padding: 0 var(--space-3); border: 0; background: none; color: var(--pl-ink2); font-size: 17px; cursor: pointer; }
+
+/* Ready screen */
+.pl__ready { flex: 1; display: flex; flex-direction: column; gap: var(--space-4); }
+.pl__title { font-family: var(--font-display); font-weight: 600; font-size: 34px; letter-spacing: -0.02em; line-height: 1.12; margin-top: var(--space-4); }
+.pl__summary { color: var(--pl-ink2); font-size: 17px; }
+.pl__modes { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); margin-top: var(--space-3); }
+.pl__mode { min-height: 72px; padding: var(--space-3) var(--space-4); border-radius: var(--radius-field); border: 1.5px solid rgba(238, 240, 236, 0.25); background: none; color: var(--pl-ink); text-align: left; cursor: pointer; display: flex; flex-direction: column; gap: 2px; font-size: 15px; }
+.pl__mode strong { font-size: 17px; font-weight: 600; }
+.pl__mode span { color: var(--pl-ink2); }
+.pl__mode[aria-checked='true'] { border-color: var(--color-accent); background: rgba(169, 200, 160, 0.12); }
+
+/* Cue pulse: a brief flash over the whole screen. */
+.pl__pulse { position: absolute; inset: 0; pointer-events: none; z-index: 5; opacity: 0; background: rgba(255, 255, 255, 0.55); animation-name: pl-pulse; animation-timing-function: ease-out; animation-fill-mode: forwards; }
+.pl__pulse--beep { background: rgba(255, 255, 255, 0.35); }
+.pl__pulse--rest { background: rgba(255, 255, 255, 0.3); }
+.pl__pulse--bell { background: rgba(255, 255, 255, 0.4); }
+.pl--dark .pl__pulse { background: rgba(169, 200, 160, 0.4); }
+@keyframes pl-pulse { 0% { opacity: 1; } 100% { opacity: 0; } }
+/* Reduced motion: no fading, a brief hard colour change instead. */
+@media (prefers-reduced-motion: reduce) {
+  .pl { transition: none; }
+  .pl__pulse { animation-name: pl-pulse-still; animation-timing-function: steps(1, end); animation-fill-mode: none; }
+  @keyframes pl-pulse-still { 0% { opacity: 1; } 100% { opacity: 1; } }
+}
