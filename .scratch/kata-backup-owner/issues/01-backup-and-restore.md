@@ -4,17 +4,26 @@
 
 **Blocked by:** None (can start immediately)
 
-Status: ready-for-agent
+Status: done
 
-- [ ] Export produces one JSON document with a format version, an export timestamp and every Dexie table's contents (enumerated from the database, not a hand-kept list)
-- [ ] Share sheet is used when available, otherwise a file download; the last-backup time is recorded locally only when export succeeds
-- [ ] Import validates the whole document first; a truncated, non-JSON, wrong-shape or future-version file is rejected with a clear message and no data change (tested)
-- [ ] Import replaces all stores in one transaction; a failure part-way leaves the old data intact (tested)
-- [ ] Confirmation step warns that everything on this device is overwritten before import runs
-- [ ] Round trip: export, wipe, import restores every store identically (tested), including sessions, activities, routines with custom steps, settings and exercise links
-- [ ] A backup in an earlier format version is accepted (tested with a fixture)
-- [ ] "Last backup: N days ago" in Settings; nudge in Settings and History at more than 14 days or never (tested at 13, 14, 15 days and never); the nudge disappears after a backup
-- [ ] Persistent storage status (granted or not) is shown in Settings
-- [ ] A visual pulse on/off setting exists, persists, is included in backups and is honoured by the player (with sound and vibration off the pulse still works by default)
-- [ ] Layout checked headless at 400 px wide in light and dark
-- [ ] Build and tests pass
+- [x] Export produces one JSON document with a format version, an export timestamp and every Dexie table's contents (enumerated from the database, not a hand-kept list)
+- [x] Share sheet is used when available, otherwise a file download; the last-backup time is recorded locally only when export succeeds
+- [x] Import validates the whole document first; a truncated, non-JSON, wrong-shape or future-version file is rejected with a clear message and no data change (tested)
+- [x] Import replaces all stores in one transaction; a failure part-way leaves the old data intact (tested)
+- [x] Confirmation step warns that everything on this device is overwritten before import runs
+- [x] Round trip: export, wipe, import restores every store identically (tested), including sessions, activities, routines with custom steps, settings and exercise links
+- [x] A backup in an earlier format version is accepted (tested with a fixture)
+- [x] "Last backup: N days ago" in Settings; nudge in Settings and History at more than 14 days or never (tested at 13, 14, 15 days and never); the nudge disappears after a backup
+- [x] Persistent storage status (granted or not) is shown in Settings
+- [x] A visual pulse on/off setting exists, persists, is included in backups and is honoured by the player (with sound and vibration off the pulse still works by default)
+- [x] Layout checked headless at 400 px wide in light and dark
+- [x] Build and tests pass
+
+## Notes
+
+- Code: `app/src/backup/` (backup.ts data boundary, nudge.ts, file.ts, BackupNudge, useLastBackup); UI in Settings.tsx (Backup section) and a one-line `<BackupNudge />` in History's header.
+- File shape: `{ app: 'kata', formatVersion: 1, exportedAt, tables: { <every db.tables name>: rows[] } }`. Validation checks shape, version, known tables and each row's primary key before the single `rw` transaction (clear + bulkPut for every table; tables missing from an older file are emptied).
+- Last backup time lives in localStorage (`kata.lastBackupAt`), not the settings table, so it is device-local and not part of a backup. After a restore it is set to the file's export time. Persistent storage: Settings re-calls `requestPersistentStorage()` and shows the result.
+- Visual pulse: new `pulse` setting (default on), honoured in PlayerRun independent of sound/vibration.
+- Verified: npm test (187 pass), npm run build, headless Playwright at 400px light and dark (seed, export download, wipe, bad/future file rejected, import restores, nudge shows and clears).
+- Device test pending: real share sheet (navigator.share with a file) on the phone, and persistent-storage grant in the installed PWA.

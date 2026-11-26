@@ -6,6 +6,7 @@ import { activityMonthTotals, canGoNext, monthGrid, monthLabel, monthOf, formatD
 import { currentStreak, dayKey, monthMarkers, monthStats } from '../history/streak'
 import { BackIcon, PlusIcon, SettingsIcon } from '../ui/Icons'
 import { Empty } from '../ui/Empty'
+import { BackupNudge } from '../backup/BackupNudge'
 import './history.css'
 
 /** Everything History shows comes from here. */
@@ -23,6 +24,7 @@ function useHistoryData(): { sessions: SessionRow[]; activities: ActivityRow[] }
 
 function HistoryHeader() {
   return (
+    <>
     <div className="topbar">
       <h1 className="screen-title">History</h1>
       <Link to="/log" className="hlog">
@@ -32,6 +34,8 @@ function HistoryHeader() {
         <SettingsIcon />
       </Link>
     </div>
+    <BackupNudge />
+    </>
   )
 }
 

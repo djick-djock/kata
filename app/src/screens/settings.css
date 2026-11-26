@@ -21,3 +21,7 @@
 .slider { width: 100%; height: 32px; accent-color: var(--color-accentText); cursor: pointer; }
 .slider:disabled { opacity: 0.45; cursor: default; }
 @media (prefers-reduced-motion: reduce) { .switch, .switch::after { transition: none; } }
+
+.nudge { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-2) var(--space-4); margin: 0 0 var(--space-3); background: var(--color-accentPale); border-radius: var(--radius-card); color: var(--color-text); font-size: 15px; }
+.setnote--error { color: var(--color-danger); }
+.setgroup > .btn { margin-top: var(--space-1); }

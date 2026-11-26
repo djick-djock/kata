@@ -31,6 +31,6 @@ describe('settings', () => {
     await saveSetting('volume', 0.2, first)
     first.close()
     const again = new KataDB('settings-reopen')
-    expect(await loadSettings(again)).toEqual({ sound: false, vibration: false, volume: 0.2, switchPauseSeconds: 9 })
+    expect(await loadSettings(again)).toEqual({ sound: false, vibration: false, pulse: true, volume: 0.2, switchPauseSeconds: 9 })
   })
 })

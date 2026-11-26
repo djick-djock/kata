@@ -103,7 +103,7 @@ export function PlayerRun({ routine, mode, settings, cuePlayer, onFinished, now 
           if (s.vibration) vibrate(vibrationFor(cue))
         }
         const last = u.cues[u.cues.length - 1]
-        setPulse({ ...pulseFor(last), id: ++pulseId.current })
+        if (s.pulse !== false) setPulse({ ...pulseFor(last), id: ++pulseId.current })
       }
       if ((u.state.status === 'finished' || u.state.status === 'stopped') && u.state.result && !reported.current) {
         reported.current = true

@@ -4,19 +4,21 @@ import { db, type KataDB, type SettingRow } from './db'
 
 /**
  * Player-facing settings, stored as key/value rows in the Dexie `settings` table
- * (keys: sound, vibration, volume, switchPauseSeconds). Missing or invalid rows fall back to the
+ * (keys: sound, vibration, pulse, volume, switchPauseSeconds). Missing or invalid rows fall back to the
  * defaults, so the player works before the settings screen (ticket 06) writes anything.
  */
 export interface PlayerSettings {
   sound: boolean
   vibration: boolean
+  /** Visual flash on cues. */
+  pulse: boolean
   /** 0..1 */
   volume: number
   /** Pause between the left and right part of a per-side step, seconds. */
   switchPauseSeconds: number
 }
 
-export const DEFAULT_SETTINGS: PlayerSettings = { sound: true, vibration: true, volume: 0.7, switchPauseSeconds: 5 }
+export const DEFAULT_SETTINGS: PlayerSettings = { sound: true, vibration: true, pulse: true, volume: 0.7, switchPauseSeconds: 5 }
 
 export type SettingKey = keyof PlayerSettings
 
@@ -30,6 +32,7 @@ export function parseSettings(rows: readonly SettingRow[]): PlayerSettings {
   return {
     sound: bool('sound', DEFAULT_SETTINGS.sound),
     vibration: bool('vibration', DEFAULT_SETTINGS.vibration),
+    pulse: bool('pulse', DEFAULT_SETTINGS.pulse),
     volume: num(map.get('volume'), DEFAULT_SETTINGS.volume, 0, 1),
     switchPauseSeconds: Math.round(num(map.get('switchPauseSeconds'), DEFAULT_SETTINGS.switchPauseSeconds, 0, 120)),
   }
