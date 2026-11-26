@@ -4,49 +4,53 @@ Tick `[x]` to keep, change to `[ ]` to drop. Add anything missing at the bottom.
 
 Equipment assumed: bodyweight, doorframe pull-up bar, parallel bars, resistance bands, one small kettlebell.
 
-## A. From the existing catalog (30)
+## A. From the existing catalog (29)
 
-### Strength — push (5)
+Tags: `warm-up` = offered first when adding a step to a warm-up block. Indented lines are variants, picked when the exercise is added to a routine (they share the parent's drawing unless noted).
+
+### Strength — push (3)
 - [x] `push-up` Push-up
-- [x] `knee-push-up` Knee push-up
-- [x] `diamond-push-up` Diamond push-up
+  - variants: standard, knee
 - [x] `pike-push-up` Pike push-up
 - [x] `parallel-bar-dip` Parallel bar dip
 
 ### Strength — pull (5)
 - [x] `dead-hang` Dead hang
 - [x] `scapular-pull-up` Scapular pull-up
-- [x] `band-assisted-pull-up` Band-assisted pull-up
 - [x] `pull-up` Pull-up
+  - variants: strict, chin-up
 - [x] `band-row` Band row
+- [x] `band-face-pull` Band face pull
 
-### Strength — legs (6)
-- [x] `bodyweight-squat` Bodyweight squat
-- [x] `goblet-squat` Goblet squat
+### Strength — legs (5)
+- [x] `squat` Squat `warm-up`
+  - variants: bodyweight, goblet (kettlebell)
 - [x] `reverse-lunge` Reverse lunge
 - [x] `lateral-lunge` Lateral lunge
 - [x] `glute-bridge` Glute bridge
 - [x] `wall-sit` Wall sit
 
-### Strength — core (5)
+### Strength — core (6)
 - [x] `plank` Plank
 - [x] `side-plank` Side plank
 - [x] `dead-bug` Dead bug
 - [x] `hanging-knee-raise` Hanging knee raise
 - [x] `hollow-body-hold` Hollow body hold
+- [x] `crunch` Crunch
 
 ### HIIT / full body (4)
 - [x] `burpee` Burpee
-- [x] `mountain-climber` Mountain climber
-- [x] `jumping-jack` Jumping jack
+- [x] `mountain-climber` Mountain climber `warm-up`
+- [x] `jumping-jack` Jumping jack `warm-up`
 - [x] `kettlebell-swing` Kettlebell swing
 
-### Mobility (5)
-- [x] `cat-cow` Cat-cow
+### Mobility (6)
+- [x] `cat-cow` Cat-cow `warm-up`
 - [x] `child-pose` Child's pose
 - [x] `downward-dog` Downward dog
 - [x] `hip-flexor-stretch` Half-kneeling hip flexor stretch
 - [x] `thoracic-rotation` Quadruped thoracic rotation
+- [x] `arm-circles` Arm circles `warm-up`
 
 ## B. New stretch exercises to create (16, each needs a drawing)
 
@@ -78,15 +82,21 @@ Time-based, no body drawing, calm glyph, soft bell cue only.
 - [x] 4-7-8 breathing
 - [x] Body scan
 
+## D. New warm-up exercises to create (3, each needs a drawing)
+
+Time-based, category Mobility, tagged `warm-up` (can also be used at the end of a routine). Names are working names.
+
+- [x] High knees (marching in place, knees high)
+- [x] Butt kicks (heels to bum)
+- [x] Marching arm raises (walking in place, arms overhead)
+
 ## Counts
 
-30 existing + 16 new stretches + 4 meditation = **50** starter exercises, of which **20** need new drawings. Category split: Strength 21, HIIT 4, Mobility 5 plus the stretches (Stretch 16), Meditation 4.
+29 existing + 16 stretches + 4 meditation + 3 warm-up = **52** starter exercises, of which **23** need new drawings. Dropped by you for now: diamond push-up, band-assisted pull-up (easy to add back as variants).
 
 ## Open notes
 
 - French names exist for section A in the catalog; sections B and C need French names added when French is built.
 - Which of the 20 new drawings to generate with the Python generator versus through Claude requests is decided at build time.
 - Add or remove anything here before the routines and player slice starts.
-
-## Your changes
--
+- The library ships inside the app (users cannot add exercises); they can add custom steps (name plus time or reps) inside a routine.

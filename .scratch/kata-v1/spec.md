@@ -31,7 +31,7 @@ Kata is a personal installable web app (PWA). I build routines out of exercises 
 
 **Content**
 - Five fixed categories: Strength, HIIT, Stretch, Mobility, Meditation. Changing the set means changing the code in v1. Push, pull, legs and core become optional tags used for filtering.
-- The 84-exercise catalog is an archive. The starter library is a shortlist the user validates (see the starter shortlist document in the exercises docs). Starter stretch, mobility and meditation exercises are added.
+- The exercise library is bundled with the app as read-only data (always present, not part of user storage); users cannot add or edit library exercises but can add custom steps inside routines by typing a name and time or reps. Exercises may have variants (pull-up: strict, chin-up, band-assisted). A warm-up tag orders the picker, and routine blocks can be flagged warm-up. The 84-exercise catalog is an archive. The starter library is a shortlist the user validates (see the starter shortlist document in the exercises docs). Starter stretch, mobility and meditation exercises are added.
 - Drawings use the current text colour plus accent variables so they work in light and dark themes. Only starter exercises get regenerated drawings.
 
 **Cues**

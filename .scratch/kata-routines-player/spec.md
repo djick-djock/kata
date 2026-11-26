@@ -20,10 +20,10 @@ An exercise library with drawings, a routine builder (blocks, steps, time or rep
 5. As a user, I want to open an exercise to see its drawing, name, categories, default measure, how-to steps and tips, so that I do it correctly.
 6. As a user, I want to see an exercise's default measure including "per side", so that I know what to expect.
 7. As a user, I want to attach a video link (Instagram or YouTube) to an exercise and open it externally, so that I can keep a reference demo.
-8. As a user, I want to create my own exercise with name, categories, default measure, per-side flag, how-to and tips, so that I can add things I see elsewhere.
-9. As a user, I want to replace an exercise's drawing with my own photo or image, so that I can personalise it.
-10. As a user, I want exercises without a drawing to show a clean placeholder, so that new exercises still look right.
-11. As a user, I want to hide or delete starter exercises I don't use, so that my library stays tidy.
+8. As a user, I want to add a custom step to a routine by typing a name and a time or reps value (and optionally per side), so that I can include something that is not in the exercise library without editing the library.
+9. As a user, I want an exercise with variants (for example pull-up: strict, chin-up, band-assisted; squat: bodyweight, goblet with kettlebell) to ask me which variant when I add it to a routine, so that one exercise covers its versions and the library stays short.
+10. As a user, I want exercises and custom steps without a drawing to show a clean placeholder, so that every step still looks right.
+11. As a user, I want exercises suited to warming up (for example jumping jack, mountain climber, high knees) to be offered first when I add a step to a warm-up block, so that building a warm-up is quick while any exercise can still be chosen.
 12. As a user, I want to add an exercise to a routine from its detail screen, so that the flow from "I found a stretch" to "it is in my morning routine" is short.
 13. As a user, I want a list of my routines with search and category filter, so that I find the right one.
 14. As a user, I want each routine card to show its drawing, name, category, total length and when I last did it, so that I can choose at a glance.
@@ -75,10 +75,11 @@ An exercise library with drawings, a routine builder (blocks, steps, time or rep
 - Cue rules (ticks on the last 5 seconds of eligible steps, thresholds of 8 s for steps and 30 s for rests, go and rest tones, meditation bell only, end-of-routine bell) live in the engine as data-driven rules, so they can be tested without sound.
 - **Cue output** (separate thin module): turns engine cues into synthesized tones, vibration and a visual pulse according to user toggles and volume. Tones are generated, not audio files.
 - **Wake lock** handled in a small helper that requests on session start and re-acquires on returning to the app.
-- **Routine and exercise store**: Dexie-backed repositories for exercises, routines, sessions. Exercises carry: id, per-language name, how-to and tips maps with English fallback, categories (from the fixed set of five), optional tags, default measure (time or reps), per-side flag, optional video link, and a drawing reference or a user-supplied image.
+- **Exercise catalog**: the library ships inside the app as read-only data and is always present, even if the browser cache or site data is cleared. Users cannot add, edit, hide or delete library exercises. Exercises carry: id, per-language name, how-to and tips maps with English fallback, one category (from the fixed set of five), optional tags (push, pull, legs, core, and a warm-up suitability tag; cool-down likewise), default measure (time or reps), per-side flag, an optional list of variants, and a drawing reference. A variant has a label, an optional note (for example "kettlebell") and optionally its own drawing, otherwise it uses the parent drawing; history counts the parent exercise.
+- **Routine store**: Dexie-backed repositories for routines, sessions and settings, plus a small per-user table for personal additions to catalog exercises (such as the video link). Nothing from the catalog is copied into user storage.
 - Categories are a fixed set of five defined in code, each with a colour used for week circles and cards. Changing them requires a code change in v1.
-- Routine model: routine with category and pinned flag, blocks (name, repeat count, warm-up flag), steps (exercise, measure type and value, rest after seconds).
-- Starter library is seeded on first run from the validated shortlist. Seeding is idempotent and never overwrites user edits.
+- Routine model: routine with category and pinned flag, blocks (name, repeat count, warm-up flag, which also serves as the Warm-up section), steps. A step is either a catalog exercise (with a chosen variant if it has any) or a custom step (typed name, no drawing, no category of its own), plus measure type and value, per-side flag and rest after seconds. The block warm-up flag and the exercise warm-up tag are separate: the flag changes how the block plays, the tag only orders the picker.
+- The catalog is the validated starter shortlist. Because it is app data and not user data, updating the app updates the library for everyone; routines reference catalog exercises by stable id, and removing a catalog exercise in a later version must be handled (the step falls back to a custom step with its saved name).
 - The routine templates are pre-set timing patterns that create a routine with empty step slots for the user to fill.
 - Drawings use the current text colour plus accent variables so they work in both themes.
 - The UI follows the existing design system, screens and tokens. Navigation is a four-tab bottom bar (Home, Routines, Exercises, History) with pushed screens for builder, exercise detail, new routine sheet, player and session complete.
@@ -88,7 +89,7 @@ An exercise library with drawings, a routine builder (blocks, steps, time or rep
 
 - A good test drives the engine through public events with a fake clock and asserts on observable state and cues, never on internal structure.
 - **Session engine (primary seam):** flattening of blocks and repeats; per-side splitting and switch pause; reps step with Done; rest after each step including zero rest; warm-up handling; pause and resume preserving elapsed time; skip and previous; early stop producing a partial result with percent; tick thresholds (8 s step minimum, 30 s rest minimum); go tone after rest; meditation bell-only rule; accuracy after a large clock jump (simulated backgrounding).
-- **Data boundary (secondary seam):** routine save and load, copy routine leaves original unchanged, idempotent starter seeding, deleting an exercise used by a routine is handled predictably, language fallback to English.
+- **Data boundary (secondary seam):** routine save and load, copy routine leaves original unchanged, catalog available with empty storage, routine with a custom step plays and saves, variant choice stored and counted under the parent exercise, step referencing a removed catalog id falls back to its saved name, language fallback to English.
 - Screens are checked manually on the device against the design screenshots.
 - Prior art: none yet; these tests establish the pattern for later slices.
 

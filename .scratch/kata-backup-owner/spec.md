@@ -5,7 +5,7 @@ Blocked by: kata-routines-player
 
 ## Problem Statement
 
-All my data lives on my device. If I clear site data, uninstall, or switch phone, I lose everything. Separately, I want to add new exercises with Claude-generated drawings, but only for me: my sisters and friends shouldn't see that feature.
+All my data lives on my device. If I clear site data, uninstall, or switch phone, I lose everything. Separately, I want to request Claude-generated drawings for exercises, but only for me: my sisters and friends shouldn't see that feature.
 
 ## Solution
 
@@ -19,7 +19,7 @@ A Settings screen with cue and language-ready preferences, a manual backup (expo
 4. As a user, I want to set the switch pause length for per-side exercises, so that it matches my pace.
 5. As a user, I want to export all my data to a single JSON file, so that I can back it up.
 6. As a user, I want to save that file through my phone's share sheet to Drive or elsewhere, so that I choose where it goes.
-7. As a user, I want the backup to include routines, exercises (including my own and their drawings), sessions, activities and settings, so that nothing is lost.
+7. As a user, I want the backup to include routines, routines (including custom steps), sessions, activities and settings, so that nothing is lost.
 8. As a user, I want to import a backup file, so that I can restore my data or move to a new device.
 9. As a user, I want import to clearly warn me that it overwrites everything on this device and require confirmation, so that I don't lose data by accident.
 10. As a user, I want a damaged or wrong file to be rejected with a clear message and my existing data left untouched, so that a bad file can't destroy anything.
@@ -32,10 +32,10 @@ A Settings screen with cue and language-ready preferences, a manual backup (expo
 17. As an owner, I want a "Request drawing" action on an exercise, so that I can ask Claude for an illustration.
 18. As an owner, I want that action to copy a ready-made prompt containing the exercise name, how-to steps, per-side or measure info, and the drawing style rules, so that I can paste it into Claude directly.
 19. As an owner, I want the prompt to require an SVG that uses the current text colour and accent variables with the standard canvas size, so that the result fits both themes and the existing drawings.
-20. As an owner, I want to paste or import the returned SVG into the exercise, so that the drawing is attached.
+20. As an owner, I want to paste or import the returned SVG as a local drawing for that exercise on my device, so that I can see it in the app before it is added to the shipped library.
 21. As an owner, I want the SVG validated and sanitised on import (no scripts, no external references), so that a pasted file can't harm the app.
 22. As an owner, I want a preview of the imported drawing in light and dark themes before saving, so that I catch bad drawings.
-23. As an owner, I want to replace or remove an exercise's drawing later, so that I can iterate.
+23. As an owner, I want to replace or remove my local drawing later, so that I can iterate.
 24. As a regular user (a friend or family member), I want none of the owner features visible, so that the app stays simple.
 25. As a developer, I want the request mechanism to be one small module taking an app id, request type and payload, so that I can reuse it in other apps later.
 26. As a developer, I want clipboard to be the only transport in v1 and the module to allow other transports later, so that a future Raspberry Pi service can be added without touching screens.
