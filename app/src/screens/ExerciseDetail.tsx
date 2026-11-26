@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { drawingFor, findExercise, localized } from '../catalog'
 import { getExerciseLink, normaliseLink, removeExerciseLink, setExerciseLink } from '../data/exercise-links'
+import { AddToRoutine } from './AddToRoutine'
 import { Drawing } from '../ui/Drawing'
 import { BackIcon, LinkIcon, PlusIcon } from '../ui/Icons'
 import { CATEGORY_LABEL, formatMeasure } from './exercise-format'
@@ -11,6 +12,8 @@ export function ExerciseDetail() {
   const { id = '' } = useParams()
   const exercise = findExercise(id)
   const [variantId, setVariantId] = useState<string | undefined>(undefined)
+  const [adding, setAdding] = useState(false)
+  const [added, setAdded] = useState<{ id: string; name: string } | null>(null)
 
   if (!exercise) {
     return (
@@ -62,6 +65,20 @@ export function ExerciseDetail() {
         <p className="tips">{localized(exercise.tips)}</p>
         <VideoLink exerciseId={exercise.id} />
       </div>
+      {added && (
+        <p className="toast" role="status">Added to {added.name}. <Link to={`/routines/${added.id}`}>Open</Link></p>
+      )}
+      <div className="detail__cta">
+        <button type="button" className="btn btn--primary btn--block btn--tall" onClick={() => { setAdded(null); setAdding(true) }}>Add to a routine</button>
+      </div>
+      {adding && (
+        <AddToRoutine
+          exerciseId={exercise.id}
+          variantId={variants.length ? (variantId ?? variants[0].id) : undefined}
+          onClose={() => setAdding(false)}
+          onAdded={(r) => { setAdding(false); setAdded({ id: r.id, name: r.name }) }}
+        />
+      )}
     </div>
   )
 }

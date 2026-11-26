@@ -4,16 +4,26 @@
 
 **Blocked by:** 02, 03
 
-Status: ready-for-agent
+Status: done
 
-- [ ] Routine list with search, category filter and card info; a Play button exists (the player arrives in ticket 05)
-- [ ] Create from blank, template and copy; copy leaves the original unchanged (tested)
-- [ ] Blocks with name, repeat count, warm-up flag and collapse; steps with exercise or custom step, variant choice, measure, per-side and rest after
-- [ ] Add-exercise picker works from the builder and "add to routine" works from the exercise detail screen
-- [ ] Warm-up-tagged exercises are listed first in a warm-up block
-- [ ] Drag to reorder steps works on touch
-- [ ] Total duration is computed through the engine's flattening, approximate mark shown for reps
-- [ ] Only one routine can be pinned
-- [ ] Routines persist across reloads; round-trip save and load tested; a missing catalog id falls back to the saved name (tested)
-- [ ] Screens match the design (routines list, new routine sheet, builder) at 400 px wide in both themes
-- [ ] Build and tests pass
+- [x] Routine list with search, category filter and card info; a Play button exists (the player arrives in ticket 05)
+- [x] Create from blank, template and copy; copy leaves the original unchanged (tested)
+- [x] Blocks with name, repeat count, warm-up flag and collapse; steps with exercise or custom step, variant choice, measure, per-side and rest after
+- [x] Add-exercise picker works from the builder and "add to routine" works from the exercise detail screen
+- [x] Warm-up-tagged exercises are listed first in a warm-up block
+- [x] Drag to reorder steps works on touch
+- [x] Total duration is computed through the engine's flattening, approximate mark shown for reps
+- [x] Only one routine can be pinned
+- [x] Routines persist across reloads; round-trip save and load tested; a missing catalog id falls back to the saved name (tested)
+- [x] Screens match the design (routines list, new routine sheet, builder) at 400 px wide in both themes
+- [x] Build and tests pass
+
+## Notes
+
+- Data: Dexie v3 `routines` table, `app/src/data/routines.ts` (save/load/list/delete/copy/setPinned/getPinnedRoutine/`markRoutineDone` hook for sessions). Pure helpers and templates in `app/src/routines/model.ts`; tests in `data/routines.test.ts` and `routines/format.test.ts`.
+- Each step stores its display name, kind and measure; on load it is re-resolved against the catalog (missing id becomes a custom step with the saved name).
+- Templates create one block with repeat and timing defaults (applied to each exercise added to it).
+- Drag to reorder is a hand-written pointer handler (`ui/useDragReorder.ts`, grip handle with touch-action none); Move up/down in the step editor is the non-drag fallback. Verified with headless Playwright at 400 px, light and dark (mouse pointer events); real touch drag: device test pending. No autoscroll while dragging near the screen edge.
+- Routes: `/routines/:id` builder, `/play/:routineId` is a stub for ticket 05 (`?mode=step` for step by step).
+- Builder saves on every change; Save and Back just leave.
+- Dark theme values are still the derived ones from theme.css.
