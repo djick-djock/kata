@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
+import { ExerciseDetail } from './screens/ExerciseDetail'
 import { Exercises } from './screens/Exercises'
 import { History } from './screens/History'
 import { Home } from './screens/Home'
@@ -15,6 +16,7 @@ export function App() {
         <Route path="exercises" element={<Exercises />} />
         <Route path="history" element={<History />} />
       </Route>
+      <Route path="exercises/:id" element={<ExerciseDetail />} />
       <Route path="settings" element={<Settings />} />
       <Route path="*" element={<Shell />}>
         <Route path="*" element={<Home />} />

@@ -4,15 +4,15 @@
 
 **Blocked by:** 01
 
-Status: ready-for-agent
+Status: done
 
-- [ ] Flattening: block repeats, per-side splitting with adjustable switch pause (default 5 s), rests including zero, warm-up marking, custom steps; unit-tested
-- [ ] Reps step runs until Done, tracks elapsed time, Done moves to the following rest
-- [ ] Play all and Step by step behave as described
-- [ ] Pause and resume preserve elapsed time; skip and previous work across steps, rests and block boundaries
-- [ ] Early stop gives a partial result with steps done, rounds and percent completed
-- [ ] Cue rules as above, including thresholds of 8 s and 30 s, the go tone, the rest tone, the meditation bell-only rule and the end bell; unit-tested without sound
-- [ ] A large simulated clock jump (backgrounding) leaves state correct and emits only sensible cues
-- [ ] Routine time left and progress per block are correct, including per-side parts
-- [ ] Types for routine, block and step are exported for use by the builder
-- [ ] Build and tests pass
+- [x] Flattening: block repeats, per-side splitting with adjustable switch pause (default 5 s), rests including zero, warm-up marking, custom steps; unit-tested - routine.ts flattenRoutine; routine.test.ts
+- [x] Reps step runs until Done, tracks elapsed time, Done moves to the following rest - reps item has durationMs null, repsDone moves on, elapsed tracked
+- [x] Play all and Step by step behave as described - play-all and step-by-step (first step starts on start(); later steps wait, start()/resume() begins them)
+- [x] Pause and resume preserve elapsed time; skip and previous work across steps, rests and block boundaries - pause/resume keep elapsed; skip/previous are step-level and cross rests and blocks
+- [x] Early stop gives a partial result with steps done, rounds and percent completed - stop() returns result with stepsDone, roundsDone, elapsedMs, percent
+- [x] Cue rules as above, including thresholds of 8 s and 30 s, the go tone, the rest tone, the meditation bell-only rule and the end bell; unit-tested without sound - cue rules in session.ts with tests; extra: go tone also after a switch pause
+- [x] A large simulated clock jump (backgrounding) leaves state correct and emits only sensible cues - clock jump tests: latest tick only, stale transition cues dropped (3 s)
+- [x] Routine time left and progress per block are correct, including per-side parts - routineRemainingMs and block progress/segments, per-side included
+- [x] Types for routine, block and step are exported for use by the builder - exported from src/engine/index.ts
+- [x] Build and tests pass - npm test (74 pass) and npm run build pass

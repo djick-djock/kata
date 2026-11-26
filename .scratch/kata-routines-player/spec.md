@@ -1,5 +1,4 @@
-Status: ready-for-agent
-Blocked by: kata-spike passing
+Status: in-progress
 
 # Kata — routines, exercises and player
 
