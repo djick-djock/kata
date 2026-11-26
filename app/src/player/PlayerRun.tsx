@@ -15,6 +15,8 @@ export interface FinishedSession {
   routineId?: string
   routineName: string
   mode: SessionMode
+  startedAt: number
+  finishedAt: number
 }
 
 /** Interval between engine updates; timing itself derives from the clock, never from this. */
@@ -82,6 +84,7 @@ export function PlayerRun({ routine, mode, settings, cuePlayer, onFinished, now 
   const settingsRef = useRef(settings)
   const finishedRef = useRef(onFinished)
   const reported = useRef(false)
+  const startedAt = useRef(now())
   const pulseId = useRef(0)
   useEffect(() => {
     settingsRef.current = settings
@@ -104,7 +107,7 @@ export function PlayerRun({ routine, mode, settings, cuePlayer, onFinished, now 
       }
       if ((u.state.status === 'finished' || u.state.status === 'stopped') && u.state.result && !reported.current) {
         reported.current = true
-        finishedRef.current({ result: u.state.result, routineId: routine.id, routineName: routine.name, mode })
+        finishedRef.current({ result: u.state.result, routineId: routine.id, routineName: routine.name, mode, startedAt: startedAt.current, finishedAt: now() })
       }
     })
     session.start()

@@ -4,12 +4,20 @@
 
 **Blocked by:** 05
 
-Status: ready-for-agent
+Status: done
 
-- [ ] Finished and early-stopped sessions are written to a sessions store with the fields above; round-trip tested
-- [ ] Completion screen matches the design and the optional feel rating is saved with the session
-- [ ] Home shows the pinned routine and a Quick start list; Start opens the player in one tap
-- [ ] Routine cards show "last done" from the sessions store
-- [ ] Settings: switch pause, sound on/off, vibration on/off, volume; they persist and take effect in the next session
-- [ ] Layout matches the design at 400 px wide in both themes
-- [ ] Build and tests pass
+- [x] Finished and early-stopped sessions are written to a sessions store with the fields above; round-trip tested
+- [x] Completion screen matches the design and the optional feel rating is saved with the session
+- [x] Home shows the pinned routine and a Quick start list; Start opens the player in one tap
+- [x] Routine cards show "last done" from the sessions store
+- [x] Settings: switch pause, sound on/off, vibration on/off, volume; they persist and take effect in the next session
+- [x] Layout matches the design at 400 px wide in both themes
+- [x] Build and tests pass
+
+## Notes
+
+- Sessions: Dexie v4 table `sessions` (indexes `id, startedAt, routineId, [routineId+startedAt]`), `src/data/sessions.ts` (saveSession, getSession, setSessionFeel, listSessions, sessionsBetween, sessionsForRoutine, deleteSession). Row has id, startedAt, finishedAt, routineId, routineName, category, mode, durationSeconds, stepsDone/Total, roundsDone/Total, percent, completed, feel?.
+- Saved once: Play creates the id, saves, then navigates to /session-complete with `{ sessionId }`; saving an existing id is a no-op, the completion screen only reads. `markRoutineDone` runs on a new save with at least one step done.
+- Settings: switch pause stepper (0-60 s), sound and vibration switches, volume slider; changes apply from the next session. The app version comes from package.json via `__APP_VERSION__`. No backup section yet (later slice adds it).
+- Home omits the week card and "Log an activity" (other slices).
+- Verified headless at 400 px, light and dark: full run, completion, partial (stop early), saved row, Home, "Last: Today", settings persisting across reload, sound off gives no oscillators. Device test pending.

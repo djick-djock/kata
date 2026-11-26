@@ -2,17 +2,18 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { createCuePlayer, type CuePlayer } from '../audio/cue-player'
 import { loadRoutine } from '../data/routines'
+import { saveSession } from '../data/sessions'
 import type { KataRoutine } from '../data/routine-types'
 import { useSettings } from '../data/settings'
 import type { SessionMode } from '../engine'
 import { PlayerRun, type FinishedSession } from '../player/PlayerRun'
 import { formatLength } from '../routines/format'
-import { routineTotal, stepCount } from '../routines/model'
+import { routineTotal, stepCount, uid } from '../routines/model'
 import '../player/player.css'
 import '../screens/exercises.css'
 import '../screens/routines.css'
 
-/** Where a finished or stopped session goes. Ticket 06 builds the screen at this route and saves the session there. */
+/** Where a finished or stopped session goes (it is saved first; the screen only reads it). */
 export const SESSION_COMPLETE_PATH = '/session-complete'
 
 /** Player route: a ready screen (mode choice, and the user gesture that unlocks audio), then the session. */
@@ -70,6 +71,11 @@ export function Play() {
     )
   }
 
-  const onFinished = (done: FinishedSession) => navigate(SESSION_COMPLETE_PATH, { replace: true, state: done })
+  const onFinished = (done: FinishedSession) => {
+    // The id is fixed before saving, and saving the same id twice is a no-op, so this is written exactly once.
+    const sessionId = uid()
+    const go = () => navigate(SESSION_COMPLETE_PATH, { replace: true, state: { sessionId } })
+    void saveSession({ ...done, id: sessionId, category: routine.category }).then(go, go)
+  }
   return <PlayerRun routine={routine} mode={mode} settings={settings} cuePlayer={cuePlayer.current!} onFinished={onFinished} />
 }
