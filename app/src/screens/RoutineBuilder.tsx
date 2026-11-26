@@ -4,7 +4,7 @@ import { CATEGORIES, drawingFor, findExercise, type Category } from '../catalog'
 import { deleteRoutine, loadRoutine, saveRoutine } from '../data/routines'
 import type { KataRoutine, RoutineBlock, RoutineStep } from '../data/routine-types'
 import { formatTotal } from '../routines/format'
-import { blockTotal, catalogStep, customStep, infoParam, moveItem, newBlock, nextBlockName, parseInfoParam, routineTotal, stepName, type InfoTarget } from '../routines/model'
+import { blockTotal, catalogStep, customStep, duplicateBlock, infoParam, moveItem, newBlock, nextBlockName, parseInfoParam, routineTotal, stepName, type InfoTarget } from '../routines/model'
 import { Drawing } from '../ui/Drawing'
 import { BackIcon, ChevronDownIcon, GripIcon, InfoIcon, PinIcon, PlayIcon, PlusIcon, RepeatIcon, StepByStepIcon, TrashIcon } from '../ui/Icons'
 import { Sheet } from '../ui/Sheet'
@@ -107,10 +107,15 @@ export function RoutineBuilder() {
           {routine.blocks.length} {routine.blocks.length === 1 ? 'block' : 'blocks'} · total <strong data-testid="total">{formatTotal(total.seconds, total.approximate)}</strong>{total.approximate ? ' · reps add time' : ''}
         </p>
 
-        {routine.blocks.map((block) => (
+        {routine.blocks.map((block, index) => (
           <BlockCard
             key={block.id}
             block={block}
+            canMoveUp={index > 0}
+            canMoveDown={index < routine.blocks.length - 1}
+            onMove={(to) => change((r) => ({ ...r, blocks: moveItem(r.blocks, index, to) }))}
+            onDuplicate={() => change((r) => { const i = r.blocks.findIndex((b) => b.id === block.id); const copy = duplicateBlock(r.blocks[i], r.blocks); return { ...r, blocks: [...r.blocks.slice(0, i + 1), copy, ...r.blocks.slice(i + 1)] } })}
+            index={index}
             collapsed={!!collapsed[block.id]}
             canDelete={routine.blocks.length > 1}
             onToggle={() => setCollapsed((c) => ({ ...c, [block.id]: !c[block.id] }))}
@@ -176,8 +181,13 @@ export function RoutineBuilder() {
   )
 }
 
-function BlockCard({ block, collapsed, canDelete, onToggle, onChange, onDelete, onAdd, onEdit, onInfo }: {
+function BlockCard({ block, index, canMoveUp, canMoveDown, onMove, onDuplicate, collapsed, canDelete, onToggle, onChange, onDelete, onAdd, onEdit, onInfo }: {
   block: RoutineBlock
+  index: number
+  canMoveUp: boolean
+  canMoveDown: boolean
+  onMove: (to: number) => void
+  onDuplicate: () => void
   collapsed: boolean
   canDelete: boolean
   onToggle: () => void
@@ -211,6 +221,11 @@ function BlockCard({ block, collapsed, canDelete, onToggle, onChange, onDelete, 
             <div className="block__row">
               <span className="block__row-label">Rounds</span>
               <Stepper label="Rounds" value={block.repeat} min={1} step={1} suffix="×" onChange={(v) => onChange((b) => ({ ...b, repeat: v }))} />
+            </div>
+            <div className="block__row block__row--actions">
+              <button type="button" className="text-btn text-btn--small" disabled={!canMoveUp} aria-label={`Move ${block.name} up`} onClick={() => onMove(index - 1)}>Move up</button>
+              <button type="button" className="text-btn text-btn--small" disabled={!canMoveDown} aria-label={`Move ${block.name} down`} onClick={() => onMove(index + 1)}>Move down</button>
+              <button type="button" className="text-btn text-btn--small" aria-label={`Duplicate ${block.name}`} onClick={onDuplicate}>Duplicate</button>
             </div>
             <div className="block__row">
               <label className="check check--inline">

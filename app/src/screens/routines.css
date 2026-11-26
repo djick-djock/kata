@@ -1,5 +1,8 @@
 /* Routines list, new-routine sheet, builder, pickers. Tokens only; dark theme comes from theme.css. */
 .text-btn { border: 0; background: none; color: var(--color-accentText); font-weight: 600; font-size: 17px; min-height: 48px; padding: 0 var(--space-3); cursor: pointer; display: inline-flex; align-items: center; gap: var(--space-2); }
+.text-btn--small { font-size: 15px; padding: 0 var(--space-2); white-space: nowrap; }
+.text-btn:disabled { opacity: .4; cursor: default; }
+.block__row--actions { justify-content: flex-start; gap: var(--space-2); }
 .text-btn--danger { color: var(--color-danger); font-size: 15px; white-space: nowrap; }
 .text-btn:focus-visible, .new-btn:focus-visible, .play-btn:focus-visible, .rcard__main:focus-visible, .opt:focus-visible, .tpl:focus-visible, .pick:focus-visible, .row-btn:focus-visible, .step__main:focus-visible, .grip:focus-visible, .block__head:focus-visible, .add-ex:focus-visible, .add-block:focus-visible, .copylist button:focus-visible { outline: 2px solid var(--color-accentText); outline-offset: 2px; }
 
