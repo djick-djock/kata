@@ -1,4 +1,4 @@
-Status: ready-for-agent
+Status: done
 
 # Kata spike — audio, screen-awake and timer on a real Android phone
 
