@@ -44,12 +44,25 @@ describe('catalog', () => {
     expect(localized(stretch.name, 'fr')).toBe('Pigeon pose')
   })
 
-  it('has drawings for existing exercises and none for new ones', () => {
+  it('resolves drawings and variants', () => {
     expect(drawingFor('push-up')).toContain('<svg')
     expect(drawingFor('push-up', 'knee')).not.toBe(drawingFor('push-up'))
     expect(drawingFor('push-up', 'standard')).toBe(drawingFor('push-up'))
-    expect(drawingFor('pigeon-pose')).toBeUndefined()
-    const withDrawing = allExercises().filter((e) => drawingFor(e.id))
-    expect(withDrawing).toHaveLength(29)
+    expect(drawingFor('pigeon-pose')).toContain('<svg')
+    expect(drawingFor('nope')).toBeUndefined()
+  })
+})
+
+describe('drawings', () => {
+  it('has a drawing for every catalog exercise (no placeholder fallback)', () => {
+    const missing = allExercises().filter((e) => !drawingFor(e.id)).map((e) => e.id)
+    expect(missing).toEqual([])
+  })
+
+  it('uses no scripts or external references in any drawing', () => {
+    for (const e of allExercises()) {
+      const svg = drawingFor(e.id) ?? ''
+      expect(svg).not.toMatch(/<script|href=|<image|url\(\s*['"]?https?:/i)
+    }
   })
 })

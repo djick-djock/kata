@@ -1,0 +1,3 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Silent sit">
+  <circle cx="60" cy="50" r="40" stroke="var(--ill-far, #9AA4BC)" stroke-opacity="0.45" stroke-width="1.6"/><circle cx="60" cy="28" r="7" fill="var(--ill-bg, transparent)"/><path d="M60 36 L60 66"/><path d="M60 42 L42 58 L38 72"/><path d="M60 42 L78 58 L82 72"/><path d="M26 78 Q42 64 60 70 Q78 64 94 78"/><path d="M26 78 Q60 88 94 78"/>
+</svg>

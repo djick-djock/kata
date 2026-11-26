@@ -4,10 +4,12 @@
 
 **Blocked by:** 02
 
-Status: ready-for-agent
+Status: done
 
-- [ ] One drawing for each of the 23 new exercises, wired to the catalog so no new exercise shows a placeholder
-- [ ] Style matches the existing drawings (canvas, line weight, current-colour strokes, accent variables); checked visually in light and dark in a contact sheet screenshot
-- [ ] Per-side stretches show one side clearly
-- [ ] No scripts, no external references in any drawing
-- [ ] Build and tests pass
+- [x] One drawing for each of the 23 new exercises, wired to the catalog so no new exercise shows a placeholder
+- [x] Style matches the existing drawings (canvas, line weight, current-colour strokes, accent variables); checked visually in light and dark in a contact sheet screenshot
+- [x] Per-side stretches show one side clearly
+- [x] No scripts, no external references in any drawing
+- [x] Build and tests pass
+
+Note: 23 hand-written single-line SVGs (120x100, stroke 2.6, currentColor, --ill-far for far limbs) added in app/src/catalog/drawings, auto-wired by the existing glob. Meditation uses glyphs (silent sit lotus in a halo, box with arrows, three-segment 4-7-8 arc, body outline with scan bands). Checked in a light and dark contact sheet; a unit test in app/src/catalog/index.test.ts asserts every catalog exercise has a drawing and none has scripts or external references.
