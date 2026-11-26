@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react'
 import { listSessions } from '../data/sessions'
-import { homeWeek, sessionToEntry, type HomeWeek } from './home-week'
+import { listActivities } from '../data/activities'
+import { toEntries } from './calendar'
+import { homeWeek, type HomeWeek } from './home-week'
 import type { DayEntry } from './streak'
 
 /**
- * Loads the history entries behind Home's week strip and streak. Extend `load` to merge logged
- * activities (kind 'activity') into the same entry list.
+ * Loads the history entries (sessions and logged activities) behind Home's week strip and streak.
  */
 async function load(): Promise<DayEntry[]> {
-  const sessions = await listSessions()
-  return sessions.map(sessionToEntry)
+  const [sessions, activities] = await Promise.all([listSessions(), listActivities()])
+  return toEntries(sessions, activities)
 }
 
 export function useHomeWeek(now: Date): HomeWeek | null {

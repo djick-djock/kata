@@ -36,6 +36,7 @@ describe('homeWeek', () => {
   it('maps colours', () => {
     expect(weekColor(undefined)).toBeUndefined()
     expect(weekColor('meditation')).toBe('var(--color-category-mobility)')
+    expect(weekColor('activity')).toBe('var(--color-category-run)')
     expect(weekColor('hiit')).toBe('var(--color-category-hiit)')
   })
 })

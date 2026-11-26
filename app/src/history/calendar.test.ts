@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import type { SessionRow } from '../data/db'
 import type { ActivityRow } from '../data/db'
-import { activityRowText, canGoNext, formatDuration, formatWhen, monthGrid, monthLabel, recentItems, shiftMonth, toEntries } from './calendar'
+import { activityMonthTotals, activityRowText, canGoNext, formatDuration, formatWhen, monthGrid, monthLabel, recentItems, shiftMonth, toEntries } from './calendar'
 
 const row = (o: Partial<SessionRow>): SessionRow => ({
   id: 'a', startedAt: 0, finishedAt: 0, routineName: 'Hip flow', category: 'mobility', mode: 'play-all', durationSeconds: 60,
@@ -74,5 +74,25 @@ describe('activity rows', () => {
     expect(items.map((i) => i.id)).toEqual(['s1', 'a1', 'a2', 's2'])
     expect(items[1]).toMatchObject({ kind: 'activity', status: 'Logged', to: '/log/a1', when: 'Today · 7:15' })
     expect(items[0]).toMatchObject({ kind: 'session', to: '/history/s1' })
+  })
+})
+
+describe('activityMonthTotals', () => {
+  const a = (o: Partial<ActivityRow>) => ({ type: 'run' as const, startedAt: Date.UTC(2026, 10, 10, 12), distanceKm: 5, ...o })
+  it('sums distance and counts runs in the month only', () => {
+    const t = activityMonthTotals([a({}), a({ distanceKm: 5.26 }), a({ type: 'bike', distanceKm: 20 }), a({ startedAt: Date.UTC(2026, 9, 31, 12), distanceKm: 100 })], 2026, 11, 'UTC')
+    expect(t).toEqual({ distanceKm: 30.26, runs: 2 })
+  })
+  it('counts runs without distance and ignores missing or negative distance', () => {
+    expect(activityMonthTotals([a({ distanceKm: undefined }), a({ distanceKm: -3 })], 2026, 11, 'UTC')).toEqual({ distanceKm: 0, runs: 2 })
+  })
+  it('is zero for an empty month and follows the local day at the month edge', () => {
+    expect(activityMonthTotals([], 2026, 11, 'UTC')).toEqual({ distanceKm: 0, runs: 0 })
+    const late = a({ startedAt: Date.UTC(2026, 10, 1, 2) }) // 2026-10-31 22:00 in New York
+    expect(activityMonthTotals([late], 2026, 11, 'America/New_York').runs).toBe(0)
+    expect(activityMonthTotals([late], 2026, 10, 'America/New_York').runs).toBe(1)
+  })
+  it('toEntries merges activities as active-day entries', () => {
+    expect(toEntries([], [{ startedAt: 7 }])).toEqual([{ startedAt: 7, kind: 'activity' }])
   })
 })

@@ -18,10 +18,10 @@ export function weekStart(key: string): string {
   return addDays(key, -dow)
 }
 
-/** Colour token suffix for a day circle: meditation shares mobility's colour, logged activities use the accent. */
+/** Colour token suffix for a day circle: meditation shares mobility's colour, logged activities use the gold run colour. */
 export function weekColor(category: string | undefined): string | undefined {
   if (!category) return undefined
-  if (category === 'activity') return 'var(--color-accent)'
+  if (category === 'activity') return 'var(--color-category-run)'
   return `var(--color-category-${category === 'meditation' ? 'mobility' : category})`
 }
 

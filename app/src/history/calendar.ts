@@ -33,9 +33,37 @@ export function monthGrid({ year, month }: YearMonth): (number | null)[] {
   return [...Array<null>(blanks).fill(null), ...Array.from({ length: daysInMonth(year, month) }, (_, i) => i + 1)]
 }
 
-/** The one place sessions become engine input; activities become a second kind here later. */
-export function toEntries(sessions: readonly SessionRow[]): DayEntry[] {
-  return sessions.map((s) => ({ startedAt: s.startedAt, kind: 'session', category: s.category, stepsDone: s.stepsDone }))
+/** Anything with a start time can be a logged activity for the engine. */
+export function activityToEntry(a: Pick<ActivityRow, 'startedAt'>): DayEntry {
+  return { startedAt: a.startedAt, kind: 'activity' }
+}
+
+/** The one place sessions and logged activities become engine input. */
+export function toEntries(sessions: readonly SessionRow[], activities: readonly Pick<ActivityRow, 'startedAt'>[] = []): DayEntry[] {
+  return [
+    ...sessions.map((s): DayEntry => ({ startedAt: s.startedAt, kind: 'session', category: s.category, stepsDone: s.stepsDone })),
+    ...activities.map(activityToEntry),
+  ]
+}
+
+export interface ActivityMonthTotals {
+  /** Kilometres summed over all activities with a distance in the month. */
+  distanceKm: number
+  /** Activities of type 'run' in the month. */
+  runs: number
+}
+
+/** Distance (all types) and run count for a month (month is 1-12), in local days of the given zone. */
+export function activityMonthTotals(activities: readonly Pick<ActivityRow, 'startedAt' | 'type' | 'distanceKm'>[], year: number, month: number, timeZone?: string): ActivityMonthTotals {
+  let distanceKm = 0
+  let runs = 0
+  for (const a of activities) {
+    const k = dayKey(a.startedAt, timeZone)
+    if (Number(k.slice(0, 4)) !== year || Number(k.slice(5, 7)) !== month) continue
+    if (a.distanceKm !== undefined && Number.isFinite(a.distanceKm) && a.distanceKm > 0) distanceKm += a.distanceKm
+    if (a.type === 'run') runs++
+  }
+  return { distanceKm: Math.round(distanceKm * 100) / 100, runs }
 }
 
 const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']

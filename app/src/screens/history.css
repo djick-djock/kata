@@ -1,5 +1,9 @@
 /* History: stats, month calendar, recent list. Tokens only. */
-.hstats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+.hstats { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-3); }
+.hstat { grid-column: span 2; }
+.hstat--half { grid-column: span 3; }
+.hlog { margin-left: auto; margin-right: var(--space-2); display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; padding: 0 var(--space-4); border-radius: var(--radius-pill); background: var(--color-accent); color: var(--color-phase-onPhase); font-weight: 600; font-size: 17px; text-decoration: none; }
+.hlog:focus-visible { outline: 2px solid var(--color-accentText); outline-offset: 2px; }
 .hstat { display: flex; flex-direction: column; gap: 2px; padding: var(--space-3) var(--space-3); background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-card); min-width: 0; }
 .hstat strong { font-family: var(--font-display); font-weight: 600; font-size: 22px; letter-spacing: -0.01em; white-space: nowrap; }
 .hstat span { font-size: 14px; color: var(--color-textMuted); white-space: nowrap; }
@@ -15,8 +19,13 @@
 .cal__dow { font-size: 14px; color: var(--color-textMuted); padding-bottom: var(--space-2); }
 .cal__day { display: flex; flex-direction: column; align-items: center; gap: 3px; margin: 0 auto; width: 40px; padding: 6px 0 5px; border-radius: 12px; font-size: 15px; font-weight: 500; }
 .cal__day--today { background: var(--color-surfaceRaised); }
-.cal__dot { width: 6px; height: 6px; border-radius: 50%; background: transparent; }
+.cal__dots { display: flex; gap: 3px; height: 6px; }
+.cal__dot { width: 6px; height: 6px; border-radius: 50%; }
 .cal__dot--on { background: var(--color-accentText); }
+.cal__dot--logged { background: var(--color-category-run); }
+.cal__legend { display: inline-flex; align-items: center; gap: 5px; font-size: 14px; color: var(--color-textMuted); margin: calc(var(--space-2) * -1) 0 var(--space-3); }
+.cal__key { width: 8px; height: 8px; border-radius: 50%; background: var(--color-accentText); }
+.cal__key--logged { background: var(--color-category-run); margin-left: var(--space-2); }
 
 .recent { list-style: none; margin: var(--space-5) 0 0; padding: 0; }
 .recent__row { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) 0; border-bottom: 1px solid var(--color-line); }

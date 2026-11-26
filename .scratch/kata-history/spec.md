@@ -1,4 +1,4 @@
-Status: in-progress
+Status: done
 
 # Kata — history, calendar and streak
 

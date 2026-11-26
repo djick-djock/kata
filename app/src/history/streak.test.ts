@@ -122,6 +122,21 @@ describe('currentStreak', () => {
     const e = [session(at(2026, 11, 25)), activity(at(2026, 11, 24)), session(at(2026, 11, 23))]
     expect(currentStreak(e, TODAY, UTC)).toBe(3)
   })
+  it('counts activity-only days and a day with a session and an activity once', () => {
+    expect(currentStreak([activity(at(2026, 11, 25)), activity(at(2026, 11, 24))], TODAY, UTC)).toBe(2)
+    const both = [session(at(2026, 11, 25, 7)), activity(at(2026, 11, 25, 18)), session(at(2026, 11, 24)), activity(at(2026, 11, 24, 9))]
+    expect(currentStreak(both, TODAY, UTC)).toBe(2)
+    expect(monthStats(both, 2026, 11, UTC).activeDays).toBe(2)
+  })
+  it('drops when the bridging activity is deleted', () => {
+    const e = [session(at(2026, 11, 25)), activity(at(2026, 11, 24)), session(at(2026, 11, 23))]
+    expect(currentStreak(e, TODAY, UTC)).toBe(3)
+    const afterDelete = e.filter((x) => x.kind !== 'activity')
+    expect(currentStreak(afterDelete, TODAY, UTC)).toBe(1)
+    expect(monthStats(afterDelete, 2026, 11, UTC)).toMatchObject({ activities: 0, activeDays: 2 })
+    expect(monthMarkers(afterDelete, 2026, 11, UTC)[23].logged).toBe(false)
+    expect(weekStrip(afterDelete, TODAY, UTC)[5].active).toBe(false)
+  })
   it('crosses month and year boundaries', () => {
     const e = [at(2026, 1, 1), at(2025, 12, 31), at(2025, 12, 30)].map((t) => session(t))
     expect(currentStreak(e, at(2026, 1, 1), UTC)).toBe(3)

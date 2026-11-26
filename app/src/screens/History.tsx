@@ -2,11 +2,10 @@ import { Link } from 'react-router-dom'
 import { useEffect, useMemo, useState } from 'react'
 import { listSessions, type SessionRow } from '../data/sessions'
 import { listActivities, type ActivityRow } from '../data/activities'
-import { canGoNext, monthGrid, monthLabel, monthOf, recentItems, shiftMonth, toEntries } from '../history/calendar'
+import { activityMonthTotals, canGoNext, monthGrid, monthLabel, monthOf, formatDistance, recentItems, shiftMonth, toEntries } from '../history/calendar'
 import { currentStreak, dayKey, monthMarkers, monthStats } from '../history/streak'
-import { BackIcon } from '../ui/Icons'
+import { BackIcon, PlusIcon, SettingsIcon } from '../ui/Icons'
 import { Empty } from '../ui/Empty'
-import { ScreenHeader } from '../ui/ScreenHeader'
 import './history.css'
 
 /** Everything History shows comes from here. */
@@ -22,29 +21,44 @@ function useHistoryData(): { sessions: SessionRow[]; activities: ActivityRow[] }
   return data
 }
 
+function HistoryHeader() {
+  return (
+    <div className="topbar">
+      <h1 className="screen-title">History</h1>
+      <Link to="/log" className="hlog">
+        <PlusIcon /> Log
+      </Link>
+      <Link to="/settings" className="icon-btn" aria-label="Settings">
+        <SettingsIcon />
+      </Link>
+    </div>
+  )
+}
+
 const WEEK = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
 
 export function History() {
   const data = useHistoryData()
   const sessions = data?.sessions
-  const activities = data?.activities ?? []
+  const activities = useMemo(() => data?.activities ?? [], [data])
   const now = Date.now()
   const todayKey = dayKey(now)
   const current = monthOf(todayKey)
   const [shown, setShown] = useState(current)
-  const entries = useMemo(() => toEntries(sessions ?? []), [sessions])
+  const entries = useMemo(() => toEntries(sessions ?? [], data?.activities ?? []), [sessions, data])
 
-  if (!sessions) return <ScreenHeader title="History" />
+  if (!sessions) return <HistoryHeader />
   if (sessions.length === 0 && activities.length === 0) {
     return (
       <>
-        <ScreenHeader title="History" />
+        <HistoryHeader />
         <Empty title="No sessions yet">Finished sessions will show up here.</Empty>
       </>
     )
   }
 
   const stats = monthStats(entries, current.year, current.month)
+  const totals = activityMonthTotals(activities, current.year, current.month)
   const streak = currentStreak(entries, now)
   const markers = new Map(monthMarkers(entries, shown.year, shown.month).map((m) => [m.day, m]))
   const recent = recentItems(sessions, now, 20, undefined, activities)
@@ -52,11 +66,13 @@ export function History() {
 
   return (
     <>
-      <ScreenHeader title="History" />
+      <HistoryHeader />
       <div className="hstats">
         <div className="hstat"><strong>{stats.routines}</strong><span>Routines</span></div>
         <div className="hstat"><strong>{stats.activities}</strong><span>Activities</span></div>
         <div className="hstat"><strong>{streak} {streak === 1 ? 'day' : 'days'}</strong><span>Active streak</span></div>
+        <div className="hstat hstat--half"><strong>{formatDistance(totals.distanceKm)} km</strong><span>Distance</span></div>
+        <div className="hstat hstat--half"><strong>{totals.runs}</strong><span>{totals.runs === 1 ? 'Run' : 'Runs'}</span></div>
       </div>
 
       <section className="cal" aria-label="Calendar">
@@ -69,6 +85,7 @@ export function History() {
             <BackIcon />
           </button>
         </div>
+        <p className="cal__legend" aria-hidden="true"><i className="cal__key" />Routine<i className="cal__key cal__key--logged" />Logged</p>
         <div className="cal__grid">
           {WEEK.map((w, i) => <span key={i} className="cal__dow" aria-hidden="true">{w}</span>)}
           {monthGrid(shown).map((day, i) => {
@@ -78,7 +95,10 @@ export function History() {
             return (
               <span key={key} className={`cal__day${key === todayKey ? ' cal__day--today' : ''}`} aria-current={key === todayKey ? 'date' : undefined}>
                 {day}
-                <i className={`cal__dot${m?.routine ? ' cal__dot--on' : ''}`} aria-label={m?.routine ? 'Routine done' : undefined} />
+                <span className="cal__dots">
+                  {m?.routine && <i className="cal__dot cal__dot--on" aria-label="Routine done" />}
+                  {m?.logged && <i className="cal__dot cal__dot--logged" aria-label="Activity logged" />}
+                </span>
               </span>
             )
           })}
