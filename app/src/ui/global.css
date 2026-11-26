@@ -32,3 +32,5 @@ h1, h2, p { margin: 0; }
 .tab { flex: 1; min-height: 64px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: var(--color-textMuted); text-decoration: none; font-size: 12px; font-weight: 500; }
 .tab[aria-current='page'] { color: var(--color-accentText); font-weight: 600; }
 h1.screen-title, .brand, .empty h2 { font-family: var(--font-display); }
+
+.notice { position: fixed; left: var(--space-5); right: var(--space-5); bottom: calc(88px + env(safe-area-inset-bottom)); max-width: 600px; margin: 0 auto; padding: var(--space-3) var(--space-4); background: var(--color-text); color: var(--color-bg); border-radius: var(--radius-field); font-size: 16px; text-align: center; z-index: 50; }

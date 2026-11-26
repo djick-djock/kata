@@ -1,5 +1,4 @@
-Status: ready-for-agent
-Blocked by: kata-history
+Status: in-progress
 
 # Kata — log activity
 

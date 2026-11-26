@@ -6,11 +6,12 @@ import { listRoutines } from '../data/routines'
 import { formatLength } from '../routines/format'
 import { firstExerciseRef, routineTotal, stepCount } from '../routines/model'
 import { Drawing } from '../ui/Drawing'
-import { PlayIcon, SettingsIcon } from '../ui/Icons'
+import { PlayIcon, PlusIcon, SettingsIcon } from '../ui/Icons'
 import { KataMark } from '../ui/KataMark'
 import { CATEGORY_LABEL } from './exercise-format'
 import './exercises.css'
 import './home.css'
+import './log.css'
 
 function greeting(d: Date) {
   const h = d.getHours()
@@ -95,6 +96,7 @@ export function Home() {
           )}
         </>
       )}
+      <Link to="/log" className="homelog"><PlusIcon /> Log activity</Link>
     </>
   )
 }

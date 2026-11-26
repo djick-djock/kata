@@ -40,6 +40,29 @@ export interface SessionRow {
   feel?: Feel
 }
 
+export type ActivityType = 'run' | 'walk' | 'bike' | 'swim' | 'other'
+
+/** An activity done outside Kata. Pace is derived (see data/activities.ts), never stored. */
+export interface ActivityRow {
+  id: string
+  type: ActivityType
+  /** ms since epoch; days are grouped in local time from this. */
+  startedAt: number
+  durationSeconds: number
+  /** Kilometres. Absent when not entered. */
+  distanceKm?: number
+  feel?: Feel
+  notes?: string
+  /** Where it came from: 'manual' now; later imports use e.g. 'gpx' or 'strava'. */
+  source: string
+  /** Identifier in the source system, to detect duplicate imports. */
+  externalId?: string
+  /** Reserved for later imports (route points); unused in v1. */
+  route?: unknown
+  /** Reserved for later imports (heart-rate samples); unused in v1. */
+  heartRate?: unknown
+}
+
 /** Routine as stored. `pinned` is a number because booleans are not indexable. */
 export type RoutineRow = Omit<KataRoutine, 'pinned'> & { pinned: 0 | 1 }
 
@@ -48,6 +71,7 @@ export class KataDB extends Dexie {
   exerciseLinks!: EntityTable<ExerciseLinkRow, 'exerciseId'>
   routines!: EntityTable<RoutineRow, 'id'>
   sessions!: EntityTable<SessionRow, 'id'>
+  activities!: EntityTable<ActivityRow, 'id'>
 
   constructor(name = 'kata') {
     super(name)
@@ -55,6 +79,7 @@ export class KataDB extends Dexie {
     this.version(2).stores({ exerciseLinks: 'exerciseId' })
     this.version(3).stores({ routines: 'id, pinned, updatedAt' })
     this.version(4).stores({ sessions: 'id, startedAt, routineId, [routineId+startedAt]' })
+    this.version(5).stores({ activities: 'id, startedAt, externalId' })
   }
 }
 

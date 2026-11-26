@@ -1,5 +1,4 @@
-Status: ready-for-agent
-Blocked by: kata-routines-player
+Status: in-progress
 
 # Kata — history, calendar and streak
 
