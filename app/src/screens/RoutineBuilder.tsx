@@ -113,6 +113,7 @@ export function RoutineBuilder() {
             block={block}
             canMoveUp={index > 0}
             canMoveDown={index < routine.blocks.length - 1}
+            isLast={index === routine.blocks.length - 1}
             onMove={(to) => change((r) => ({ ...r, blocks: moveItem(r.blocks, index, to) }))}
             onDuplicate={() => change((r) => { const i = r.blocks.findIndex((b) => b.id === block.id); const copy = duplicateBlock(r.blocks[i], r.blocks); return { ...r, blocks: [...r.blocks.slice(0, i + 1), copy, ...r.blocks.slice(i + 1)] } })}
             index={index}
@@ -181,11 +182,12 @@ export function RoutineBuilder() {
   )
 }
 
-function BlockCard({ block, index, canMoveUp, canMoveDown, onMove, onDuplicate, collapsed, canDelete, onToggle, onChange, onDelete, onAdd, onEdit, onInfo }: {
+function BlockCard({ block, index, canMoveUp, canMoveDown, isLast, onMove, onDuplicate, collapsed, canDelete, onToggle, onChange, onDelete, onAdd, onEdit, onInfo }: {
   block: RoutineBlock
   index: number
   canMoveUp: boolean
   canMoveDown: boolean
+  isLast: boolean
   onMove: (to: number) => void
   onDuplicate: () => void
   collapsed: boolean
@@ -222,6 +224,18 @@ function BlockCard({ block, index, canMoveUp, canMoveDown, onMove, onDuplicate, 
               <span className="block__row-label">Rounds</span>
               <Stepper label="Rounds" value={block.repeat} min={1} step={1} suffix="×" onChange={(v) => onChange((b) => ({ ...b, repeat: v }))} />
             </div>
+            {block.repeat > 1 && (
+              <div className="block__row">
+                <span className="block__row-label">Rest between rounds</span>
+                <Stepper label="Rest between rounds" value={block.restBetweenRoundsSeconds ?? 0} min={0} step={5} suffix="s" onChange={(v) => onChange((b) => ({ ...b, restBetweenRoundsSeconds: v }))} />
+              </div>
+            )}
+            {!isLast && (
+              <div className="block__row">
+                <span className="block__row-label">Rest after block</span>
+                <Stepper label="Rest after block" value={block.restAfterBlockSeconds ?? 0} min={0} step={5} suffix="s" onChange={(v) => onChange((b) => ({ ...b, restAfterBlockSeconds: v }))} />
+              </div>
+            )}
             <div className="block__row block__row--actions">
               <button type="button" className="text-btn text-btn--small" disabled={!canMoveUp} aria-label={`Move ${block.name} up`} onClick={() => onMove(index - 1)}>Move up</button>
               <button type="button" className="text-btn text-btn--small" disabled={!canMoveDown} aria-label={`Move ${block.name} down`} onClick={() => onMove(index + 1)}>Move down</button>

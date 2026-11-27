@@ -14,3 +14,12 @@ describe('duplicateBlock', () => {
     expect(duplicateBlock(a, [a, copy]).name).toBe('Block A copy 2')
   })
 })
+
+describe('duplicateBlock rest fields', () => {
+  it('copies the dedicated rests', () => {
+    const a = { ...newBlock('A', { repeat: 2, restBetweenRoundsSeconds: 30, restAfterBlockSeconds: 60 }), steps: [] }
+    const c = duplicateBlock(a, [a])
+    expect(c.restBetweenRoundsSeconds).toBe(30)
+    expect(c.restAfterBlockSeconds).toBe(60)
+  })
+})
