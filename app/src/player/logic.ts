@@ -62,7 +62,10 @@ export function phaseLabel(item: PlanItem, status: SessionState['status']): stri
     case 'warmup': return `Warm-up${side}`
     case 'work': return item.meditation ? 'Stillness' : `Work${side}`
     case 'reps': return `Reps · your pace${side}`
-    case 'rest': return 'Rest · breathe'
+    case 'rest': {
+      const kind = (item as { restKind?: string }).restKind
+      return kind === 'round' ? 'Rest · next round' : kind === 'block' ? 'Rest · next block' : 'Rest · breathe'
+    }
     case 'switch': return 'Switch sides'
   }
 }
@@ -71,20 +74,25 @@ const measureText = (item: PlanItem) =>
   item.durationMs === null ? `×${item.reps}` : `${Math.round(item.durationMs / 1000)} s`
 const sideText = (item: PlanItem) => (item.side ? ` (${item.side})` : '')
 
-/** "Rest 15 s → Push-ups ×20", "Push-ups ×20 → tap Done when finished", "Finish". */
+/**
+ * "Push-ups ×20", "Switch sides 5 s → Stretch (right) 30 s", "Next block: Core → Plank 45 s", "Finish".
+ * Plain rests are left out (the rest is shown by the main label and the Done button); switch-side
+ * gaps are kept. When the next step starts another block, the text says so with the block name.
+ */
 export function nextCardText(items: readonly PlanItem[], index: number): string {
   const current = items[index]
   const gaps: string[] = []
   let j = index + 1
   while (items[j] && !items[j].isStep) {
-    gaps.push(`${items[j].phase === 'rest' ? 'Rest' : 'Switch sides'} ${Math.round((items[j].durationMs ?? 0) / 1000)} s`)
+    if (items[j].phase !== 'rest') gaps.push(`Switch sides ${Math.round((items[j].durationMs ?? 0) / 1000)} s`)
     j++
   }
   const target = items[j]
   if (!target) return 'Finish'
   const parts = [...gaps, `${target.name}${sideText(target)} ${measureText(target)}`]
   if (target.durationMs === null && current && !current.isStep) parts.push('tap Done when finished')
-  return parts.join(' → ')
+  const text = parts.join(' → ')
+  return current && target.blockIndex !== current.blockIndex ? `Next block: ${target.blockName} → ${text}` : text
 }
 
 /** Label for the big Done button: "Done · rest 15 s" when a rest follows. */
@@ -99,3 +107,9 @@ export function timeLeftText(ms: number, approximate: boolean): string {
 }
 
 export const elapsedText = (ms: number) => formatClock(Math.floor(ms / 1000))
+
+/** "Block 2 of 6" for the overall progress line. */
+export const blockCountText = (n: number, count: number) => `Block ${Math.max(1, n)} of ${count}`
+
+/** Overall bar width as a whole percent, clamped 0..100. */
+export const overallPercent = (fraction: number) => Math.round(Math.min(1, Math.max(0, fraction)) * 100)
