@@ -165,7 +165,7 @@ export function PlayerRun({ routine, mode, settings, cuePlayer, onFinished, now 
       <header className="pl__top">
         <button type="button" className="pl__close" aria-label="Stop session" onClick={askStop}><Close /></button>
         <div className="pl__meta">
-          <span>{blockCountText(view.blockNumber, view.blockCount)} · {block?.name ?? ''}{roundText}</span>
+          <span><b data-testid="overall-percent">{overallPercent(view.overallFraction)}%</b> · {blockCountText(view.blockNumber, view.blockCount)} · {block?.name ?? ''}{roundText}</span>
           <strong data-testid="time-left">{meta2}</strong>
         </div>
       </header>
