@@ -1,5 +1,5 @@
 // Pure routine-building helpers: no React, no storage. The builder and the repository use these.
-import { findExercise, localized, type Category, type Exercise } from '../catalog'
+import { allExercises, findExercise, localized, type Category, type Exercise } from '../catalog'
 import { routineDuration, type Measure } from '../engine'
 import type { BlockDefaults, KataRoutine, RoutineBlock, RoutineStep } from '../data/routine-types'
 
@@ -101,6 +101,18 @@ export function parseInfoParam(v: string | null): InfoTarget | null {
   return null
 }
 
+/** Typed names that differ from the catalog name (typo, regional spelling). */
+const CUSTOM_NAME_ALIASES: Record<string, string> = { 'side reache': 'side-reach', 'bum kicks': 'butt-kicks' }
+
+/** Catalog exercise a custom step was named after (trimmed, case-insensitive), if any. */
+function catalogExerciseNamed(name: string): Exercise | undefined {
+  const key = name.trim().toLowerCase()
+  if (!key) return undefined
+  const aliased = CUSTOM_NAME_ALIASES[key]
+  if (aliased) return findExercise(aliased)
+  return allExercises().find((e) => [e.name.en, e.name.fr].some((n) => n?.trim().toLowerCase() === key))
+}
+
 /**
  * Re-reads each exercise step against the catalog: refreshes name and kind, drops an unknown variant,
  * and turns a step whose exercise is gone into a custom step that keeps its saved name.
@@ -111,6 +123,10 @@ export function resolveRoutine(routine: KataRoutine): KataRoutine {
     blocks: routine.blocks.map((block) => ({
       ...block,
       steps: block.steps.map((step): RoutineStep => {
+        if (step.ref.type === 'custom') {
+          const named = catalogExerciseNamed(step.name)
+          return named ? { ...step, ref: { type: 'exercise', exerciseId: named.id }, name: stepName(named), kind: named.category } : step
+        }
         if (step.ref.type !== 'exercise') return step
         const exercise = findExercise(step.ref.exerciseId)
         if (!exercise) return { ...step, ref: { type: 'custom' }, kind: undefined }

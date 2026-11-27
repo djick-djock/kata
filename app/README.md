@@ -16,7 +16,7 @@ The real Kata app (Vite, React, TypeScript, Dexie, vite-plugin-pwa). The `spike/
 
 ## Exercise catalog and drawings
 
-`src/catalog` is read-only app data (52 exercises, `exercises.ts`) with a lookup module (`index.ts`: `allExercises`, `findExercise`, `variantsOf`, `warmUpExercises`, `localized` with English fallback). Nothing from it is stored in Dexie; only the personal video link is (table `exerciseLinks`).
+`src/catalog` is read-only app data (57 exercises, `exercises.ts`) with a lookup module (`index.ts`: `allExercises`, `findExercise`, `variantsOf`, `warmUpExercises`, `localized` with English fallback). Nothing from it is stored in Dexie; only the personal video link is (table `exerciseLinks`).
 
 **Drawing convention.** Drop an SVG into `src/catalog/drawings/` named after the exercise id: `<exercise-id>.svg`. A variant with its own drawing uses `<exercise-id>--<variant-id>.svg`. That is all: files are bundled by a Vite glob (offline, no code change) and exercises without a file show the placeholder. SVG rules for theming: draw the figure with `currentColor` (the app sets it to the category tint), use `var(--ill-far, ...)` for far limbs, `var(--color-line)` for the floor, `var(--ill-bg, transparent)` for head fills, and no hard-coded background rectangle. See `drawings/squat.svg` (single-line style from `docs/assets`) and `drawings/push-up--knee.svg` (converted two-panel archive drawing).
 

@@ -2,9 +2,9 @@ import { describe, expect, it } from 'vitest'
 import { allExercises, CATEGORIES, drawingFor, findExercise, localized, variantsOf, warmUpExercises } from './index'
 
 describe('catalog', () => {
-  it('is available with empty storage and holds the 52 starter exercises', () => {
+  it('is available with empty storage and holds the 57 exercises', () => {
     // No database is opened here: the catalog is code, not stored data.
-    expect(allExercises()).toHaveLength(52)
+    expect(allExercises()).toHaveLength(57)
   })
 
   it('has unique ids and valid categories, English names and how-to', () => {
