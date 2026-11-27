@@ -1,12 +1,12 @@
 name: Deploy app to GitHub Pages
 
-# Publishes one Pages artifact: the app at /<repo>/ and the spike at /<repo>/spike/.
-# Runs on every push to main that touches the app or the spike. Failing tests or a failing build stop the deploy.
+# Publishes one Pages artifact: the app at /<repo>/.
+# Runs on every push to main that touches the app. Failing tests or a failing build stop the deploy.
 on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['app/**', 'spike/**', '.github/workflows/app-pages.yml']
+    paths: ['app/**', '.github/workflows/app-pages.yml']
 
 permissions:
   contents: read
@@ -26,9 +26,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: |
-            app/package-lock.json
-            spike/package-lock.json
+          cache-dependency-path: app/package-lock.json
       - name: Build app
         working-directory: app
         run: |
@@ -37,20 +35,10 @@ jobs:
           npm run build
         env:
           VITE_BASE: /${{ github.event.repository.name }}/
-      - name: Build spike (kept reachable at /spike/)
-        working-directory: spike
-        run: |
-          npm ci
-          npm test
-          npm run build
-        env:
-          VITE_BASE: /${{ github.event.repository.name }}/spike/
       - name: Assemble site
         run: |
           mkdir site
           cp -R app/dist/. site/
-          mkdir site/spike
-          cp -R spike/dist/. site/spike/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
