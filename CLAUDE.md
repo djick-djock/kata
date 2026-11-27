@@ -22,9 +22,9 @@ Single-context. See `docs/agents/domain.md`.
 
 ## Shipping
 
-`main` is the live app: a push to `main` that touches `app/` or `spike/` deploys to https://djick-djock.github.io/kata/ through `.github/workflows/app-pages.yml`.
+`main` is the live app: a push to `main` that touches `app/` deploys to https://djick-djock.github.io/kata/ through `.github/workflows/app-pages.yml`.
 
-- Before anything reaches `main`, run `npm ci`, `npm test` and `npm run build` in `app/` (and in `spike/` if it changed).
+- Before anything reaches `main`, run `npm ci`, `npm test` and `npm run build` in `app/`.
 - Work on a branch. Merge or push to `main` only when asked to ship.
 - The app keeps its data in IndexedDB on the user's phone, so a schema change must migrate existing data.
 - Sound, vibration and keeping the screen awake need a check on the phone; say so when a change touches them.
