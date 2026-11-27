@@ -1472,21 +1472,23 @@ export const EXERCISES: readonly Exercise[] = [
     "perSide": false,
     "howTo": {
       "en": [
-        "Stand beside a line on the floor, feet together.",
-        "Hop sideways over the line, landing softly on both feet.",
-        "Hop straight back over it, swinging the arms for momentum.",
-        "Keep going at a steady pace; step over it if jumping is too much."
+        "Stand tall and reach both hands overhead, as if climbing a mountain.",
+        "Step out to one side into a deep side lunge, bending that knee and keeping the other leg straight.",
+        "Lower your torso and place both hands on the floor.",
+        "Push back up to the middle and reach overhead again.",
+        "Repeat to the other side, and keep alternating sides for the full time."
       ],
       "fr": [
-        "Tenez-vous à côté d'une ligne au sol, pieds joints.",
-        "Sautez latéralement par-dessus la ligne, en atterrissant doucement sur les deux pieds.",
-        "Resautez dans l'autre sens en balançant les bras pour l'élan.",
-        "Continuez à rythme régulier; enjambez la ligne si sauter est trop exigeant."
+        "Tenez-vous droit et tendez les deux mains au-dessus de la tête, comme pour grimper une montagne.",
+        "Faites un grand pas sur le côté en fente latérale profonde, en fléchissant ce genou et en gardant l'autre jambe tendue.",
+        "Penchez le buste et posez les deux mains au sol.",
+        "Repoussez pour revenir au centre et tendez de nouveau les bras au-dessus de la tête.",
+        "Répétez de l'autre côté, et continuez en alternant les côtés pendant toute la durée."
       ]
     },
     "tips": {
-      "en": "Land softly on the balls of the feet with the knees slightly bent.",
-      "fr": "Atterrissez doucement sur l'avant des pieds, genoux légèrement fléchis."
+      "en": "Keep the heel of the bent leg down and the chest up; no jumping, just a steady rhythm.",
+      "fr": "Gardez le talon de la jambe fléchie au sol et la poitrine ouverte; sans sauter, à rythme régulier."
     }
   },
   {
