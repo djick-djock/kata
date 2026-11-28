@@ -33,7 +33,8 @@ export interface Cue {
 /** Cue rules, exported so the UI/tests can reference them. */
 export const TICK_SECONDS = 5
 export const MIN_STEP_TICK_SECONDS = 8
-export const MIN_REST_TICK_SECONDS = 30
+/** Rests and switch-side pauses tick too, with the same threshold as steps: the countdown before the next exercise. */
+export const MIN_REST_TICK_SECONDS = MIN_STEP_TICK_SECONDS
 /** Transition cues older than this when noticed (backgrounding) are dropped. */
 export const STALE_CUE_MS = 3000
 /** Previous restarts the current step when it has run at least this long. */
@@ -62,6 +63,10 @@ export interface SegmentProgress {
 
 export interface BlockProgress {
   index: number
+  /** 1-based position among the blocks that have steps (warm-up blocks included). */
+  number: number
+  /** How many blocks have steps. */
+  count: number
   name: string
   warmUp: boolean
   round: number
@@ -93,6 +98,12 @@ export interface SessionState {
   elapsedMs: number
   /** 0..1 position in the routine. */
   progress: number
+  /** Overall routine progress, elapsed / total from the plan (an estimate with reps steps), clamped 0..1. */
+  overallFraction: number
+  /** 1-based number of the current block among blocks with steps; 0 when there is no current item. */
+  blockNumber: number
+  /** Blocks that have steps. */
+  blockCount: number
   block: BlockProgress | null
   /** Present once finished or stopped. */
   result: SessionResult | null
@@ -128,6 +139,7 @@ export function createSession(opts: SessionOptions) {
   let result: SessionResult | null = null
   const progressed = items.map(() => 0) // best ms progressed per item
   const finishedItem = items.map(() => false)
+  const blockOrder = [...new Set(items.map((i) => i.blockIndex))]
   const listeners = new Set<(u: Update) => void>()
 
   // ---- helpers -----------------------------------------------------------
@@ -227,22 +239,28 @@ export function createSession(opts: SessionOptions) {
       lastSettle = t
     }
     let cues: Cue[] = []
+    let transitioned = false
     while (status === 'running') {
       const item = items[idx]
       if (item.durationMs === null || t - itemStart < item.durationMs) break
       const at = itemStart + item.durationMs
       cues = advance(t, at)
+      transitioned = true
     }
     if (status === 'running') {
       const item = items[idx]
       const dur = item.durationMs
       const minTick =
-        item.phase === 'rest' ? MIN_REST_TICK_SECONDS : isStepPhase(item.phase) && !item.meditation ? MIN_STEP_TICK_SECONDS : Infinity
+        item.phase === 'rest' || item.phase === 'switch'
+          ? MIN_REST_TICK_SECONDS
+          : isStepPhase(item.phase) && !item.meditation ? MIN_STEP_TICK_SECONDS : Infinity
       if (dur !== null && dur >= minTick * 1000) {
         const s = Math.ceil((dur - (t - itemStart)) / 1000)
         if (s >= 1 && s <= TICK_SECONDS && s * 1000 < dur && s < lastTick) {
           lastTick = s
-          cues = [...cues, { kind: 'beep', reason: 'tick', secondsLeft: s, itemIndex: idx }]
+          // A transition cue noticed in this same update (rest / go / bell) already marks the moment:
+          // never stack a tick on top of it (a fresh rest cue and the first tick can coincide).
+          if (!(transitioned && cues.length)) cues = [...cues, { kind: 'beep', reason: 'tick', secondsLeft: s, itemIndex: idx }]
         }
       }
     }
@@ -274,6 +292,9 @@ export function createSession(opts: SessionOptions) {
     if (status === 'finished') progress = 1
     else if (item && total) progress = items.reduce((a, it) => a + prog(it.index), 0) / total
 
+    const overallFraction = Math.min(1, Math.max(0, status === 'finished' ? 1 : progress))
+    const blockNumber = item ? blockOrder.indexOf(item.blockIndex) + 1 : 0
+
     let block: BlockProgress | null = null
     if (item) {
       const inBlock = items.filter((i) => i.blockIndex === item.blockIndex)
@@ -296,6 +317,8 @@ export function createSession(opts: SessionOptions) {
       }
       block = {
         index: item.blockIndex,
+        number: blockNumber,
+        count: blockOrder.length,
         name: item.blockName,
         warmUp: item.warmUp,
         round: item.round,
@@ -319,6 +342,9 @@ export function createSession(opts: SessionOptions) {
       approximate: plan.approximate,
       elapsedMs: Math.round(status === 'running' ? activeMs + Math.max(0, t - lastSettle) : activeMs),
       progress,
+      overallFraction,
+      blockNumber,
+      blockCount: blockOrder.length,
       block,
       result,
     }

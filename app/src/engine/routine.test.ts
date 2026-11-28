@@ -93,3 +93,43 @@ describe('routineDuration', () => {
     expect(routineDuration(r, { secondsPerRep: 2 }).seconds).toBe(20)
   })
 })
+
+describe('dedicated rests between rounds and blocks', () => {
+  const st = (name: string, rest = 10): Step => ({ ref: { type: 'custom' }, name, measure: { type: 'time', seconds: 20 }, restAfterSeconds: rest })
+  const blk = (b: Partial<Block> & { steps: Step[] }): Block => ({ name: 'B', repeat: 1, ...b })
+  const rests = (r: Routine) => flattenRoutine(r).items.filter((i) => i.phase === 'rest')
+
+  it('absent fields keep the old output', () => {
+    const r: Routine = { name: 'r', blocks: [blk({ repeat: 2, steps: [st('a', 10)] }), blk({ steps: [st('b', 5)] })] }
+    expect(rests(r).map((i) => [i.durationMs, i.restKind])).toEqual([[10000, 'step'], [10000, 'step']])
+    expect(flattenRoutine(r).totalMs).toBe(20000 * 3 + 10000 * 2)
+  })
+
+  it('between-rounds rest replaces the last step rest, not after the final round', () => {
+    const r: Routine = { name: 'r', blocks: [blk({ repeat: 3, restBetweenRoundsSeconds: 30, steps: [st('a', 10), st('b', 10)] })] }
+    const rs = rests(r)
+    const round = rs.filter((i) => i.restKind === 'round')
+    expect(round.map((i) => [i.durationMs, i.round])).toEqual([[30000, 1], [30000, 2]])
+    expect(rs.filter((i) => i.restKind === 'step').length).toBe(3)
+    expect(flattenRoutine(r).items.at(-1)?.phase).toBe('work')
+    expect(flattenRoutine(r).totalMs).toBe(20000 * 6 + 10000 * 3 + 30000 * 2)
+  })
+
+  it('a defined 0 removes the rest at that boundary', () => {
+    const r: Routine = { name: 'r', blocks: [blk({ repeat: 2, restBetweenRoundsSeconds: 0, steps: [st('a', 10)] })] }
+    expect(rests(r)).toHaveLength(0)
+  })
+
+  it('rest after block replaces the last step rest, keeps block info, none after the last block', () => {
+    const r: Routine = { name: 'r', blocks: [blk({ restAfterBlockSeconds: 45, steps: [st('a', 10)] }), blk({ restAfterBlockSeconds: 45, steps: [st('b', 10)] })] }
+    const rs = rests(r)
+    expect(rs).toHaveLength(1)
+    expect(rs[0]).toMatchObject({ restKind: 'block', durationMs: 45000, blockIndex: 0, stepSeq: 0 })
+    expect(flattenRoutine(r).items.at(-1)?.phase).toBe('work')
+  })
+
+  it('warm-up blocks ignore step rests but honour block rests', () => {
+    const r: Routine = { name: 'r', blocks: [blk({ warmUp: true, repeat: 2, restBetweenRoundsSeconds: 15, restAfterBlockSeconds: 20, steps: [st('a', 10)] }), blk({ steps: [st('b', 0)] })] }
+    expect(rests(r).map((i) => [i.restKind, i.durationMs])).toEqual([['round', 15000], ['block', 20000]])
+  })
+})

@@ -1354,5 +1354,175 @@ export const EXERCISES: readonly Exercise[] = [
     "tips": {
       "en": "Reach tall through the fingertips and keep the ribs down."
     }
+  },
+  {
+    "id": "side-reach",
+    "category": "mobility",
+    "tags": [
+      "warm-up"
+    ],
+    "name": {
+      "en": "Side reach",
+      "fr": "Étirement latéral"
+    },
+    "measure": {
+      "type": "time",
+      "value": 30
+    },
+    "perSide": false,
+    "howTo": {
+      "en": [
+        "Stand tall with feet a little wider than the hips.",
+        "Reach one arm up and over the head, leaning to the opposite side.",
+        "Come back to the middle and reach with the other arm.",
+        "Alternate sides at a smooth pace."
+      ],
+      "fr": [
+        "Tenez-vous droit, pieds un peu plus écartés que les hanches.",
+        "Levez un bras au-dessus de la tête en vous penchant du côté opposé.",
+        "Revenez au centre, puis changez de bras.",
+        "Alternez les côtés à un rythme fluide."
+      ]
+    },
+    "tips": {
+      "en": "Lean sideways, not forward, and keep both hips facing front.",
+      "fr": "Penchez-vous sur le côté, pas vers l'avant, et gardez les hanches de face."
+    }
+  },
+  {
+    "id": "standing-elbow-to-knee-crunches",
+    "category": "hiit",
+    "tags": [
+      "core"
+    ],
+    "name": {
+      "en": "Standing elbow to knee crunches",
+      "fr": "Crunchs debout coude-genou"
+    },
+    "measure": {
+      "type": "time",
+      "value": 45
+    },
+    "perSide": false,
+    "howTo": {
+      "en": [
+        "Stand tall with the hands behind the head, elbows wide.",
+        "Lift one knee while bringing the opposite elbow down to meet it.",
+        "Return to standing and switch sides.",
+        "Keep alternating at a steady pace."
+      ],
+      "fr": [
+        "Tenez-vous droit, les mains derrière la tête, coudes écartés.",
+        "Montez un genou en ramenant le coude opposé vers lui.",
+        "Revenez debout, puis changez de côté.",
+        "Continuez en alternant à un rythme régulier."
+      ]
+    },
+    "tips": {
+      "en": "Crunch the ribs toward the hips instead of just bending the neck.",
+      "fr": "Rapprochez les côtes des hanches plutôt que de simplement plier le cou."
+    }
+  },
+  {
+    "id": "rise-with-floor-touch",
+    "category": "hiit",
+    "tags": [
+      "legs"
+    ],
+    "name": {
+      "en": "Rise with floor touch",
+      "fr": "Montée avec toucher du sol"
+    },
+    "measure": {
+      "type": "time",
+      "value": 45
+    },
+    "perSide": false,
+    "howTo": {
+      "en": [
+        "Stand with feet shoulder-width apart.",
+        "Squat down, hips back, and touch the floor with both hands.",
+        "Push through the feet to stand up.",
+        "Reach both arms overhead at the top, then repeat."
+      ],
+      "fr": [
+        "Tenez-vous debout, pieds écartés à la largeur des épaules.",
+        "Descendez en squat, hanches vers l'arrière, et touchez le sol des deux mains.",
+        "Poussez dans les pieds pour vous relever.",
+        "Montez les deux bras au-dessus de la tête, puis recommencez."
+      ]
+    },
+    "tips": {
+      "en": "Keep the heels down and the chest up as you rise; touch the floor lightly.",
+      "fr": "Gardez les talons au sol et la poitrine haute en remontant; touchez le sol légèrement."
+    }
+  },
+  {
+    "id": "up-and-overs",
+    "category": "hiit",
+    "tags": [],
+    "name": {
+      "en": "Up and overs",
+      "fr": "Sauts par-dessus"
+    },
+    "measure": {
+      "type": "time",
+      "value": 45
+    },
+    "perSide": false,
+    "howTo": {
+      "en": [
+        "Stand tall and reach both hands overhead, as if climbing a mountain.",
+        "Step out to one side into a deep side lunge, bending that knee and keeping the other leg straight.",
+        "Lower your torso and place both hands on the floor.",
+        "Push back up to the middle and reach overhead again.",
+        "Repeat to the other side, and keep alternating sides for the full time."
+      ],
+      "fr": [
+        "Tenez-vous droit et tendez les deux mains au-dessus de la tête, comme pour grimper une montagne.",
+        "Faites un grand pas sur le côté en fente latérale profonde, en fléchissant ce genou et en gardant l'autre jambe tendue.",
+        "Penchez le buste et posez les deux mains au sol.",
+        "Repoussez pour revenir au centre et tendez de nouveau les bras au-dessus de la tête.",
+        "Répétez de l'autre côté, et continuez en alternant les côtés pendant toute la durée."
+      ]
+    },
+    "tips": {
+      "en": "Keep the heel of the bent leg down and the chest up; no jumping, just a steady rhythm.",
+      "fr": "Gardez le talon de la jambe fléchie au sol et la poitrine ouverte; sans sauter, à rythme régulier."
+    }
+  },
+  {
+    "id": "arms-open-close",
+    "category": "mobility",
+    "tags": [
+      "warm-up"
+    ],
+    "name": {
+      "en": "Arms open close",
+      "fr": "Bras ouverts, fermés"
+    },
+    "measure": {
+      "type": "time",
+      "value": 45
+    },
+    "perSide": false,
+    "howTo": {
+      "en": [
+        "Stand tall with feet hip-width apart.",
+        "Open both arms wide to the sides, chest proud.",
+        "Close them in front of you in a big hug.",
+        "Open and close at a smooth, steady pace."
+      ],
+      "fr": [
+        "Tenez-vous droit, pieds à la largeur des hanches.",
+        "Ouvrez grand les deux bras sur les côtés, poitrine ouverte.",
+        "Refermez-les devant vous comme pour une grande accolade.",
+        "Ouvrez et fermez à un rythme fluide et régulier."
+      ]
+    },
+    "tips": {
+      "en": "Keep the shoulders relaxed and the ribs down; do not arch the lower back.",
+      "fr": "Gardez les épaules relâchées et les côtes basses; ne cambrez pas le bas du dos."
+    }
   }
 ]

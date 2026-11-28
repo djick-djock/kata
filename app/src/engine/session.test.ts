@@ -339,15 +339,48 @@ describe('cue rules', () => {
     expect(h.cues()).toEqual(['5:beep5', '6:beep4', '7:beep3', '8:beep2', '9:beep1'])
   })
 
-  it('rest: rest tone at start, ticks only if rest >= 30 s', () => {
-    const short = setup(routine({ name: 'A', repeat: 1, steps: [step('x', 5, 29), step('y', 5)] }))
+  it('rest: rest tone at start, then ticks the last 5 s when the rest lasts >= 8 s, then go', () => {
+    const short = setup(routine({ name: 'A', repeat: 1, steps: [step('x', 5, 7), step('y', 5)] }))
     short.do(short.s.start)
-    short.run(5 + 29)
-    expect(short.cues()).toEqual(['5:rest', '34:go'])
-    const long = setup(routine({ name: 'A', repeat: 1, steps: [step('x', 5, 30), step('y', 5)] }))
+    short.run(5 + 7)
+    expect(short.cues()).toEqual(['5:rest', '12:go'])
+    const long = setup(routine({ name: 'A', repeat: 1, steps: [step('x', 5, 15), step('y', 5)] }))
     long.do(long.s.start)
-    long.run(5 + 30)
-    expect(long.cues()).toEqual(['5:rest', '30:beep5', '31:beep4', '32:beep3', '33:beep2', '34:beep1', '35:go'])
+    long.run(5 + 15)
+    expect(long.cues()).toEqual(['5:rest', '15:beep5', '16:beep4', '17:beep3', '18:beep2', '19:beep1', '20:go'])
+  })
+
+  it('an 8 s rest ticks from 5 s left, not on its first second', () => {
+    const h = setup(routine({ name: 'A', repeat: 1, steps: [step('x', 5, 8), step('y', 5)] }))
+    h.do(h.s.start)
+    h.run(5 + 8)
+    expect(h.cues()).toEqual(['5:rest', '8:beep5', '9:beep4', '10:beep3', '11:beep2', '12:beep1', '13:go'])
+  })
+
+  it('the last tick of a step and the rest tone are one second apart, never together', () => {
+    const h = setup(routine({ name: 'A', repeat: 1, steps: [step('x', 10, 10), step('y', 10)] }))
+    h.do(h.s.start)
+    h.run(20)
+    expect(h.cues().slice(0, 7)).toEqual(['5:beep5', '6:beep4', '7:beep3', '8:beep2', '9:beep1', '10:rest', '15:beep5'])
+  })
+
+  it('a fresh rest tone noticed after a jump is not stacked with a tick', () => {
+    const h = setup(routine({ name: 'A', repeat: 1, steps: [step('x', 10, 8), step('y', 10)] }))
+    h.do(h.s.start)
+    h.set(13_000) // 3 s into the 8 s rest: rest tone exactly 3 s old (still fresh) and 5 s left
+    const u = h.do(h.s.update)
+    expect(u.cues.map((c) => c.kind)).toEqual(['rest'])
+  })
+
+  it('switch-side pause ticks when it lasts >= 8 s, and not when shorter', () => {
+    const long = setup(routine({ name: 'A', repeat: 1, steps: [step('x', 5, 0, { perSide: true })] }), 'play-all', { switchPauseSeconds: 10 })
+    long.do(long.s.start)
+    long.run(20)
+    expect(long.cues()).toEqual(['10:beep5', '11:beep4', '12:beep3', '13:beep2', '14:beep1', '15:go', '20:bell'])
+    const short = setup(routine({ name: 'A', repeat: 1, steps: [step('x', 5, 0, { perSide: true })] }), 'play-all', { switchPauseSeconds: 7 })
+    short.do(short.s.start)
+    short.run(17)
+    expect(short.cues()).toEqual(['12:go', '17:bell'])
   })
 
   it('go tone when a step starts after a rest, not for the first step or without rest', () => {
@@ -501,5 +534,41 @@ describe('subscribe and edge cases', () => {
   it('exposes the flattened plan', () => {
     const h = setup(routine({ name: 'A', repeat: 1, steps: [step('x', 10, 5), step('y', 10)] }))
     expect(h.s.plan.totalMs).toBe(25000)
+  })
+})
+
+describe('overall progression', () => {
+  const r = routine(
+    { name: 'Warm', repeat: 1, warmUp: true, steps: [step('w', 10)] },
+    { name: 'Empty', repeat: 1, steps: [] },
+    { name: 'Main', repeat: 2, steps: [step('a', 10, 10)] },
+  )
+  it('numbers blocks that have steps (warm-up included, empty ones skipped)', () => {
+    const h = setup(r)
+    expect(h.s.getState().blockCount).toBe(2)
+    h.do(h.s.start)
+    expect(h.s.getState()).toMatchObject({ blockNumber: 1, blockCount: 2, overallFraction: 0 })
+    expect(h.s.getState().block).toMatchObject({ number: 1, count: 2 })
+    h.run(10)
+    expect(h.s.getState().blockNumber).toBe(2)
+  })
+  it('overallFraction is elapsed / total, clamped, 1 when finished', () => {
+    const h = setup(r) // total 10 + 10 + 10 + 10 = 40 s (no rest after the warm-up or the last step)
+    h.do(h.s.start)
+    h.run(10)
+    expect(h.s.getState().overallFraction).toBeCloseTo(0.25)
+    h.run(10)
+    expect(h.s.getState().overallFraction).toBeCloseTo(0.5)
+    h.run(20)
+    expect(h.s.getState().status).toBe('finished')
+    expect(h.s.getState().overallFraction).toBe(1)
+  })
+  it('stays within 0..1 with reps steps', () => {
+    const h = setup(routine({ name: 'A', repeat: 1, steps: [reps('p', 5), step('s', 10)] }))
+    h.do(h.s.start)
+    h.run(100)
+    const f = h.s.getState().overallFraction
+    expect(f).toBeGreaterThanOrEqual(0)
+    expect(f).toBeLessThanOrEqual(1)
   })
 })

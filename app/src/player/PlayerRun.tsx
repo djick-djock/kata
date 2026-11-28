@@ -7,7 +7,7 @@ import { createWakeLock } from '../platform/wake-lock'
 import { vibrate } from '../platform/vibration'
 import { Drawing } from '../ui/Drawing'
 import { Sheet } from '../ui/Sheet'
-import { doneLabel, elapsedText, nextCardText, phaseLabel, pulseFor, ringFraction, timeLeftText, toneFor, vibrationFor, type Pulse } from './logic'
+import { blockCountText, overallPercent, doneLabel, elapsedText, nextCardText, phaseLabel, pulseFor, ringFraction, timeLeftText, toneFor, vibrationFor, type Pulse } from './logic'
 import './player.css'
 
 export interface FinishedSession {
@@ -165,10 +165,13 @@ export function PlayerRun({ routine, mode, settings, cuePlayer, onFinished, now 
       <header className="pl__top">
         <button type="button" className="pl__close" aria-label="Stop session" onClick={askStop}><Close /></button>
         <div className="pl__meta">
-          <span>{block?.name ?? ''}{roundText}</span>
+          <span><b data-testid="overall-percent">{overallPercent(view.overallFraction)}%</b> · {blockCountText(view.blockNumber, view.blockCount)} · {block?.name ?? ''}{roundText}</span>
           <strong data-testid="time-left">{meta2}</strong>
         </div>
       </header>
+      <div className="pl__overall" role="progressbar" aria-label="Routine progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={overallPercent(view.overallFraction)} data-testid="overall">
+        <i style={{ width: `${overallPercent(view.overallFraction)}%` }} />
+      </div>
       <div className="pl__segments" role="img" aria-label={`Step ${(block?.segments.findIndex((s) => s.status === 'current') ?? 0) + 1} of ${block?.segments.length ?? 0} in this block`}>
         {block?.segments.map((s) => (
           <span key={s.stepInBlock} className={`pl__seg pl__seg--${s.status}`}>

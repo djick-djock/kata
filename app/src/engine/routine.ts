@@ -33,6 +33,16 @@ export interface Block {
   repeat: number
   warmUp?: boolean
   steps: Step[]
+  /**
+   * Rest between rounds in seconds (only when repeat > 1). When defined, even 0, it replaces the
+   * last step's own restAfterSeconds after every round except the final one. Honoured in warm-up blocks.
+   */
+  restBetweenRoundsSeconds?: number
+  /**
+   * Rest after the final round, before the next block (never after the last block). When defined,
+   * even 0, it replaces the last step's own restAfterSeconds. Honoured in warm-up blocks.
+   */
+  restAfterBlockSeconds?: number
 }
 
 export interface Routine {
@@ -74,6 +84,8 @@ export interface PlanItem {
   estimatedMs: number
   blockIndex: number
   blockName: string
+  /** For rests: what the rest follows (a step, a round, or a block). */
+  restKind?: 'step' | 'round' | 'block'
   /** 1-based round within the block. */
   round: number
   rounds: number
@@ -163,11 +175,21 @@ export function flattenRoutine(routine: Routine, settings: EngineSettings = {}):
         } else {
           drafts.push(part())
         }
-        const restMs = block.warmUp ? 0 : Math.max(0, step.restAfterSeconds || 0) * 1000
+        const isLastStep = stepInBlock === steps.length - 1
+        let restMs = block.warmUp ? 0 : Math.max(0, step.restAfterSeconds || 0) * 1000
+        let restKind: 'step' | 'round' | 'block' = 'step'
+        if (isLastStep) {
+          const boundary = round < rounds ? block.restBetweenRoundsSeconds : block.restAfterBlockSeconds
+          if (typeof boundary === 'number' && Number.isFinite(boundary)) {
+            restMs = Math.max(0, boundary) * 1000
+            restKind = round < rounds ? 'round' : 'block'
+          }
+        }
         if (restMs > 0)
           drafts.push({
             ...base,
             phase: 'rest',
+            restKind,
             name: 'Rest',
             isStep: false,
             ref: null,
